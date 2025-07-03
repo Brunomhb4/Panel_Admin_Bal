@@ -25,18 +25,18 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
     <div className="card floating-card">
       <div className="mb-4 xs:mb-5 sm:mb-6 md:mb-8">
         <div className="flex items-center gap-3 mb-2 xs:mb-2.5 sm:mb-3 md:mb-3">
-          {/* Enhanced title with icon */}
+          {/* Enhanced title with icon using blue palette */}
           <div className="flex items-center gap-2">
-            <div className="bg-gradient-to-br from-indigo-500/90 to-purple-600/90 shadow-[0_0_15px_rgba(99,102,241,0.3)] border-2 border-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3
+            <div className="bg-gradient-to-br from-midnight-blue/90 to-navy-blue/90 shadow-[0_0_20px_rgba(27,59,111,0.3)] border-2 border-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 group relative overflow-hidden
                             rounded-xl p-2
                             xs:rounded-2xl xs:p-2.5
                             sm:p-3
                             md:rounded-3xl md:p-3.5">
               
               {/* Animated shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-1000 skew-x-12 rounded-xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12 rounded-xl"></div>
               
-              <User className="text-white relative z-10 drop-shadow-lg
+              <User className="text-white relative z-10 drop-shadow-lg transition-all duration-300 group-hover:scale-110
                               h-4 w-4
                               xs:h-4 xs:w-4
                               sm:h-5 sm:w-5
@@ -51,7 +51,7 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
               Checadores
             </h3>
             
-            {/* Sparkle effect */}
+            {/* Sparkle effect with blue palette */}
             <Sparkles className="text-sky-muted animate-pulse opacity-70
                                h-4 w-4
                                xs:h-5 xs:w-5
@@ -86,8 +86,8 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
               >
                 <td className="table-body-cell">
                   <div className="flex items-center">
-                    {/* Enhanced avatar */}
-                    <div className="text-white font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 group relative overflow-hidden border-2 border-white/20
+                    {/* Enhanced avatar with blue palette */}
+                    <div className="text-white font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 flex items-center justify-center bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted group relative overflow-hidden border-2 border-white/20
                                     h-8 w-8 rounded-xl text-xs mr-2
                                     xs:h-9 xs:w-9 xs:rounded-2xl xs:text-sm xs:mr-3
                                     sm:h-10 sm:w-10 sm:text-sm sm:mr-4
@@ -138,18 +138,18 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                 
                 <td className="table-body-cell">
                   <div className="flex items-center">
-                    {/* Enhanced badge with icon */}
-                    <div className="bg-gradient-to-r from-emerald-500/10 to-green-600/10 border border-emerald-500/20 backdrop-blur-sm flex items-center transition-all duration-300 hover:scale-105 hover:shadow-md group
+                    {/* Enhanced badge with blue palette */}
+                    <div className="bg-gradient-to-r from-sky-muted/10 to-blue-soft/20 border border-sky-muted/30 backdrop-blur-sm flex items-center transition-all duration-300 hover:scale-105 hover:shadow-md group
                                     px-2 py-1 rounded-lg
                                     xs:px-2.5 xs:py-1.5 xs:rounded-xl
                                     sm:px-3 sm:py-1.5 sm:rounded-xl">
                       
-                      <Award className="text-emerald-600 mr-1.5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12
+                      <Award className="text-sky-muted mr-1.5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12
                                        h-3 w-3
                                        xs:h-3 xs:w-3
                                        sm:h-4 sm:w-4" />
                       
-                      <span className="font-bold text-emerald-700
+                      <span className="font-bold text-midnight-blue
                                        text-xs
                                        xs:text-xs
                                        sm:text-sm">

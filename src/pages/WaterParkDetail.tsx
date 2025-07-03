@@ -42,7 +42,7 @@ const WaterParkDetail: React.FC = () => {
                         md:h-48
                         lg:h-64">
           <div className="relative">
-            {/* Enhanced loading spinner */}
+            {/* Enhanced loading spinner with blue palette */}
             <div className="animate-spin rounded-full border-4 border-sky-light/30 border-t-midnight-blue
                             h-8 w-8
                             xs:h-10 xs:w-10
@@ -78,56 +78,56 @@ const WaterParkDetail: React.FC = () => {
       title: 'Tickets Activos',
       value: waterPark.activeTickets,
       icon: Ticket,
-      bgColor: 'bg-gradient-to-br from-blue-500/10 to-indigo-600/20',
+      bgColor: 'bg-gradient-to-br from-midnight-blue/10 to-navy-blue/20',
       iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-blue-500/90 to-indigo-600/90',
-      iconGlow: 'shadow-[0_0_20px_rgba(59,130,246,0.4)]',
+      iconBg: 'bg-gradient-to-br from-midnight-blue/90 to-navy-blue/90',
+      iconGlow: 'shadow-[0_0_25px_rgba(27,59,111,0.4)]',
       textColor: 'text-deep-navy',
-      borderColor: 'border-blue-500/20',
-      pulseColor: 'bg-blue-400/30'
+      borderColor: 'border-midnight-blue/20',
+      pulseColor: 'bg-midnight-blue/30'
     },
     {
       title: 'Tickets Vendidos',
       value: waterPark.soldTickets,
       icon: TrendingUp,
-      bgColor: 'bg-gradient-to-br from-emerald-500/10 to-green-600/20',
+      bgColor: 'bg-gradient-to-br from-sky-muted/10 to-blue-soft/20',
       iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-emerald-500/90 to-green-600/90',
-      iconGlow: 'shadow-[0_0_20px_rgba(16,185,129,0.4)]',
+      iconBg: 'bg-gradient-to-br from-sky-muted/90 to-blue-soft/90',
+      iconGlow: 'shadow-[0_0_25px_rgba(84,131,179,0.4)]',
       textColor: 'text-deep-navy',
-      borderColor: 'border-emerald-500/20',
-      pulseColor: 'bg-emerald-400/30'
+      borderColor: 'border-sky-muted/20',
+      pulseColor: 'bg-sky-muted/30'
     },
     {
       title: 'Tickets Impresos',
       value: waterPark.printedTickets,
       icon: Printer,
-      bgColor: 'bg-gradient-to-br from-purple-500/10 to-violet-600/20',
-      iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-purple-500/90 to-violet-600/90',
-      iconGlow: 'shadow-[0_0_20px_rgba(139,92,246,0.4)]',
+      bgColor: 'bg-gradient-to-br from-blue-soft/10 to-sky-light/30',
+      iconColor: 'text-deep-navy',
+      iconBg: 'bg-gradient-to-br from-blue-soft/90 to-sky-light/90',
+      iconGlow: 'shadow-[0_0_25px_rgba(125,160,202,0.4)]',
       textColor: 'text-deep-navy',
-      borderColor: 'border-purple-500/20',
-      pulseColor: 'bg-purple-400/30'
+      borderColor: 'border-blue-soft/20',
+      pulseColor: 'bg-blue-soft/30'
     },
     {
       title: 'Tickets Inactivos',
       value: waterPark.inactiveTickets,
       icon: TicketX,
-      bgColor: 'bg-gradient-to-br from-red-500/10 to-pink-600/20',
+      bgColor: 'bg-gradient-to-br from-navy-blue/10 to-deep-navy/20',
       iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-red-500/90 to-pink-600/90',
-      iconGlow: 'shadow-[0_0_20px_rgba(239,68,68,0.4)]',
+      iconBg: 'bg-gradient-to-br from-navy-blue/90 to-deep-navy/90',
+      iconGlow: 'shadow-[0_0_25px_rgba(5,38,89,0.4)]',
       textColor: 'text-deep-navy',
-      borderColor: 'border-red-500/20',
-      pulseColor: 'bg-red-400/30'
+      borderColor: 'border-navy-blue/20',
+      pulseColor: 'bg-navy-blue/30'
     }
   ];
   
   return (
     <DashboardLayout title={waterPark.name}>
       <div className="animate-fade-in">
-        {/* Enhanced Summary Stats */}
+        {/* Enhanced Summary Stats with blue palette */}
         <div className="responsive-grid mb-4 xs:mb-5 sm:mb-6 md:mb-8 lg:mb-10">
           {statsCards.map((stat, index) => {
             const Icon = stat.icon;
@@ -145,7 +145,7 @@ const WaterParkDetail: React.FC = () => {
                 </div>
 
                 <div className="flex items-center relative z-10">
-                  {/* Enhanced icon container */}
+                  {/* Enhanced icon container with blue palette */}
                   <div className={`${stat.iconBg} ${stat.iconGlow} border-2 border-white/30 backdrop-blur-sm flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden
                                    rounded-xl p-2 mr-2
                                    xs:rounded-2xl xs:p-2.5 xs:mr-3
@@ -159,7 +159,7 @@ const WaterParkDetail: React.FC = () => {
                     {/* Animated shine effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
                     
-                    <Icon className={`${stat.iconColor} relative z-10 drop-shadow-lg transition-all duration-300 group-hover:drop-shadow-2xl
+                    <Icon className={`${stat.iconColor} relative z-10 drop-shadow-lg transition-all duration-300 group-hover:drop-shadow-2xl group-hover:scale-110
                                      h-4 w-4
                                      xs:h-4 xs:w-4
                                      sm:h-5 sm:w-5
