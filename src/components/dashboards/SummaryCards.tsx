@@ -21,7 +21,10 @@ const SummaryCards: React.FC = () => {
       borderColor: 'border-sky-light/40',
       textColor: 'text-deep-navy',
       subTextColor: 'text-midnight-blue',
-      iconBg: 'bg-gradient-to-br from-midnight-blue/10 to-navy-blue/10'
+      iconBg: 'bg-gradient-to-br from-midnight-blue/20 to-navy-blue/30',
+      iconGlow: 'shadow-[0_0_20px_rgba(27,59,111,0.3)]',
+      iconColor: 'text-white',
+      pulseColor: 'bg-midnight-blue/20'
     },
     {
       title: 'Ingresos Totales',
@@ -32,7 +35,10 @@ const SummaryCards: React.FC = () => {
       borderColor: 'border-sky-muted/30',
       textColor: 'text-deep-navy',
       subTextColor: 'text-sky-muted',
-      iconBg: 'bg-gradient-to-br from-sky-muted/10 to-blue-soft/10'
+      iconBg: 'bg-gradient-to-br from-emerald-500/90 to-green-600/90',
+      iconGlow: 'shadow-[0_0_20px_rgba(16,185,129,0.4)]',
+      iconColor: 'text-white',
+      pulseColor: 'bg-emerald-400/30'
     },
     {
       title: 'Total Balnearios',
@@ -43,7 +49,10 @@ const SummaryCards: React.FC = () => {
       borderColor: 'border-blue-soft/30',
       textColor: 'text-deep-navy',
       subTextColor: 'text-blue-soft',
-      iconBg: 'bg-gradient-to-br from-blue-soft/10 to-sky-light/20'
+      iconBg: 'bg-gradient-to-br from-violet-500/90 to-purple-600/90',
+      iconGlow: 'shadow-[0_0_20px_rgba(139,92,246,0.4)]',
+      iconColor: 'text-white',
+      pulseColor: 'bg-violet-400/30'
     },
     {
       title: 'Tickets Vendidos',
@@ -54,7 +63,10 @@ const SummaryCards: React.FC = () => {
       borderColor: 'border-navy-blue/20',
       textColor: 'text-deep-navy',
       subTextColor: 'text-navy-blue',
-      iconBg: 'bg-gradient-to-br from-navy-blue/10 to-sky-muted/10'
+      iconBg: 'bg-gradient-to-br from-orange-500/90 to-red-500/90',
+      iconGlow: 'shadow-[0_0_20px_rgba(249,115,22,0.4)]',
+      iconColor: 'text-white',
+      pulseColor: 'bg-orange-400/30'
     }
   ];
   
@@ -65,29 +77,44 @@ const SummaryCards: React.FC = () => {
         return (
           <div 
             key={card.title}
-            className={`card-compact bg-gradient-to-br ${card.bgGradient} border-2 ${card.borderColor} hover:shadow-large transition-all duration-300 animate-slide-up floating-card hover:scale-105`}
+            className={`card-compact bg-gradient-to-br ${card.bgGradient} border-2 ${card.borderColor} hover:shadow-large transition-all duration-500 animate-slide-up floating-card hover:scale-105 group relative overflow-hidden`}
             style={{ animationDelay: `${index * 150}ms` }}
           >
-            <div className="flex items-center">
-              <div className={`shadow-soft border border-white/20 backdrop-blur-sm flex-shrink-0 ${card.iconBg}
+            {/* Animated background particles */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className={`absolute top-2 right-2 w-1 h-1 ${card.pulseColor} rounded-full animate-ping`}></div>
+              <div className={`absolute bottom-3 left-3 w-0.5 h-0.5 ${card.pulseColor} rounded-full animate-ping`} style={{ animationDelay: '0.5s' }}></div>
+              <div className={`absolute top-1/2 right-1/4 w-0.5 h-0.5 ${card.pulseColor} rounded-full animate-ping`} style={{ animationDelay: '1s' }}></div>
+            </div>
+
+            <div className="flex items-center relative z-10">
+              <div className={`${card.iconBg} ${card.iconGlow} border-2 border-white/30 backdrop-blur-sm flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden
                                rounded-xl p-2
                                xs:rounded-2xl xs:p-2.5
                                sm:rounded-2xl sm:p-3
                                md:rounded-3xl md:p-4
                                lg:rounded-3xl lg:p-5`}>
-                <Icon className="text-midnight-blue
+                
+                {/* Icon glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
+                
+                {/* Animated shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+                
+                <Icon className={`${card.iconColor} relative z-10 drop-shadow-lg transition-all duration-300 group-hover:drop-shadow-2xl
                                  h-4 w-4
                                  xs:h-4 xs:w-4
                                  sm:h-5 sm:w-5
                                  md:h-6 md:w-6
-                                 lg:h-7 lg:w-7" />
+                                 lg:h-7 lg:w-7`} />
               </div>
+              
               <div className="min-w-0 flex-1
                               ml-2
                               xs:ml-3
                               sm:ml-4
                               lg:ml-6">
-                <p className={`${card.subTextColor} truncate font-semibold
+                <p className={`${card.subTextColor} truncate font-semibold transition-all duration-300 group-hover:text-opacity-80
                                text-xs mb-0.5
                                xs:text-xs xs:mb-1
                                sm:text-sm sm:mb-1
@@ -95,7 +122,7 @@ const SummaryCards: React.FC = () => {
                                lg:text-base lg:mb-2`}>
                   {card.title}
                 </p>
-                <h3 className={`${card.textColor} truncate font-bold
+                <h3 className={`${card.textColor} truncate font-bold transition-all duration-300 group-hover:scale-105 origin-left
                                 text-sm
                                 xs:text-base
                                 sm:text-lg
@@ -104,6 +131,11 @@ const SummaryCards: React.FC = () => {
                   {card.value}
                 </h3>
               </div>
+            </div>
+
+            {/* Subtle animated border */}
+            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+              <div className={`absolute inset-0 bg-gradient-to-r ${card.gradient} opacity-20 rounded-xl animate-pulse`}></div>
             </div>
           </div>
         );
