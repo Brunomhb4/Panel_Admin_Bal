@@ -6,6 +6,7 @@ import {
   LayoutDashboard, 
   Users, 
   Waves, 
+  FileText,
   LogOut,
   X
 } from 'lucide-react';
@@ -30,6 +31,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       show: true,
       iconColor: 'text-blue-500',
       activeColor: 'from-blue-500 to-blue-600'
+    },
+    {
+      path: '/superadmin/notes',
+      icon: FileText,
+      label: 'Gestión de Notas',
+      show: userRole === 'superadmin',
+      iconColor: 'text-green-500',
+      activeColor: 'from-green-500 to-green-600'
     },
     {
       path: '/superadmin/waterparks',

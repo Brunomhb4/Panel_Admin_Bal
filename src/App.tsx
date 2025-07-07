@@ -7,6 +7,7 @@ import SuperAdminDashboard from './pages/SuperAdminDashboard';
 import WaterParkDetail from './pages/WaterParkDetail';
 import UserManagement from './pages/UserManagement';
 import WaterParkManagement from './pages/WaterParkManagement';
+import NotesManagement from './pages/NotesManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -64,6 +65,14 @@ function App() {
         element={
           <ProtectedRoute requiredRole="superadmin">
             <WaterParkManagement />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/superadmin/notes" 
+        element={
+          <ProtectedRoute requiredRole="superadmin">
+            <NotesManagement />
           </ProtectedRoute>
         } 
       />
