@@ -6,11 +6,14 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   body {
     @apply bg-gradient-to-br from-sky-light via-white to-blue-soft/20 text-deep-navy antialiased;
+    @apply dark:bg-gradient-to-br dark:from-deep-navy dark:via-navy-blue dark:to-midnight-blue dark:text-sky-light;
     background-attachment: fixed;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -51,6 +54,7 @@
   /* Ultra Responsive Card Components */
   .card {
     @apply bg-white/90 backdrop-blur-md shadow-soft border border-sky-light/50 hover:shadow-medium transition-all duration-300 hover:border-blue-soft/30 hover:-translate-y-1;
+    @apply dark:bg-midnight-blue/90 dark:border-sky-light/20 dark:hover:border-blue-soft/40;
     /* Ultra small screens */
     @apply p-2 rounded-lg;
     /* Small phones */
@@ -67,6 +71,7 @@
   
   .card-compact {
     @apply bg-white/85 backdrop-blur-sm shadow-soft border border-sky-light/40 hover:shadow-medium transition-all duration-300 hover:bg-white/95;
+    @apply dark:bg-midnight-blue/85 dark:border-sky-light/20 dark:hover:bg-midnight-blue/95;
     /* Ultra small screens */
     @apply p-2 rounded-lg;
     /* Small phones */
@@ -93,6 +98,7 @@
   /* Ultra Responsive Form Components */
   .input {
     @apply w-full border-2 border-sky-light/60 shadow-soft placeholder-blue-soft/60 focus:outline-none focus:ring-2 focus:ring-sky-muted/20 focus:border-sky-muted transition-all duration-300 bg-white/80 backdrop-blur-sm hover:bg-white/90;
+    @apply dark:bg-midnight-blue/80 dark:border-sky-light/30 dark:placeholder-blue-soft/80 dark:focus:border-sky-light dark:hover:bg-midnight-blue/90 dark:text-sky-light;
     /* Ultra small screens */
     @apply px-2 py-2 text-xs rounded-lg;
     /* Small phones */
@@ -113,6 +119,7 @@
   
   .label {
     @apply block font-semibold text-midnight-blue;
+    @apply dark:text-sky-light;
     /* Ultra small screens */
     @apply text-xs mb-1;
     /* Small phones */
@@ -135,6 +142,7 @@
   /* Ultra Responsive Table Components */
   .table-container {
     @apply overflow-hidden shadow-medium bg-white/60 backdrop-blur-md border border-sky-light/40;
+    @apply dark:bg-midnight-blue/60 dark:border-sky-light/20;
     /* Ultra small screens */
     @apply rounded-lg;
     /* Small phones */
@@ -151,10 +159,12 @@
 
   .table-header {
     @apply bg-gradient-to-r from-sky-light/40 to-blue-soft/20 backdrop-blur-sm;
+    @apply dark:from-navy-blue/40 dark:to-midnight-blue/20;
   }
 
   .table-header-cell {
     @apply text-left font-bold text-midnight-blue uppercase tracking-wider;
+    @apply dark:text-sky-light;
     /* Ultra small screens */
     @apply px-1 py-2 text-xs;
     /* Small phones */
@@ -171,10 +181,12 @@
 
   .table-body {
     @apply bg-white/30 backdrop-blur-xs divide-y divide-sky-light/30;
+    @apply dark:bg-midnight-blue/30 dark:divide-sky-light/20;
   }
 
   .table-body-cell {
     @apply whitespace-nowrap text-deep-navy;
+    @apply dark:text-sky-light;
     /* Ultra small screens */
     @apply px-1 py-2 text-xs;
     /* Small phones */
@@ -191,6 +203,7 @@
   
   .table-row {
     @apply hover:bg-sky-light/20 transition-all duration-200 hover:backdrop-blur-sm;
+    @apply dark:hover:bg-navy-blue/20;
   }
   
   /* Ultra Responsive Badge Components */
@@ -233,6 +246,7 @@
   /* Ultra Responsive Layout Components */
   .sidebar {
     @apply bg-white/95 backdrop-blur-lg h-screen shadow-large border-r border-sky-light/30 flex flex-col;
+    @apply dark:bg-midnight-blue/95 dark:border-sky-light/20;
     /* Mobile sidebar width */
     @apply w-64;
     /* Small phones */
@@ -247,6 +261,7 @@
   
   .sidebar-header {
     @apply border-b border-sky-light/30 flex justify-between items-center bg-gradient-to-r from-sky-light/20 to-transparent;
+    @apply dark:border-sky-light/20 dark:from-navy-blue/20;
     /* Ultra small screens */
     @apply p-2;
     /* Small phones */
@@ -295,15 +310,18 @@
   
   .sidebar-nav-item-active {
     @apply text-white bg-gradient-to-r from-midnight-blue to-navy-blue shadow-medium border-l-4 border-sky-muted transform scale-105;
+    @apply dark:border-sky-light;
   }
   
   .sidebar-nav-item-inactive {
     @apply text-midnight-blue hover:text-deep-navy hover:bg-gradient-to-r hover:from-sky-light/30 hover:to-blue-soft/20 hover:shadow-soft hover:scale-102;
+    @apply dark:text-sky-light dark:hover:text-white dark:hover:from-navy-blue/30 dark:hover:to-midnight-blue/20;
   }
   
   /* Ultra Responsive Header */
   .header {
     @apply bg-white/90 backdrop-blur-lg border-b border-sky-light/30 shadow-soft flex items-center justify-between;
+    @apply dark:bg-midnight-blue/90 dark:border-sky-light/20;
     /* Ultra small screens */
     @apply h-12 px-2;
     /* Small phones */
@@ -321,6 +339,7 @@
   /* Ultra Responsive Mobile Sidebar */
   .mobile-sidebar-backdrop {
     @apply fixed inset-0 z-20 bg-deep-navy/40 backdrop-blur-sm lg:hidden;
+    @apply dark:bg-black/60;
   }
   
   .mobile-sidebar {
@@ -440,6 +459,7 @@
   
   .gradient-text {
     @apply bg-gradient-to-r from-midnight-blue to-sky-muted bg-clip-text text-transparent;
+    @apply dark:from-sky-light dark:to-blue-soft;
   }
   
   /* Ultra Responsive animations */
