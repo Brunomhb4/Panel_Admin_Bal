@@ -138,6 +138,3 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
 };
 
 export default Header;
-          }
-  )
-}
