@@ -27,7 +27,7 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
         <div className="flex items-center gap-3 mb-2 xs:mb-2.5 sm:mb-3 md:mb-3">
           {/* Enhanced title with icon using blue palette */}
           <div className="flex items-center gap-2">
-            <div className="bg-gradient-to-br from-midnight-blue/90 to-navy-blue/90 shadow-[0_0_20px_rgba(27,59,111,0.3)] border-2 border-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 group relative overflow-hidden
+            <div className="bg-gradient-to-br from-[#1B3B6F]/90 to-[#052659]/90 shadow-[0_0_20px_rgba(27,59,111,0.3)] border-2 border-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 group relative overflow-hidden
                             rounded-xl p-2
                             xs:rounded-2xl xs:p-2.5
                             sm:p-3
@@ -52,14 +52,14 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
             </h3>
             
             {/* Sparkle effect with blue palette */}
-            <Sparkles className="text-sky-muted animate-pulse opacity-70
+            <Sparkles className="text-[#5483B3] animate-pulse opacity-70
                                h-4 w-4
                                xs:h-5 xs:w-5
                                sm:h-6 sm:w-6" />
           </div>
         </div>
         
-        <p className="text-sky-muted font-medium transition-all duration-300 hover:text-blue-soft
+        <p className="text-[#5483B3] font-medium transition-all duration-300 hover:text-[#7DA0CA]
                       text-xs
                       xs:text-sm
                       sm:text-base">
@@ -87,7 +87,7 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                 <td className="table-body-cell">
                   <div className="flex items-center">
                     {/* Enhanced avatar with blue palette */}
-                    <div className="text-white font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 flex items-center justify-center bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted group relative overflow-hidden border-2 border-white/20
+                    <div className="text-white font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 flex items-center justify-center bg-gradient-to-br from-[#1B3B6F] via-[#052659] to-[#5483B3] group relative overflow-hidden border-2 border-white/20
                                     h-8 w-8 rounded-xl text-xs mr-2
                                     xs:h-9 xs:w-9 xs:rounded-2xl xs:text-sm xs:mr-3
                                     sm:h-10 sm:w-10 sm:text-sm sm:mr-4
@@ -103,7 +103,7 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                     </div>
                     
                     <div className="min-w-0 flex-1">
-                      <span className="font-bold text-deep-navy block truncate transition-all duration-300 hover:text-midnight-blue hover:scale-105 origin-left
+                      <span className="font-bold text-[#021024] block truncate transition-all duration-300 hover:text-[#1B3B6F] hover:scale-105 origin-left
                                        text-xs
                                        xs:text-sm
                                        sm:text-base">
@@ -112,8 +112,8 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                       
                       {/* Mobile email display */}
                       <div className="xs:hidden flex items-center mt-0.5">
-                        <Mail className="text-sky-muted mr-1 h-3 w-3" />
-                        <span className="text-sky-muted font-medium block truncate text-xs">
+                        <Mail className="text-[#5483B3] mr-1 h-3 w-3" />
+                        <span className="text-[#5483B3] font-medium block truncate text-xs">
                           {checker.email}
                         </span>
                       </div>
@@ -123,11 +123,11 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                 
                 <td className="table-body-cell hidden xs:table-cell">
                   <div className="flex items-center">
-                    <Mail className="text-sky-muted mr-2 transition-all duration-300 hover:text-blue-soft hover:scale-110
+                    <Mail className="text-[#5483B3] mr-2 transition-all duration-300 hover:text-[#7DA0CA] hover:scale-110
                                     h-3 w-3
                                     xs:h-4 xs:w-4
                                     sm:h-4 sm:w-4" />
-                    <span className="text-sky-muted font-medium transition-all duration-300 hover:text-blue-soft
+                    <span className="text-[#5483B3] font-medium transition-all duration-300 hover:text-[#7DA0CA]
                                      text-xs
                                      xs:text-sm
                                      sm:text-base">
@@ -139,17 +139,17 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                 <td className="table-body-cell">
                   <div className="flex items-center">
                     {/* Enhanced badge with blue palette */}
-                    <div className="bg-gradient-to-r from-sky-muted/10 to-blue-soft/20 border border-sky-muted/30 backdrop-blur-sm flex items-center transition-all duration-300 hover:scale-105 hover:shadow-md group
+                    <div className="bg-gradient-to-r from-[#5483B3]/10 to-[#7DA0CA]/20 border border-[#5483B3]/30 backdrop-blur-sm flex items-center transition-all duration-300 hover:scale-105 hover:shadow-md group
                                     px-2 py-1 rounded-lg
                                     xs:px-2.5 xs:py-1.5 xs:rounded-xl
                                     sm:px-3 sm:py-1.5 sm:rounded-xl">
                       
-                      <Award className="text-sky-muted mr-1.5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12
+                      <Award className="text-[#5483B3] mr-1.5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12
                                        h-3 w-3
                                        xs:h-3 xs:w-3
                                        sm:h-4 sm:w-4" />
                       
-                      <span className="font-bold text-midnight-blue
+                      <span className="font-bold text-[#1B3B6F]
                                        text-xs
                                        xs:text-xs
                                        sm:text-sm">
@@ -164,7 +164,7 @@ const CheckersTable: React.FC<CheckersTableProps> = ({
                     <div className="flex space-x-2 xs:space-x-3 sm:space-x-4">
                       <button 
                         onClick={() => onEdit && onEdit(checker.id)}
-                        className="text-midnight-blue hover:text-deep-navy transition-all duration-300 font-semibold hover:scale-105 hover:bg-sky-light/20 rounded-lg px-2 py-1
+                        className="text-[#1B3B6F] hover:text-[#021024] transition-all duration-300 font-semibold hover:scale-105 hover:bg-[#C1E8FF]/20 rounded-lg px-2 py-1
                                    text-xs
                                    xs:text-sm
                                    sm:text-base"

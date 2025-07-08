@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       <div className="sidebar-header">
         <div className="flex items-center min-w-0 flex-1">
           {/* Enhanced logo */}
-          <div className="flex items-center justify-center bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-white/20
+          <div className="flex items-center justify-center bg-gradient-to-br from-[#052659] via-[#1B3B6F] to-[#5483B3] shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-white/20
                           w-8 h-8 rounded-xl
                           xs:w-9 xs:h-9 xs:rounded-2xl
                           sm:w-10 sm:h-10
@@ -80,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                           lg:w-14 lg:h-14 lg:rounded-3xl">
             
             {/* Animated background effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-light/20 to-blue-soft/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
             
             {/* Shine effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
@@ -105,7 +105,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                            lg:text-xl">
               Balnearios
             </h1>
-            <p className="text-sky-muted truncate font-semibold transition-all duration-300 hover:text-blue-soft
+            <p className="text-[#5483B3] truncate font-semibold transition-all duration-300 hover:text-[#7DA0CA]
                           text-xs
                           xs:text-xs
                           sm:text-sm">
@@ -117,7 +117,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
         {/* Enhanced close button */}
         <button 
           onClick={onClose}
-          className="lg:hidden transition-all duration-300 hover:scale-110 flex-shrink-0 rounded-xl hover:bg-gradient-to-r hover:from-red-100 hover:to-pink-100 text-sky-muted hover:text-red-500 group relative overflow-hidden
+          className="lg:hidden transition-all duration-300 hover:scale-110 flex-shrink-0 rounded-xl hover:bg-gradient-to-r hover:from-red-100 hover:to-pink-100 text-[#5483B3] hover:text-red-500 group relative overflow-hidden
                      p-1
                      xs:p-1.5
                      sm:p-2"
@@ -144,14 +144,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                   to={item.path}
                   className={`sidebar-nav-item group relative overflow-hidden transition-all duration-300 ${
                     active 
-                      ? `sidebar-nav-item-active bg-gradient-to-r ${item.activeColor} text-white shadow-lg scale-105 border-l-4 border-white/50` 
-                      : 'sidebar-nav-item-inactive hover:bg-gradient-to-r hover:from-sky-light/30 hover:to-blue-soft/20 hover:shadow-soft hover:scale-102'
+                      ? `sidebar-nav-item-active bg-gradient-to-r ${item.activeColor} text-white shadow-lg scale-105 border-l-4 border-[#C1E8FF]/50` 
+                      : 'sidebar-nav-item-inactive hover:bg-gradient-to-r hover:from-[#C1E8FF]/30 hover:to-[#7DA0CA]/20 hover:shadow-soft hover:scale-102'
                   }`}
                   onClick={onClose}
                 >
                   {/* Animated background for inactive items */}
                   {!active && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/5 to-sky-muted/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#1B3B6F]/5 to-[#5483B3]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                   )}
                   
                   {/* Enhanced icon container */}
@@ -159,7 +159,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                     <Icon className={`transition-all duration-300 drop-shadow-sm ${
                       active 
                         ? 'text-white' 
-                        : `${item.iconColor} group-hover:text-midnight-blue`
+                        : `${item.iconColor} group-hover:text-[#1B3B6F]`
                     }
                                      mr-2 h-3 w-3
                                      xs:mr-2.5 xs:h-4 xs:w-4
@@ -191,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       </nav>
       
       {/* Enhanced logout section */}
-      <div className="border-t border-sky-light/30 mt-auto bg-gradient-to-r from-sky-light/10 to-transparent
+      <div className="border-t border-[#C1E8FF]/30 mt-auto bg-gradient-to-r from-[#C1E8FF]/10 to-transparent
                       p-2
                       xs:p-3
                       sm:p-4

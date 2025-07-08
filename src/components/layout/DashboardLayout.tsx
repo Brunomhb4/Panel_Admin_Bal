@@ -15,7 +15,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title }) =>
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-sky-light via-white to-blue-soft/20 particle-bg overflow-hidden">
+    <div className="flex h-screen bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F] particle-bg overflow-hidden">
       {/* Mobile sidebar backdrop */}
       {isSidebarOpen && (
         <div

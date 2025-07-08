@@ -16,7 +16,7 @@ export const useTheme = () => {
     
     // Update CSS custom properties based on theme
     if (mode === 'dark') {
-      // Dark mode variables using exact palette
+      // Dark mode - Corporate palette as primary theme
       root.style.setProperty('--theme-bg-primary', '#021024');
       root.style.setProperty('--theme-bg-secondary', '#052659');
       root.style.setProperty('--theme-bg-tertiary', '#1B3B6F');
@@ -29,18 +29,18 @@ export const useTheme = () => {
       root.style.setProperty('--theme-border', 'rgba(193, 232, 255, 0.2)');
       root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.3)');
     } else {
-      // Light mode variables using specified palette
-      root.style.setProperty('--theme-bg-primary', '#C1E8FF');      // Very Light Blue background
-      root.style.setProperty('--theme-bg-secondary', '#FFFFFF');     // White for cards
-      root.style.setProperty('--theme-bg-tertiary', '#F8F9FA');      // Very light gray
-      root.style.setProperty('--theme-text-primary', '#021024');     // Very Dark Blue for text
-      root.style.setProperty('--theme-text-secondary', '#052659');   // Deep Navy for headers
-      root.style.setProperty('--theme-text-muted', '#1B3B6F');       // Classic Midnight Blue
-      root.style.setProperty('--theme-accent', '#052659');           // Deep Navy for interactive
-      root.style.setProperty('--theme-highlight', '#5483B3');        // Muted Sky Blue for highlights
-      root.style.setProperty('--theme-light', '#7DA0CA');            // Soft Grayish Blue
-      root.style.setProperty('--theme-border', '#E0E7FF');           // Light border
-      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.08)'); // Subtle shadows
+      // Light mode - Inverted corporate palette
+      root.style.setProperty('--theme-bg-primary', '#C1E8FF');
+      root.style.setProperty('--theme-bg-secondary', '#FFFFFF');
+      root.style.setProperty('--theme-bg-tertiary', '#F8F9FA');
+      root.style.setProperty('--theme-text-primary', '#021024');
+      root.style.setProperty('--theme-text-secondary', '#052659');
+      root.style.setProperty('--theme-text-muted', '#1B3B6F');
+      root.style.setProperty('--theme-accent', '#052659');
+      root.style.setProperty('--theme-highlight', '#5483B3');
+      root.style.setProperty('--theme-light', '#7DA0CA');
+      root.style.setProperty('--theme-border', 'rgba(27, 59, 111, 0.2)');
+      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.1)');
     }
   }, [mode]);
 

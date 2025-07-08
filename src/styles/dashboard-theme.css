@@ -1,17 +1,16 @@
 /* Professional Dashboard Theme Styles */
-/* Implementing exact specifications from design requirements */
+/* Corporate Color Palette Implementation */
 
 :root {
-  /* Core Color Palette - Exact specifications */
-  --dashboard-primary: #021024;      /* Fondo principal */
-  --dashboard-secondary: #052659;    /* Contenedores/tarjetas */
-  --dashboard-tertiary: #1B3B6F;     /* Elementos secundarios */
-  --dashboard-accent: #5483B3;       /* Acentos y datos */
-  --dashboard-highlight: #7DA0CA;    /* Datos complementarios */
-  --dashboard-light: #C1E8FF;        /* Textos y destacados */
-  --dashboard-white: #FFFFFF;        /* Blanco puro */
+  /* Corporate Color Palette - Exact specifications */
+  --corporate-base: #021024;         /* Azul muy oscuro (casi negro) - Color base/fondo */
+  --corporate-primary: #052659;      /* Azul marino profundo - Color primario */
+  --corporate-secondary: #1B3B6F;    /* Azul medianoche clásico - Color secundario */
+  --corporate-accent: #5483B3;       /* Azul cielo apagado - Color de acento */
+  --corporate-complement: #7DA0CA;   /* Azul grisáceo suave - Color complementario */
+  --corporate-contrast: #C1E8FF;     /* Azul muy claro/celeste - Color de contraste */
   
-  /* Typography Scale - 24px titles, 18px subtitles, 14px regular, 32px metrics */
+  /* Typography Scale */
   --dashboard-title-size: 24px;
   --dashboard-title-weight: 600;
   --dashboard-subtitle-size: 18px;
@@ -32,10 +31,10 @@
   --dashboard-radius-sm: 8px;
   --dashboard-radius-lg: 16px;
   
-  /* Shadows - rgba(0,0,0,0.15) with 15px blur */
-  --dashboard-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  --dashboard-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
-  --dashboard-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Shadows - Corporate theme shadows */
+  --dashboard-shadow: 0 4px 15px rgba(2, 16, 36, 0.15);
+  --dashboard-shadow-hover: 0 8px 25px rgba(2, 16, 36, 0.2);
+  --dashboard-shadow-light: 0 2px 8px rgba(2, 16, 36, 0.1);
   
   /* Transitions - 300ms smooth animations */
   --dashboard-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -43,42 +42,44 @@
   --dashboard-transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Dashboard Styles */
+/* Base Dashboard Styles - Corporate Theme */
 .dashboard-container {
-  background: linear-gradient(135deg, var(--dashboard-primary) 0%, var(--dashboard-secondary) 50%, var(--dashboard-tertiary) 100%);
+  background: linear-gradient(135deg, var(--corporate-base) 0%, var(--corporate-primary) 25%, var(--corporate-secondary) 75%, var(--corporate-accent) 100%);
   min-height: 100vh;
   padding: var(--dashboard-spacing);
 }
 
-/* Professional Card System */
+/* Professional Card System - Corporate Colors */
 .dashboard-card {
-  background: var(--dashboard-secondary);
+  background: rgba(5, 38, 89, 0.8); /* corporate-primary with transparency */
   border-radius: var(--dashboard-radius);
   box-shadow: var(--dashboard-shadow);
   padding: var(--dashboard-spacing);
   transition: var(--dashboard-transition);
-  border: 1px solid rgba(193, 232, 255, 0.1);
+  border: 1px solid rgba(193, 232, 255, 0.1); /* corporate-contrast with transparency */
   backdrop-filter: blur(10px);
 }
 
 .dashboard-card:hover {
   box-shadow: var(--dashboard-shadow-hover);
   transform: translateY(-2px);
+  background: rgba(27, 59, 111, 0.8); /* corporate-secondary with transparency */
 }
 
 .dashboard-card-compact {
   padding: calc(var(--dashboard-spacing) * 0.75);
+  background: rgba(27, 59, 111, 0.6); /* corporate-secondary with transparency */
 }
 
 .dashboard-card-large {
   padding: calc(var(--dashboard-spacing) * 1.5);
 }
 
-/* Typography System */
+/* Typography System - Corporate Colors */
 .dashboard-title {
   font-size: var(--dashboard-title-size);
   font-weight: var(--dashboard-title-weight);
-  color: var(--dashboard-light);
+  color: var(--corporate-contrast);
   margin-bottom: var(--dashboard-spacing-sm);
   line-height: 1.2;
 }
@@ -86,7 +87,7 @@
 .dashboard-subtitle {
   font-size: var(--dashboard-subtitle-size);
   font-weight: var(--dashboard-subtitle-weight);
-  color: var(--dashboard-highlight);
+  color: var(--corporate-complement);
   margin-bottom: var(--dashboard-spacing-sm);
   line-height: 1.3;
 }
@@ -94,21 +95,21 @@
 .dashboard-text {
   font-size: var(--dashboard-text-size);
   font-weight: var(--dashboard-text-weight);
-  color: var(--dashboard-white);
+  color: var(--corporate-contrast);
   line-height: 1.5;
 }
 
 .dashboard-metric {
   font-size: var(--dashboard-metric-size);
   font-weight: var(--dashboard-metric-weight);
-  color: var(--dashboard-light);
+  color: var(--corporate-contrast);
   line-height: 1.1;
 }
 
-/* Interactive Elements */
+/* Interactive Components - Corporate Colors */
 .dashboard-button {
-  background: linear-gradient(135deg, var(--dashboard-accent) 0%, var(--dashboard-highlight) 100%);
-  color: var(--dashboard-white);
+  background: linear-gradient(135deg, var(--corporate-primary) 0%, var(--corporate-secondary) 100%);
+  color: var(--corporate-contrast);
   border: none;
   border-radius: var(--dashboard-radius-sm);
   padding: 12px 24px;
@@ -122,16 +123,51 @@
 .dashboard-button:hover {
   transform: translateY(-1px);
   box-shadow: var(--dashboard-shadow);
-  filter: brightness(1.1);
+  background: linear-gradient(135deg, var(--corporate-secondary) 0%, var(--corporate-accent) 100%);
 }
 
 .dashboard-button:active {
   transform: translateY(0);
 }
 
-/* Chart Containers */
+.dashboard-button-secondary {
+  background: transparent;
+  color: var(--corporate-accent);
+  border: 1px solid var(--corporate-accent);
+}
+
+.dashboard-button-secondary:hover {
+  background: rgba(84, 131, 179, 0.1);
+  border-color: var(--corporate-complement);
+}
+
+/* Navigation Elements - Corporate Colors */
+.dashboard-nav {
+  background: rgba(2, 16, 36, 0.95); /* corporate-base with transparency */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(193, 232, 255, 0.1);
+}
+
+.dashboard-nav-item {
+  background: transparent;
+  color: var(--corporate-contrast);
+  transition: var(--dashboard-transition);
+}
+
+.dashboard-nav-item:hover {
+  background: rgba(84, 131, 179, 0.2); /* corporate-accent with transparency */
+  color: var(--corporate-contrast);
+}
+
+.dashboard-nav-item-active {
+  background: linear-gradient(135deg, var(--corporate-accent) 0%, var(--corporate-complement) 100%);
+  color: var(--corporate-base);
+  box-shadow: 0 0 20px rgba(84, 131, 179, 0.4);
+}
+
+/* Chart Containers - Corporate Colors */
 .dashboard-chart-container {
-  background: var(--dashboard-secondary);
+  background: rgba(5, 38, 89, 0.8); /* corporate-primary with transparency */
   border-radius: var(--dashboard-radius);
   padding: var(--dashboard-spacing);
   box-shadow: var(--dashboard-shadow);
@@ -141,44 +177,44 @@
 .dashboard-chart-title {
   font-size: var(--dashboard-subtitle-size);
   font-weight: var(--dashboard-subtitle-weight);
-  color: var(--dashboard-light);
+  color: var(--corporate-contrast);
   margin-bottom: var(--dashboard-spacing);
 }
 
-/* Tooltip Styling */
+/* Tooltip Styling - Corporate Colors */
 .dashboard-tooltip {
-  background: var(--dashboard-tertiary) !important;
-  border: 1px solid var(--dashboard-accent) !important;
+  background: rgba(27, 59, 111, 0.95) !important; /* corporate-secondary */
+  border: 1px solid var(--corporate-accent) !important;
   border-radius: var(--dashboard-radius-sm) !important;
-  color: var(--dashboard-white) !important;
+  color: var(--corporate-contrast) !important;
   box-shadow: var(--dashboard-shadow) !important;
   backdrop-filter: blur(10px) !important;
 }
 
-/* Grid Lines */
+/* Grid Lines - Corporate Colors */
 .dashboard-grid-line {
-  stroke: var(--dashboard-tertiary);
+  stroke: var(--corporate-secondary);
   stroke-opacity: 0.5;
   stroke-dasharray: 3, 3;
 }
 
-/* Legend Styling */
+/* Legend Styling - Corporate Colors */
 .dashboard-legend {
-  color: var(--dashboard-light);
+  color: var(--corporate-contrast);
   font-size: var(--dashboard-text-size);
   font-weight: 500;
 }
 
-/* Progress Indicators */
+/* Progress Indicators - Corporate Colors */
 .dashboard-progress-bar {
-  background: rgba(193, 232, 255, 0.2);
+  background: rgba(193, 232, 255, 0.2); /* corporate-contrast with transparency */
   border-radius: 50px;
   overflow: hidden;
   height: 8px;
 }
 
 .dashboard-progress-fill {
-  background: linear-gradient(90deg, var(--dashboard-accent) 0%, var(--dashboard-light) 100%);
+  background: linear-gradient(90deg, var(--corporate-accent) 0%, var(--corporate-contrast) 100%);
   height: 100%;
   border-radius: 50px;
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -196,32 +232,62 @@
   animation: shimmer 2s infinite;
 }
 
-/* Status Indicators */
+/* Status Indicators - Corporate Colors */
 .dashboard-status-success {
-  background: rgba(16, 185, 129, 0.2);
-  color: #10B981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(125, 160, 202, 0.2); /* corporate-complement with transparency */
+  color: var(--corporate-complement);
+  border: 1px solid rgba(125, 160, 202, 0.3);
 }
 
 .dashboard-status-warning {
-  background: rgba(245, 158, 11, 0.2);
-  color: #F59E0B;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.dashboard-status-error {
-  background: rgba(239, 68, 68, 0.2);
-  color: #EF4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.dashboard-status-info {
-  background: rgba(84, 131, 179, 0.2);
-  color: var(--dashboard-accent);
+  background: rgba(84, 131, 179, 0.2); /* corporate-accent with transparency */
+  color: var(--corporate-accent);
   border: 1px solid rgba(84, 131, 179, 0.3);
 }
 
-/* Responsive Design */
+.dashboard-status-error {
+  background: rgba(5, 38, 89, 0.2); /* corporate-primary with transparency */
+  color: var(--corporate-primary);
+  border: 1px solid rgba(5, 38, 89, 0.3);
+}
+
+.dashboard-status-info {
+  background: rgba(27, 59, 111, 0.2); /* corporate-secondary with transparency */
+  color: var(--corporate-secondary);
+  border: 1px solid rgba(27, 59, 111, 0.3);
+}
+
+/* Gradient Text - Corporate Colors */
+.gradient-text {
+  background: linear-gradient(135deg, var(--corporate-accent) 0%, var(--corporate-contrast) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Chart Theme Configuration - Corporate Colors */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(27, 59, 111, 0.95) !important; /* corporate-secondary */
+  border: 1px solid var(--corporate-accent) !important;
+  border-radius: var(--dashboard-radius-sm) !important;
+  color: var(--corporate-contrast) !important;
+  box-shadow: var(--dashboard-shadow) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--corporate-secondary) !important;
+  stroke-opacity: 0.5 !important;
+}
+
+.recharts-text {
+  fill: var(--corporate-contrast) !important;
+  font-weight: 500 !important;
+}
+
+/* Responsive Design - Corporate Theme */
 @media (max-width: 768px) {
   .dashboard-container {
     padding: var(--dashboard-spacing-sm);
@@ -262,9 +328,9 @@
   }
 }
 
-/* Dark/Light Mode Support */
+/* Light Mode Adaptations - Corporate Colors */
 .light .dashboard-container {
-  background: linear-gradient(135deg, var(--dashboard-light) 0%, #FFFFFF 50%, rgba(125, 160, 202, 0.2) 100%);
+  background: linear-gradient(135deg, var(--corporate-contrast) 0%, #FFFFFF 50%, rgba(125, 160, 202, 0.2) 100%);
 }
 
 .light .dashboard-card {
@@ -274,18 +340,26 @@
 
 .light .dashboard-title,
 .light .dashboard-metric {
-  color: var(--dashboard-primary);
+  color: var(--corporate-base);
 }
 
 .light .dashboard-subtitle {
-  color: var(--dashboard-secondary);
+  color: var(--corporate-primary);
 }
 
 .light .dashboard-text {
-  color: var(--dashboard-tertiary);
+  color: var(--corporate-secondary);
 }
 
-/* Animation Classes */
+.light .dashboard-button {
+  background: linear-gradient(135deg, var(--corporate-primary) 0%, var(--corporate-secondary) 100%);
+}
+
+.light .dashboard-button:hover {
+  background: linear-gradient(135deg, var(--corporate-secondary) 0%, var(--corporate-accent) 100%);
+}
+
+/* Animation Classes - Corporate Theme */
 .dashboard-fade-in {
   animation: dashboardFadeIn 0.6s ease-out;
 }
@@ -329,21 +403,21 @@
   }
 }
 
-/* Focus States for Accessibility */
+/* Focus States for Accessibility - Corporate Colors */
 .dashboard-button:focus,
 .dashboard-interactive:focus {
-  outline: 2px solid var(--dashboard-light);
+  outline: 2px solid var(--corporate-contrast);
   outline-offset: 2px;
 }
 
-/* High Contrast Mode */
+/* High Contrast Mode - Corporate Colors */
 @media (prefers-contrast: high) {
   .dashboard-card {
-    border: 2px solid var(--dashboard-accent);
+    border: 2px solid var(--corporate-accent);
   }
   
   .dashboard-button {
-    border: 2px solid var(--dashboard-white);
+    border: 2px solid var(--corporate-contrast);
   }
 }
 

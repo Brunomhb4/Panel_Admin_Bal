@@ -33,7 +33,7 @@ const WaterParksTable: React.FC = () => {
         </div>
         
         {/* Enhanced activity indicator */}
-        <div className="flex items-center text-midnight-blue bg-gradient-to-r from-sky-light/40 to-blue-soft/20 border border-sky-light/40 backdrop-blur-sm shadow-soft flex-shrink-0 group relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105
+        <div className="flex items-center text-[#1B3B6F] bg-gradient-to-r from-[#C1E8FF]/40 to-[#7DA0CA]/20 border border-[#C1E8FF]/40 backdrop-blur-sm shadow-soft flex-shrink-0 group relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105
                         px-2 py-1.5 text-xs rounded-lg
                         xs:px-3 xs:py-2 xs:text-xs xs:rounded-xl
                         sm:px-4 sm:py-2.5 sm:text-sm sm:rounded-xl
@@ -41,7 +41,7 @@ const WaterParksTable: React.FC = () => {
                         lg:px-6 lg:py-3 lg:text-base lg:rounded-2xl">
           
           {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/5 to-sky-muted/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1B3B6F]/5 to-[#5483B3]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
           
           {/* Enhanced activity icon */}
           <div className="relative z-10 mr-1.5 xs:mr-2 sm:mr-3">
@@ -52,13 +52,13 @@ const WaterParksTable: React.FC = () => {
                                md:h-5 md:w-5" />
             
             {/* Pulse effect */}
-            <div className="absolute inset-0 bg-midnight-blue/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+            <div className="absolute inset-0 bg-[#1B3B6F]/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
           </div>
           
           <span className="font-semibold relative z-10">{waterParks.length} balnearios</span>
           
           {/* Sparkle effect */}
-          <Sparkles className="ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sky-muted animate-pulse
+          <Sparkles className="ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 text-[#5483B3] animate-pulse
                               h-3 w-3
                               xs:h-4 xs:w-4
                               sm:h-4 sm:w-4" />
@@ -87,7 +87,7 @@ const WaterParksTable: React.FC = () => {
                   <td className="table-body-cell">
                     <div className="flex items-center">
                       {/* Enhanced avatar */}
-                      <div className="text-white font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted group relative overflow-hidden border-2 border-white/20
+                      <div className="text-white font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-[#1B3B6F] via-[#052659] to-[#5483B3] group relative overflow-hidden border-2 border-white/20
                                       h-8 w-8 rounded-xl text-xs mr-2
                                       xs:h-9 xs:w-9 xs:rounded-2xl xs:text-sm xs:mr-3
                                       sm:h-10 sm:w-10 sm:text-sm sm:mr-3
@@ -98,13 +98,13 @@ const WaterParksTable: React.FC = () => {
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
                         
                         {/* Pulse effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-sky-light/20 to-blue-soft/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
                         
                         <span className="relative z-10 drop-shadow-lg">{park.name.charAt(0)}</span>
                       </div>
                       
                       <div className="min-w-0 flex-1">
-                        <div className="font-bold text-deep-navy truncate transition-all duration-300 hover:text-midnight-blue hover:scale-105 origin-left
+                        <div className="font-bold text-[#021024] truncate transition-all duration-300 hover:text-[#1B3B6F] hover:scale-105 origin-left
                                         text-xs
                                         xs:text-sm
                                         sm:text-base
@@ -112,7 +112,7 @@ const WaterParksTable: React.FC = () => {
                                         lg:text-lg">
                           {park.name}
                         </div>
-                        <div className="text-sky-muted font-medium transition-all duration-300 hover:text-blue-soft
+                        <div className="text-[#5483B3] font-medium transition-all duration-300 hover:text-[#7DA0CA]
                                         text-xs mt-0.5
                                         xs:text-xs xs:mt-0.5
                                         sm:text-xs sm:mt-1
@@ -142,7 +142,7 @@ const WaterParksTable: React.FC = () => {
                   </td>
                   
                   <td className="table-body-cell hidden md:table-cell">
-                    <span className="font-bold text-sky-muted transition-all duration-300 hover:text-blue-soft hover:scale-105 origin-left
+                    <span className="font-bold text-[#5483B3] transition-all duration-300 hover:text-[#7DA0CA] hover:scale-105 origin-left
                                      text-xs
                                      xs:text-sm
                                      sm:text-base
@@ -154,7 +154,7 @@ const WaterParksTable: React.FC = () => {
                   <td className="table-body-cell">
                     <Link
                       to={`${basePath}/waterpark/${park.id}`}
-                      className="inline-flex items-center font-semibold text-midnight-blue hover:text-white hover:bg-gradient-to-r hover:from-midnight-blue hover:to-navy-blue transition-all duration-300 hover:shadow-lg hover:scale-105 border border-sky-light/40 bg-white/50 backdrop-blur-sm group relative overflow-hidden
+                      className="inline-flex items-center font-semibold text-[#1B3B6F] hover:text-white hover:bg-gradient-to-r hover:from-[#1B3B6F] hover:to-[#052659] transition-all duration-300 hover:shadow-lg hover:scale-105 border border-[#C1E8FF]/40 bg-white/50 backdrop-blur-sm group relative overflow-hidden
                                  px-2 py-1.5 text-xs rounded-lg
                                  xs:px-3 xs:py-2 xs:text-xs xs:rounded-xl
                                  sm:px-4 sm:py-2.5 sm:text-sm sm:rounded-xl
@@ -162,7 +162,7 @@ const WaterParksTable: React.FC = () => {
                                  lg:px-6 lg:py-3 lg:text-base lg:rounded-2xl"
                     >
                       {/* Animated background */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/5 to-navy-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#1B3B6F]/5 to-[#052659]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                       
                       <span className="mr-1.5 xs:mr-2 sm:mr-3 hidden xs:inline relative z-10">Ver detalles</span>
                       <span className="mr-1.5 xs:hidden relative z-10">Ver</span>
