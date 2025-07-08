@@ -19,7 +19,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title }) =>
   return (
     <div className={`flex h-screen particle-bg overflow-hidden transition-all duration-300
                     ${mode === 'dark' 
-                      ? 'bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F]' 
+                      ? 'bg-gradient-to-br from-[#021024] via-[#021024] to-[#052659]' 
                       : 'bg-gradient-to-br from-[#C1E8FF] via-white to-[#F8F9FA]'
                     }`}>
       {/* Mobile sidebar backdrop */}

@@ -67,6 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
         <div className="flex items-center min-w-0 flex-1">
           {/* Enhanced logo */}
           <div className="flex items-center justify-center bg-gradient-to-br from-[#052659] via-[#1B3B6F] to-[#5483B3] shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-white/20
+          <div className="flex items-center justify-center bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F] shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-[#C1E8FF]/30
                           w-8 h-8 rounded-xl
                           xs:w-9 xs:h-9 xs:rounded-2xl
                           sm:w-10 sm:h-10
@@ -74,12 +75,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                           lg:w-14 lg:h-14 lg:rounded-3xl">
             
             {/* Animated background effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/25 to-[#7DA0CA]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
             
             {/* Shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C1E8FF]/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
             
-            <Waves className="text-white relative z-10 drop-shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-12
+            <Waves className="text-[#C1E8FF] relative z-10 drop-shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 font-bold
                               h-4 w-4
                               xs:h-5 xs:w-5
                               sm:h-5 sm:w-5

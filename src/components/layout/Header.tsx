@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
           </div>
           
           {/* Enhanced user avatar */}
-          <div className="text-white flex items-center justify-center font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 animate-float bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted group relative overflow-hidden border-2 border-white/20
+          <div className="text-white flex items-center justify-center font-bold shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 animate-float bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F] group relative overflow-hidden border-2 border-[#C1E8FF]/30
                           h-8 w-8 rounded-xl text-xs
                           xs:h-9 xs:w-9 xs:rounded-2xl xs:text-sm
                           sm:h-10 sm:w-10 sm:text-sm
@@ -116,15 +116,15 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
                           lg:h-14 lg:w-14 lg:rounded-3xl lg:text-lg">
             
             {/* Animated shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C1E8FF]/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
             
             {/* Subtle pulse effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-light/20 to-blue-soft/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#7DA0CA]/25 to-[#C1E8FF]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
             
             {user?.name ? (
-              <span className="relative z-10 drop-shadow-lg">{user.name.charAt(0).toUpperCase()}</span>
+              <span className="relative z-10 drop-shadow-lg text-[#C1E8FF] font-extrabold">{user.name.charAt(0).toUpperCase()}</span>
             ) : (
-              <User className="relative z-10 drop-shadow-lg
+              <User className="relative z-10 drop-shadow-lg text-[#C1E8FF]
                               h-3 w-3
                               xs:h-4 xs:w-4
                               sm:h-4 sm:w-4

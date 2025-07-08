@@ -17,7 +17,7 @@ export const useTheme = () => {
     // Update CSS custom properties based on theme
     if (mode === 'dark') {
       // Dark mode - Corporate palette as primary theme
-      root.style.setProperty('--theme-bg-primary', '#021024');
+      root.style.setProperty('--theme-bg-primary', '#021024'); // #021024 – Azul muy oscuro (casi negro)
       root.style.setProperty('--theme-bg-secondary', '#052659');
       root.style.setProperty('--theme-bg-tertiary', '#1B3B6F');
       root.style.setProperty('--theme-text-primary', '#C1E8FF');
@@ -26,21 +26,21 @@ export const useTheme = () => {
       root.style.setProperty('--theme-accent', '#5483B3');
       root.style.setProperty('--theme-highlight', '#7DA0CA');
       root.style.setProperty('--theme-light', '#C1E8FF');
-      root.style.setProperty('--theme-border', 'rgba(193, 232, 255, 0.2)');
-      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.3)');
+      root.style.setProperty('--theme-border', 'rgba(193, 232, 255, 0.3)');
+      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.6)');
     } else {
       // Light mode - Optimized corporate palette with accessibility
-      root.style.setProperty('--theme-bg-primary', '#FFFFFF');
+      root.style.setProperty('--theme-bg-primary', '#FFFFFF'); // Contraste perfecto con #021024
       root.style.setProperty('--theme-bg-secondary', '#F8F9FA');
       root.style.setProperty('--theme-bg-tertiary', '#F1F5F9');
-      root.style.setProperty('--theme-text-primary', '#021024');
+      root.style.setProperty('--theme-text-primary', '#021024'); // #021024 – Azul muy oscuro (casi negro)
       root.style.setProperty('--theme-text-secondary', '#052659');
       root.style.setProperty('--theme-text-muted', '#1B3B6F');
       root.style.setProperty('--theme-accent', '#052659');
       root.style.setProperty('--theme-highlight', '#5483B3');
       root.style.setProperty('--theme-light', '#7DA0CA');
-      root.style.setProperty('--theme-border', 'rgba(27, 59, 111, 0.15)');
-      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.08)');
+      root.style.setProperty('--theme-border', 'rgba(27, 59, 111, 0.12)');
+      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.06)');
     }
   }, [mode]);
 

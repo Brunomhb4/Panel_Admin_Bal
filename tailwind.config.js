@@ -31,17 +31,22 @@ export default {
         'aspect-tall': {'raw': '(max-aspect-ratio: 9/16)'},
       },
       colors: {
-        // Paleta de azules armoniosa
-        // Paleta corporativa
-        'theme-primary': '#021024',      // Azul muy oscuro (casi negro)
-        'theme-secondary': '#052659',    // Azul marino profundo
-        'theme-tertiary': '#1B3B6F',     // Azul medianoche clásico
-        'theme-accent': '#5483B3',       // Azul cielo apagado
-        'theme-highlight': '#7DA0CA',    // Azul grisáceo suave
-        'theme-light': '#C1E8FF',        // Azul muy claro / celeste
+        // Paleta Corporativa Exacta - Modo Nítido
+        'corporate-base': '#021024',      // #021024 – Azul muy oscuro (casi negro) - Color base dominante
+        'corporate-primary': '#052659',   // Color primario - Azul marino profundo para elementos principales
+        'corporate-secondary': '#1B3B6F', // Color secundario - Azul medianoche para detalles y acentos
+        'corporate-tertiary': '#5483B3',  // Color terciario - Azul cielo apagado para elementos intermedios
+        'corporate-transition': '#7DA0CA', // Color de transición - Azul grisáceo suave para gradientes
+        'corporate-highlight': '#C1E8FF',  // Color de realce - Azul muy claro para destacados y brillos
         
-        // Additional color aliases for compatibility
-        'deep-navy': '#021024',          // Alias for theme-primary
+        // Aliases para compatibilidad
+        'theme-primary': '#021024',       // #021024 – Azul muy oscuro (casi negro)
+        'theme-secondary': '#052659',
+        'theme-tertiary': '#1B3B6F',
+        'theme-accent': '#5483B3',
+        'theme-highlight': '#7DA0CA',
+        'theme-light': '#C1E8FF',
+        'deep-navy': '#021024',
         
         // CSS Variables para modo dinámico
         'theme-bg-primary': 'var(--theme-bg-primary)',
