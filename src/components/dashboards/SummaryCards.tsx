@@ -18,57 +18,57 @@ const SummaryCards: React.FC = () => {
       title: 'Tickets Activos',
       value: totalActiveTickets.toLocaleString(),
       icon: Ticket,
-      gradient: mode === 'dark' ? 'from-theme-accent to-theme-highlight' : 'from-theme-bg-tertiary to-theme-accent',
-      bgGradient: mode === 'dark' ? 'from-theme-accent/20 to-theme-highlight/10' : 'from-theme-highlight/30 to-theme-light/20',
+      gradient: mode === 'dark' ? 'from-theme-accent to-theme-highlight' : 'from-blue-600 to-indigo-600',
+      bgGradient: mode === 'dark' ? 'from-theme-accent/20 to-theme-highlight/10' : 'from-blue-50 to-indigo-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-accent/90 to-theme-highlight/90' : 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-accent/90 to-theme-highlight/90' : 'bg-gradient-to-br from-blue-600 to-indigo-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-accent/30' : 'bg-theme-bg-tertiary/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-accent/30' : 'bg-blue-500/30'
     },
     {
       title: 'Ingresos Totales',
       value: `$${totalRevenue.toLocaleString()}`,
       icon: DollarSign,
-      gradient: mode === 'dark' ? 'from-theme-highlight to-theme-light' : 'from-green-600 to-emerald-600',
-      bgGradient: mode === 'dark' ? 'from-theme-highlight/20 to-theme-light/10' : 'from-green-50 to-emerald-50',
+      gradient: mode === 'dark' ? 'from-theme-highlight to-theme-light' : 'from-emerald-600 to-green-600',
+      bgGradient: mode === 'dark' ? 'from-theme-highlight/20 to-theme-light/10' : 'from-emerald-50 to-green-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90' : 'bg-gradient-to-br from-green-600 to-emerald-600',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90' : 'bg-gradient-to-br from-emerald-600 to-green-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-highlight/30' : 'bg-green-500/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-highlight/30' : 'bg-emerald-500/30'
     },
     {
       title: 'Total Balnearios',
       value: totalWaterParks.toString(),
       icon: Store,
-      gradient: mode === 'dark' ? 'from-theme-light to-theme-highlight' : 'from-purple-600 to-violet-600',
-      bgGradient: mode === 'dark' ? 'from-theme-light/15 to-theme-highlight/20' : 'from-purple-50 to-violet-50',
+      gradient: mode === 'dark' ? 'from-theme-light to-theme-highlight' : 'from-violet-600 to-purple-600',
+      bgGradient: mode === 'dark' ? 'from-theme-light/15 to-theme-highlight/20' : 'from-violet-50 to-purple-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-light/90 to-theme-highlight/90' : 'bg-gradient-to-br from-purple-600 to-violet-600',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-light/90 to-theme-highlight/90' : 'bg-gradient-to-br from-violet-600 to-purple-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-light/30' : 'bg-purple-500/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-light/30' : 'bg-violet-500/30'
     },
     {
       title: 'Tickets Vendidos',
       value: totalSoldTickets.toLocaleString(),
       icon: TrendingUp,
-      gradient: mode === 'dark' ? 'from-theme-bg-tertiary to-theme-accent' : 'from-orange-600 to-amber-600',
-      bgGradient: mode === 'dark' ? 'from-theme-bg-tertiary/15 to-theme-accent/20' : 'from-orange-50 to-amber-50',
+      gradient: mode === 'dark' ? 'from-theme-bg-tertiary to-theme-accent' : 'from-amber-600 to-orange-600',
+      bgGradient: mode === 'dark' ? 'from-theme-bg-tertiary/15 to-theme-accent/20' : 'from-amber-50 to-orange-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90' : 'bg-gradient-to-br from-orange-600 to-amber-600',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90' : 'bg-gradient-to-br from-amber-600 to-orange-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-bg-tertiary/30' : 'bg-orange-500/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-bg-tertiary/30' : 'bg-amber-500/30'
     }
   ];
   
