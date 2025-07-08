@@ -131,6 +131,7 @@ const SuperAdminDashboard: React.FC = () => {
             }}
       </div>
     </DashboardLayout>
+  )
   );
 };
 
