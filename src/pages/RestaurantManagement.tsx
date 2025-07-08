@@ -15,7 +15,7 @@ import {
   Wine,
   UtensilsCrossed,
   Coffee,
-  Dessert
+  Dessert,
   Sparkles
 } from 'lucide-react';
 
