@@ -1,5 +1,6 @@
 import React from 'react';
 import { LucideIcon, TrendingUp, TrendingDown } from 'lucide-react';
+import { useThemeStore } from '../../stores/themeStore';
 
 interface MetricCardProps {
   title: string;
@@ -14,6 +15,7 @@ interface MetricCardProps {
   variant?: 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'error';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  format?: 'number' | 'currency' | 'percentage';
 }
 
 const MetricCard: React.FC<MetricCardProps> = ({
@@ -24,63 +26,111 @@ const MetricCard: React.FC<MetricCardProps> = ({
   trend,
   variant = 'default',
   size = 'md',
-  className = ''
+  className = '',
+  format = 'number'
 }) => {
+  const { mode } = useThemeStore();
+
+  const formatValue = (val: string | number) => {
+    if (typeof val === 'string') return val;
+    
+    switch (format) {
+      case 'currency':
+        return `$${val.toLocaleString()}`;
+      case 'percentage':
+        return `${val}%`;
+      default:
+        return val.toLocaleString();
+    }
+  };
+
   const getVariantStyles = () => {
+    const baseStyles = {
+      background: mode === 'dark' 
+        ? 'bg-gradient-to-br from-theme-bg-secondary/90 to-theme-bg-tertiary/70' 
+        : 'bg-white/90',
+      border: mode === 'dark' ? 'border-theme-border' : 'border-gray-200',
+      text: mode === 'dark' ? 'text-theme-text-primary' : 'text-gray-900',
+      subtitle: mode === 'dark' ? 'text-theme-text-secondary' : 'text-gray-600'
+    };
+
     switch (variant) {
       case 'primary':
         return {
-          background: 'bg-gradient-to-br from-theme-bg-secondary/90 to-theme-bg-tertiary/70',
-          border: 'border-theme-accent/40',
-          iconBg: 'bg-gradient-to-br from-theme-accent to-theme-highlight',
+          ...baseStyles,
+          background: mode === 'dark' 
+            ? 'bg-gradient-to-br from-theme-bg-secondary/90 to-theme-bg-tertiary/70' 
+            : 'bg-gradient-to-br from-blue-50 to-indigo-50',
+          border: mode === 'dark' ? 'border-theme-accent/40' : 'border-blue-200',
+          iconBg: mode === 'dark' 
+            ? 'bg-gradient-to-br from-theme-accent to-theme-highlight' 
+            : 'bg-gradient-to-br from-blue-600 to-indigo-600',
           iconColor: 'text-white',
-          valueColor: 'text-theme-text-primary',
-          glowColor: 'shadow-[0_0_20px_rgba(84,131,179,0.3)]'
+          glowColor: mode === 'dark' 
+            ? 'shadow-[0_0_20px_rgba(84,131,179,0.3)]' 
+            : 'shadow-[0_0_20px_rgba(59,130,246,0.3)]'
         };
       case 'accent':
         return {
-          background: 'bg-gradient-to-br from-theme-accent/15 to-theme-highlight/25',
-          border: 'border-theme-highlight/50',
-          iconBg: 'bg-gradient-to-br from-theme-highlight to-theme-light',
-          iconColor: 'text-theme-bg-primary',
-          valueColor: 'text-theme-text-primary',
-          glowColor: 'shadow-[0_0_20px_rgba(125,160,202,0.3)]'
+          ...baseStyles,
+          background: mode === 'dark' 
+            ? 'bg-gradient-to-br from-theme-accent/15 to-theme-highlight/25' 
+            : 'bg-gradient-to-br from-purple-50 to-violet-50',
+          border: mode === 'dark' ? 'border-theme-highlight/50' : 'border-purple-200',
+          iconBg: mode === 'dark' 
+            ? 'bg-gradient-to-br from-theme-highlight to-theme-light' 
+            : 'bg-gradient-to-br from-purple-600 to-violet-600',
+          iconColor: mode === 'dark' ? 'text-theme-bg-primary' : 'text-white',
+          glowColor: mode === 'dark' 
+            ? 'shadow-[0_0_20px_rgba(125,160,202,0.3)]' 
+            : 'shadow-[0_0_20px_rgba(147,51,234,0.3)]'
         };
       case 'success':
         return {
-          background: 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/30',
-          border: 'border-green-200 dark:border-green-700/50',
-          iconBg: 'bg-gradient-to-br from-green-500 to-green-600',
+          ...baseStyles,
+          background: mode === 'dark' 
+            ? 'bg-gradient-to-br from-green-900/20 to-green-800/30' 
+            : 'bg-gradient-to-br from-green-50 to-emerald-50',
+          border: mode === 'dark' ? 'border-green-700/50' : 'border-green-200',
+          iconBg: 'bg-gradient-to-br from-green-600 to-emerald-600',
           iconColor: 'text-white',
-          valueColor: 'text-green-800 dark:text-green-200',
+          text: mode === 'dark' ? 'text-green-200' : 'text-green-800',
           glowColor: 'shadow-[0_0_20px_rgba(34,197,94,0.3)]'
         };
       case 'warning':
         return {
-          background: 'bg-gradient-to-br from-yellow-50 to-orange-100 dark:from-yellow-900/20 dark:to-orange-800/30',
-          border: 'border-yellow-200 dark:border-yellow-700/50',
-          iconBg: 'bg-gradient-to-br from-yellow-500 to-orange-500',
+          ...baseStyles,
+          background: mode === 'dark' 
+            ? 'bg-gradient-to-br from-yellow-900/20 to-orange-800/30' 
+            : 'bg-gradient-to-br from-yellow-50 to-orange-50',
+          border: mode === 'dark' ? 'border-yellow-700/50' : 'border-yellow-200',
+          iconBg: 'bg-gradient-to-br from-yellow-600 to-orange-600',
           iconColor: 'text-white',
-          valueColor: 'text-yellow-800 dark:text-yellow-200',
+          text: mode === 'dark' ? 'text-yellow-200' : 'text-yellow-800',
           glowColor: 'shadow-[0_0_20px_rgba(245,158,11,0.3)]'
         };
       case 'error':
         return {
-          background: 'bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/30',
-          border: 'border-red-200 dark:border-red-700/50',
-          iconBg: 'bg-gradient-to-br from-red-500 to-red-600',
+          ...baseStyles,
+          background: mode === 'dark' 
+            ? 'bg-gradient-to-br from-red-900/20 to-red-800/30' 
+            : 'bg-gradient-to-br from-red-50 to-red-50',
+          border: mode === 'dark' ? 'border-red-700/50' : 'border-red-200',
+          iconBg: 'bg-gradient-to-br from-red-600 to-red-700',
           iconColor: 'text-white',
-          valueColor: 'text-red-800 dark:text-red-200',
+          text: mode === 'dark' ? 'text-red-200' : 'text-red-800',
           glowColor: 'shadow-[0_0_20px_rgba(239,68,68,0.3)]'
         };
       default:
         return {
-          background: 'bg-theme-bg-primary',
-          border: 'border-theme-border',
-          iconBg: 'bg-gradient-to-br from-theme-bg-tertiary to-theme-accent',
+          ...baseStyles,
+          iconBg: mode === 'dark' 
+            ? 'bg-gradient-to-br from-theme-bg-tertiary to-theme-accent' 
+            : 'bg-gradient-to-br from-gray-600 to-gray-700',
           iconColor: 'text-white',
-          valueColor: 'text-theme-text-primary',
-          glowColor: 'shadow-[0_0_20px_rgba(27,59,111,0.2)]'
+          glowColor: mode === 'dark' 
+            ? 'shadow-[0_0_20px_rgba(27,59,111,0.2)]' 
+            : 'shadow-[0_0_20px_rgba(107,114,128,0.2)]'
         };
     }
   };
@@ -136,11 +186,11 @@ const MetricCard: React.FC<MetricCardProps> = ({
         {/* Header with Icon */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <h3 className={`text-theme-text-secondary font-semibold ${sizeClasses.title} mb-1 transition-colors duration-300`}>
+            <h3 className={`${styles.subtitle} font-semibold ${sizeClasses.title} mb-1 transition-colors duration-300`}>
               {title}
             </h3>
             {subtitle && (
-              <p className={`text-theme-text-muted ${sizeClasses.subtitle}`}>
+              <p className={`${mode === 'dark' ? 'text-theme-text-muted' : 'text-gray-500'} ${sizeClasses.subtitle}`}>
                 {subtitle}
               </p>
             )}
@@ -162,10 +212,10 @@ const MetricCard: React.FC<MetricCardProps> = ({
         {/* Main Value */}
         <div className="mb-3">
           <div className={`
-            ${styles.valueColor} font-bold ${sizeClasses.value} 
+            ${styles.text} font-bold ${sizeClasses.value} 
             transition-all duration-300 group-hover:scale-105 origin-left
           `}>
-            {typeof value === 'number' ? value.toLocaleString() : value}
+            {formatValue(value)}
           </div>
         </div>
 
@@ -175,8 +225,12 @@ const MetricCard: React.FC<MetricCardProps> = ({
             <div className={`
               inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold
               ${trend.isPositive 
-                ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
-                : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                ? mode === 'dark' 
+                  ? 'bg-green-900/30 text-green-400' 
+                  : 'bg-green-100 text-green-800'
+                : mode === 'dark' 
+                  ? 'bg-red-900/30 text-red-400' 
+                  : 'bg-red-100 text-red-800'
               }
             `}>
               {trend.isPositive ? (
@@ -186,7 +240,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
               )}
               {Math.abs(trend.value)}%
             </div>
-            <span className="text-theme-text-muted text-xs">
+            <span className={`text-xs ${mode === 'dark' ? 'text-theme-text-muted' : 'text-gray-500'}`}>
               vs {trend.period}
             </span>
           </div>
@@ -195,7 +249,11 @@ const MetricCard: React.FC<MetricCardProps> = ({
 
       {/* Subtle glow effect */}
       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className={`absolute inset-0 bg-gradient-to-r ${styles.iconBg.replace('bg-gradient-to-br', 'from-transparent via-current/5 to-transparent')} rounded-xl animate-pulse`}></div>
+        <div className={`absolute inset-0 rounded-xl animate-pulse
+                        ${mode === 'dark' 
+                          ? 'bg-gradient-to-r from-theme-accent/5 to-theme-highlight/5' 
+                          : 'bg-gradient-to-r from-blue-500/5 to-indigo-500/5'
+                        }`}></div>
       </div>
     </div>
   );

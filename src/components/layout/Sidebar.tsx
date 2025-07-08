@@ -1,230 +1,227 @@
-import React, { useEffect } from 'react';
-import DashboardLayout from '../components/layout/DashboardLayout';
-import { useWaterParksStore } from '../stores/waterParksStore';
-import { Plus, BarChart3, TrendingUp, Users, Building } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import DashboardCard from '../components/ui/DashboardCard';
-import MetricCard from '../components/ui/MetricCard';
-import InteractiveChart from '../components/ui/InteractiveChart';
-import DataTable from '../components/ui/DataTable';
-import ProgressIndicator from '../components/ui/ProgressIndicator';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuthStore } from '../../stores/authStore';
+import { 
+  Home, 
+  LayoutDashboard, 
+  Users, 
+  Waves, 
+  ChefHat,
+  Briefcase,
+  LogOut,
+  X
+} from 'lucide-react';
 
-const SuperAdminDashboard: React.FC = () => {
-  const { fetchWaterParks, loading } = useWaterParksStore();
+interface SidebarProps {
+  onClose: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
+  const { userRole, logout } = useAuthStore();
+  const location = useLocation();
   
-  useEffect(() => {
-    fetchWaterParks();
-  }, [fetchWaterParks]);
-  
-  const { waterParks } = useWaterParksStore();
-  
-  // Calculate metrics
-  const totalActiveTickets = waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
-  const totalRevenue = waterParks.reduce((sum, park) => sum + park.totalRevenue, 0);
-  const totalSoldTickets = waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
-  const totalPrintedTickets = waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
-  
-  // Mock chart data
-  const revenueData = [
-    { name: 'Ene', value: 45000 },
-    { name: 'Feb', value: 52000 },
-    { name: 'Mar', value: 48000 },
-    { name: 'Abr', value: 61000 },
-    { name: 'May', value: 55000 },
-    { name: 'Jun', value: 67000 },
-  ];
-  
-  const ticketsData = [
-    { name: 'Lun', value: 120 },
-    { name: 'Mar', value: 150 },
-    { name: 'Mié', value: 180 },
-    { name: 'Jue', value: 165 },
-    { name: 'Vie', value: 200 },
-    { name: 'Sáb', value: 250 },
-    { name: 'Dom', value: 220 },
-  ];
-  
-  // Table columns
-  const tableColumns = [
+  const isActive = (path: string) => {
+    return location.pathname === path || location.pathname.startsWith(path + '/');
+  };
+
+  const navItems = [
     {
-      key: 'name',
-      label: 'Balneario',
-      sortable: true,
-      render: (value: string, row: any) => (
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-theme-accent to-theme-highlight rounded-lg flex items-center justify-center text-white font-bold text-sm">
-            {value.charAt(0)}
-          </div>
-          <span className="font-semibold">{value}</span>
-        </div>
-      )
+      path: userRole === 'admin' ? '/admin' : '/superadmin',
+      icon: LayoutDashboard,
+      label: 'Dashboard',
+      show: true,
+      iconColor: 'text-blue-500',
+      activeColor: 'from-blue-500 to-blue-600'
     },
     {
-      key: 'activeTickets',
-      label: 'Tickets Activos',
-      sortable: true,
-      align: 'right' as const,
-      render: (value: number) => (
-        <span className="font-semibold text-theme-accent">{value.toLocaleString()}</span>
-      )
+      path: '/superadmin/waterparks',
+      icon: Waves,
+      label: 'Gestión de Balnearios',
+      show: userRole === 'superadmin',
+      iconColor: 'text-cyan-500',
+      activeColor: 'from-cyan-500 to-blue-500'
     },
     {
-      key: 'totalRevenue',
-      label: 'Ingresos',
-      sortable: true,
-      align: 'right' as const,
-      render: (value: number) => (
-        <span className="font-bold text-green-600">${value.toLocaleString()}</span>
-      )
+      path: '/superadmin/restaurant',
+      icon: ChefHat,
+      label: 'Restaurante',
+      show: userRole === 'superadmin',
+      iconColor: 'text-orange-500',
+      activeColor: 'from-orange-500 to-red-500'
     },
     {
-      key: 'soldTickets',
-      label: 'Tickets Vendidos',
-      sortable: true,
-      align: 'right' as const
+      path: '/project-dashboard',
+      icon: Briefcase,
+      label: 'Tablero de Proyecto',
+      show: true,
+      iconColor: 'text-indigo-500',
+      activeColor: 'from-indigo-500 to-purple-500'
+    },
+    {
+      path: '/superadmin/users',
+      icon: Users,
+      label: 'Gestión de Usuarios',
+      show: userRole === 'superadmin',
+      iconColor: 'text-purple-500',
+      activeColor: 'from-purple-500 to-pink-500'
     }
   ];
-  
-  if (loading) {
-    return (
-      <DashboardLayout title="Dashboard">
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-        </div>
-      </DashboardLayout>
-    );
-  }
-  
+
   return (
-    <DashboardLayout title="Dashboard">
-      <div className="animate-fade-in space-y-6">
-        {/* Header Actions */}
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-theme-text-primary mb-2">
-              Panel de Control Principal
+    <aside className="sidebar">
+      <div className="sidebar-header">
+        <div className="flex items-center min-w-0 flex-1">
+          {/* Enhanced logo */}
+          <div className="flex items-center justify-center bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-white/20
+                          w-8 h-8 rounded-xl
+                          xs:w-9 xs:h-9 xs:rounded-2xl
+                          sm:w-10 sm:h-10
+                          md:w-12 md:h-12 md:rounded-2xl
+                          lg:w-14 lg:h-14 lg:rounded-3xl">
+            
+            {/* Animated background effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-sky-light/20 to-blue-soft/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
+            
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+            
+            <Waves className="text-white relative z-10 drop-shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-12
+                              h-4 w-4
+                              xs:h-5 xs:w-5
+                              sm:h-5 sm:w-5
+                              md:h-6 md:w-6
+                              lg:h-7 lg:w-7" />
+          </div>
+          
+          <div className="min-w-0 flex-1
+                          ml-2
+                          xs:ml-3
+                          sm:ml-4
+                          lg:ml-5">
+            <h1 className="gradient-text truncate font-bold transition-all duration-300 hover:scale-105 origin-left
+                           text-sm
+                           xs:text-base
+                           sm:text-lg
+                           lg:text-xl">
+              Balnearios
             </h1>
-            <p className="text-theme-text-muted">
-              Gestión integral de todos los balnearios del sistema
+            <p className="text-sky-muted truncate font-semibold transition-all duration-300 hover:text-blue-soft
+                          text-xs
+                          xs:text-xs
+                          sm:text-sm">
+              Panel Admin
             </p>
           </div>
-          <Link 
-            to="/superadmin/waterparks" 
-            className="btn btn-primary inline-flex items-center gap-2 hover-lift"
-          >
-            <Plus className="h-5 w-5" />
-            Nuevo Balneario
-          </Link>
         </div>
         
-        {/* Key Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            title="Tickets Activos"
-            value={totalActiveTickets}
-            icon={TrendingUp}
-            variant="primary"
-            trend={{
-              value: 12.5,
-              period: "mes anterior",
-              isPositive: true
-            }}
-          />
-          <MetricCard
-            title="Ingresos Totales"
-            value={totalRevenue}
-            icon={BarChart3}
-            variant="success"
-            format="currency"
-            trend={{
-              value: 8.3,
-              period: "mes anterior",
-              isPositive: true
-            }}
-          />
-          <MetricCard
-            title="Tickets Vendidos"
-            value={totalSoldTickets}
-            icon={Users}
-            variant="info"
-            trend={{
-              value: 15.2,
-              period: "mes anterior",
-              isPositive: true
-            }}
-          />
-          <MetricCard
-            title="Balnearios Activos"
-            value={waterParks.length}
-            icon={Building}
-            variant="warning"
-            trend={{
-              value: 2.1,
-              period: "mes anterior",
-              isPositive: true
-            }}
-          />
-        </div>
-        
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <DashboardCard title="Ingresos Mensuales" className="hover-lift">
-            <InteractiveChart
-              data={revenueData}
-              type="area"
-              color="#3B82F6"
-              height={300}
-            />
-          </DashboardCard>
+        {/* Enhanced close button */}
+        <button 
+          onClick={onClose}
+          className="lg:hidden transition-all duration-300 hover:scale-110 flex-shrink-0 rounded-xl hover:bg-gradient-to-r hover:from-red-100 hover:to-pink-100 text-sky-muted hover:text-red-500 group relative overflow-hidden
+                     p-1
+                     xs:p-1.5
+                     sm:p-2"
+        >
+          {/* Animated background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
           
-          <DashboardCard title="Tickets Vendidos (Última Semana)" className="hover-lift">
-            <InteractiveChart
-              data={ticketsData}
-              type="bar"
-              color="#10B981"
-              height={300}
-            />
-          </DashboardCard>
-        </div>
-        
-        {/* Water Parks Table */}
-        <DashboardCard title="Balnearios Registrados" className="hover-lift">
-          <DataTable
-            data={waterParks}
-            columns={tableColumns}
-            searchable
-            pagination
-            emptyMessage="No hay balnearios registrados"
-          />
-        </DashboardCard>
-        
-        {/* Progress Indicators */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <ProgressIndicator
-            label="Ocupación Promedio"
-            value={75}
-            maxValue={100}
-            color="blue"
-            showPercentage
-          />
-          <ProgressIndicator
-            label="Satisfacción Cliente"
-            value={4.2}
-            maxValue={5}
-            color="green"
-            format="rating"
-          />
-          <ProgressIndicator
-            label="Eficiencia Operativa"
-            value={88}
-            maxValue={100}
-            color="purple"
-            showPercentage
-          />
-        </div>
+          <X className="relative z-10 transition-all duration-300 group-hover:rotate-90
+                        h-4 w-4
+                        xs:h-5 xs:w-5
+                        sm:h-6 sm:w-6" />
+        </button>
       </div>
-    </DashboardLayout>
+      
+      <nav className="sidebar-nav custom-scrollbar">
+        <ul className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+          {navItems.filter(item => item.show).map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.path);
+            
+            return (
+              <li key={item.path}>
+                <Link 
+                  to={item.path}
+                  className={`sidebar-nav-item group relative overflow-hidden transition-all duration-300 ${
+                    active 
+                      ? `sidebar-nav-item-active bg-gradient-to-r ${item.activeColor} text-white shadow-lg scale-105 border-l-4 border-white/50` 
+                      : 'sidebar-nav-item-inactive hover:bg-gradient-to-r hover:from-sky-light/30 hover:to-blue-soft/20 hover:shadow-soft hover:scale-102'
+                  }`}
+                  onClick={onClose}
+                >
+                  {/* Animated background for inactive items */}
+                  {!active && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/5 to-sky-muted/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                  )}
+                  
+                  {/* Enhanced icon container */}
+                  <div className={`relative z-10 flex-shrink-0 transition-all duration-300 ${active ? 'scale-110' : 'group-hover:scale-105'}`}>
+                    <Icon className={`transition-all duration-300 drop-shadow-sm ${
+                      active 
+                        ? 'text-white' 
+                        : `${item.iconColor} group-hover:text-midnight-blue`
+                    }
+                                     mr-2 h-3 w-3
+                                     xs:mr-2.5 xs:h-4 xs:w-4
+                                     sm:mr-3 sm:h-4 sm:w-4
+                                     md:mr-3.5 md:h-5 md:w-5
+                                     lg:mr-4 lg:h-6 lg:w-6`} />
+                  </div>
+                  
+                  <span className={`truncate font-semibold relative z-10 transition-all duration-300 ${
+                    active ? 'text-white drop-shadow-sm' : 'text-midnight-blue group-hover:text-deep-navy'
+                  }
+                                   text-xs
+                                   xs:text-xs
+                                   sm:text-sm
+                                   md:text-sm
+                                   lg:text-base`}>
+                    {item.label}
+                  </span>
+                  
+                  {/* Active indicator glow */}
+                  {active && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50 rounded-xl animate-pulse"></div>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      
+      {/* Enhanced logout section */}
+      <div className="border-t border-sky-light/30 mt-auto bg-gradient-to-r from-sky-light/10 to-transparent
+                      p-2
+                      xs:p-3
+                      sm:p-4
+                      lg:p-6">
+        <button 
+          onClick={() => {
+            logout();
+            onClose();
+          }} 
+          className="w-full flex items-center text-error-600 transition-all duration-300 hover:shadow-lg hover:scale-105 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 font-semibold group relative overflow-hidden border border-transparent hover:border-red-200
+                     px-2 py-2 text-xs rounded-lg
+                     xs:px-2.5 xs:py-2.5 xs:text-xs xs:rounded-xl
+                     sm:px-3 sm:py-3 sm:text-sm sm:rounded-xl
+                     md:px-4 md:py-3.5 md:text-sm md:rounded-2xl
+                     lg:px-6 lg:py-4 lg:text-base lg:rounded-2xl"
+        >
+          {/* Animated background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+          
+          <LogOut className="flex-shrink-0 relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12 drop-shadow-sm
+                             mr-2 h-3 w-3
+                             xs:mr-2.5 xs:h-4 xs:w-4
+                             sm:mr-3 sm:h-4 sm:w-4
+                             md:mr-3.5 md:h-5 md:w-5
+                             lg:mr-4 lg:h-6 lg:w-6" />
+          <span className="truncate relative z-10">Cerrar sesión</span>
+        </button>
+      </div>
+    </aside>
   );
 };
 
-export default SuperAdminDashboard;
+export default Sidebar;

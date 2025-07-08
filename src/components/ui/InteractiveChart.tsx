@@ -12,6 +12,7 @@ import {
   LineChart,
   Line
 } from 'recharts';
+import { useThemeStore } from '../../stores/themeStore';
 
 interface ChartData {
   name: string;
@@ -43,19 +44,32 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
   showGrid = true,
   showTooltip = true,
   gradientId = 'chartGradient',
-  primaryColor = '#5483B3',
-  secondaryColor = '#7DA0CA',
+  primaryColor,
+  secondaryColor,
   className = ''
 }) => {
+  const { mode } = useThemeStore();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Use theme-aware colors if not provided
+  const defaultPrimaryColor = primaryColor || (mode === 'dark' ? '#5483B3' : '#3B82F6');
+  const defaultSecondaryColor = secondaryColor || (mode === 'dark' ? '#7DA0CA' : '#60A5FA');
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-theme-bg-primary border border-theme-border rounded-xl p-4 shadow-lg backdrop-blur-md">
-          <p className="text-theme-text-secondary font-medium text-sm mb-2">{label}</p>
+        <div className={`p-4 rounded-xl shadow-lg backdrop-blur-md border transition-all duration-300
+                        ${mode === 'dark' 
+                          ? 'bg-theme-bg-primary border-theme-border' 
+                          : 'bg-white border-gray-200'
+                        }`}>
+          <p className={`font-medium text-sm mb-2
+                        ${mode === 'dark' ? 'text-theme-text-secondary' : 'text-gray-600'}`}>
+            {label}
+          </p>
           {payload.map((entry: any, index: number) => (
-            <p key={index} className="text-theme-text-primary font-semibold">
+            <p key={index} className={`font-semibold
+                                      ${mode === 'dark' ? 'text-theme-text-primary' : 'text-gray-900'}`}>
               <span style={{ color: entry.color }}>●</span>
               {` ${entry.name}: ${entry.value.toLocaleString()}`}
             </p>
@@ -74,21 +88,23 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
       onMouseLeave: () => setActiveIndex(null)
     };
 
+    const gridColor = mode === 'dark' ? 'rgba(193, 232, 255, 0.1)' : 'rgba(107, 114, 128, 0.2)';
+    const textColor = mode === 'dark' ? '#7DA0CA' : '#6B7280';
+
     switch (type) {
       case 'bar':
         return (
           <BarChart {...commonProps}>
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={primaryColor} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={primaryColor} stopOpacity={0.3} />
+                <stop offset="5%" stopColor={defaultPrimaryColor} stopOpacity={0.8} />
+                <stop offset="95%" stopColor={defaultPrimaryColor} stopOpacity={0.3} />
               </linearGradient>
             </defs>
             {showGrid && (
               <CartesianGrid 
                 strokeDasharray="3 3" 
-                stroke="var(--theme-border)" 
-                opacity={0.5}
+                stroke={gridColor}
                 vertical={false}
               />
             )}
@@ -97,7 +113,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               axisLine={false}
               tickLine={false}
               tick={{ 
-                fill: 'var(--theme-text-muted)', 
+                fill: textColor, 
                 fontSize: 12, 
                 fontWeight: 600 
               }}
@@ -106,7 +122,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               axisLine={false}
               tickLine={false}
               tick={{ 
-                fill: 'var(--theme-text-muted)', 
+                fill: textColor, 
                 fontSize: 12, 
                 fontWeight: 600 
               }}
@@ -116,7 +132,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               dataKey="value" 
               fill={`url(#${gradientId})`}
               radius={[4, 4, 0, 0]}
-              stroke={primaryColor}
+              stroke={defaultPrimaryColor}
               strokeWidth={1}
             />
           </BarChart>
@@ -128,8 +144,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
             {showGrid && (
               <CartesianGrid 
                 strokeDasharray="3 3" 
-                stroke="var(--theme-border)" 
-                opacity={0.5}
+                stroke={gridColor}
                 vertical={false}
               />
             )}
@@ -138,7 +153,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               axisLine={false}
               tickLine={false}
               tick={{ 
-                fill: 'var(--theme-text-muted)', 
+                fill: textColor, 
                 fontSize: 12, 
                 fontWeight: 600 
               }}
@@ -147,7 +162,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               axisLine={false}
               tickLine={false}
               tick={{ 
-                fill: 'var(--theme-text-muted)', 
+                fill: textColor, 
                 fontSize: 12, 
                 fontWeight: 600 
               }}
@@ -156,10 +171,10 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
             <Line 
               type="monotone" 
               dataKey="value" 
-              stroke={primaryColor}
+              stroke={defaultPrimaryColor}
               strokeWidth={3}
-              dot={{ fill: primaryColor, strokeWidth: 2, r: 4 }}
-              activeDot={{ r: 6, fill: secondaryColor, stroke: primaryColor, strokeWidth: 2 }}
+              dot={{ fill: defaultPrimaryColor, strokeWidth: 2, r: 4 }}
+              activeDot={{ r: 6, fill: defaultSecondaryColor, stroke: defaultPrimaryColor, strokeWidth: 2 }}
             />
           </LineChart>
         );
@@ -169,15 +184,14 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
           <AreaChart {...commonProps}>
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={primaryColor} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={primaryColor} stopOpacity={0.1} />
+                <stop offset="5%" stopColor={defaultPrimaryColor} stopOpacity={0.8} />
+                <stop offset="95%" stopColor={defaultPrimaryColor} stopOpacity={0.1} />
               </linearGradient>
             </defs>
             {showGrid && (
               <CartesianGrid 
                 strokeDasharray="3 3" 
-                stroke="var(--theme-border)" 
-                opacity={0.5}
+                stroke={gridColor}
                 vertical={false}
               />
             )}
@@ -186,7 +200,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               axisLine={false}
               tickLine={false}
               tick={{ 
-                fill: 'var(--theme-text-muted)', 
+                fill: textColor, 
                 fontSize: 12, 
                 fontWeight: 600 
               }}
@@ -195,7 +209,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
               axisLine={false}
               tickLine={false}
               tick={{ 
-                fill: 'var(--theme-text-muted)', 
+                fill: textColor, 
                 fontSize: 12, 
                 fontWeight: 600 
               }}
@@ -204,7 +218,7 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
             <Area 
               type="monotone" 
               dataKey="value" 
-              stroke={primaryColor}
+              stroke={defaultPrimaryColor}
               strokeWidth={3}
               fillOpacity={1} 
               fill={`url(#${gradientId})`}
@@ -216,13 +230,16 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
 
   return (
     <div className={`
-      bg-theme-bg-primary border border-theme-border
-      backdrop-blur-md rounded-xl p-6 
+      backdrop-blur-md rounded-xl p-6 border-2
       shadow-[0_4px_15px_rgba(0,0,0,0.15)] 
       hover:shadow-[0_8px_25px_rgba(0,0,0,0.2)]
       transition-all duration-300 ease-out
       hover:-translate-y-1
       group relative overflow-hidden
+      ${mode === 'dark' 
+        ? 'bg-theme-bg-primary border-theme-border' 
+        : 'bg-white/90 border-gray-200'
+      }
       ${className}
     `}>
       {/* Animated background effect */}
@@ -230,11 +247,13 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
       
       {/* Header */}
       <div className="relative z-10 mb-6">
-        <h3 className="text-theme-text-primary font-bold text-lg mb-1 transition-all duration-300 group-hover:scale-105 origin-left">
+        <h3 className={`font-bold text-lg mb-1 transition-all duration-300 group-hover:scale-105 origin-left
+                       ${mode === 'dark' ? 'text-theme-text-primary' : 'text-gray-900'}`}>
           {title}
         </h3>
         {subtitle && (
-          <p className="text-theme-text-muted text-sm">
+          <p className={`text-sm
+                        ${mode === 'dark' ? 'text-theme-text-muted' : 'text-gray-600'}`}>
             {subtitle}
           </p>
         )}
@@ -249,7 +268,11 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
 
       {/* Subtle glow effect */}
       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-r from-theme-accent/5 to-theme-highlight/5 rounded-xl animate-pulse"></div>
+        <div className={`absolute inset-0 rounded-xl animate-pulse
+                        ${mode === 'dark' 
+                          ? 'bg-gradient-to-r from-theme-accent/5 to-theme-highlight/5' 
+                          : 'bg-gradient-to-r from-blue-500/5 to-indigo-500/5'
+                        }`}></div>
       </div>
     </div>
   );

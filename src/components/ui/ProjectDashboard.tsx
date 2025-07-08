@@ -9,7 +9,11 @@ import {
   CheckCircle,
   AlertCircle,
   Activity,
-  Zap
+  Zap,
+  Award,
+  Briefcase,
+  Code,
+  GitBranch
 } from 'lucide-react';
 import { useThemeStore } from '../../stores/themeStore';
 import DashboardCard from './DashboardCard';
@@ -21,33 +25,85 @@ import DataTable from './DataTable';
 // Mock data for the project dashboard
 const generateProjectData = () => {
   const weeklyData = [
-    { name: 'Lun', value: 85, secondary: 92 },
-    { name: 'Mar', value: 78, secondary: 88 },
-    { name: 'Mié', value: 92, secondary: 85 },
-    { name: 'Jue', value: 88, secondary: 95 },
-    { name: 'Vie', value: 95, secondary: 90 },
-    { name: 'Sáb', value: 82, secondary: 87 },
-    { name: 'Dom', value: 89, secondary: 93 }
+    { name: 'Lun', value: 85, secondary: 92, commits: 12 },
+    { name: 'Mar', value: 78, secondary: 88, commits: 8 },
+    { name: 'Mié', value: 92, secondary: 85, commits: 15 },
+    { name: 'Jue', value: 88, secondary: 95, commits: 11 },
+    { name: 'Vie', value: 95, secondary: 90, commits: 18 },
+    { name: 'Sáb', value: 82, secondary: 87, commits: 6 },
+    { name: 'Dom', value: 89, secondary: 93, commits: 4 }
   ];
 
   const monthlyData = [
-    { name: 'Ene', value: 850, secondary: 920 },
-    { name: 'Feb', value: 780, secondary: 880 },
-    { name: 'Mar', value: 920, secondary: 850 },
-    { name: 'Abr', value: 880, secondary: 950 },
-    { name: 'May', value: 950, secondary: 900 },
-    { name: 'Jun', value: 820, secondary: 870 }
+    { name: 'Ene', value: 850, secondary: 920, bugs: 45 },
+    { name: 'Feb', value: 780, secondary: 880, bugs: 38 },
+    { name: 'Mar', value: 920, secondary: 850, bugs: 52 },
+    { name: 'Abr', value: 880, secondary: 950, bugs: 41 },
+    { name: 'May', value: 950, secondary: 900, bugs: 35 },
+    { name: 'Jun', value: 820, secondary: 870, bugs: 29 }
+  ];
+
+  const performanceData = [
+    { name: 'Frontend', value: 85, color: '#5483B3' },
+    { name: 'Backend', value: 72, color: '#7DA0CA' },
+    { name: 'Testing', value: 45, color: '#1B3B6F' },
+    { name: 'DevOps', value: 68, color: '#C1E8FF' }
   ];
 
   const projectTasks = [
-    { id: 1, task: 'Diseño de interfaz', status: 'Completado', progress: 100, assignee: 'Ana García', dueDate: '2025-01-10' },
-    { id: 2, task: 'Desarrollo backend', status: 'En progreso', progress: 75, assignee: 'Carlos López', dueDate: '2025-01-20' },
-    { id: 3, task: 'Testing QA', status: 'Pendiente', progress: 25, assignee: 'María Rodríguez', dueDate: '2025-01-25' },
-    { id: 4, task: 'Documentación', status: 'En progreso', progress: 60, assignee: 'Juan Pérez', dueDate: '2025-01-18' },
-    { id: 5, task: 'Deploy producción', status: 'Pendiente', progress: 0, assignee: 'Luis Martín', dueDate: '2025-01-30' }
+    { 
+      id: 1, 
+      task: 'Diseño de interfaz', 
+      status: 'Completado', 
+      progress: 100, 
+      assignee: 'Ana García', 
+      dueDate: '2025-01-10',
+      priority: 'Alta',
+      category: 'UI/UX'
+    },
+    { 
+      id: 2, 
+      task: 'Desarrollo backend', 
+      status: 'En progreso', 
+      progress: 75, 
+      assignee: 'Carlos López', 
+      dueDate: '2025-01-20',
+      priority: 'Alta',
+      category: 'Backend'
+    },
+    { 
+      id: 3, 
+      task: 'Testing QA', 
+      status: 'Pendiente', 
+      progress: 25, 
+      assignee: 'María Rodríguez', 
+      dueDate: '2025-01-25',
+      priority: 'Media',
+      category: 'Testing'
+    },
+    { 
+      id: 4, 
+      task: 'Documentación', 
+      status: 'En progreso', 
+      progress: 60, 
+      assignee: 'Juan Pérez', 
+      dueDate: '2025-01-18',
+      priority: 'Baja',
+      category: 'Docs'
+    },
+    { 
+      id: 5, 
+      task: 'Deploy producción', 
+      status: 'Pendiente', 
+      progress: 0, 
+      assignee: 'Luis Martín', 
+      dueDate: '2025-01-30',
+      priority: 'Alta',
+      category: 'DevOps'
+    }
   ];
 
-  return { weeklyData, monthlyData, projectTasks };
+  return { weeklyData, monthlyData, performanceData, projectTasks };
 };
 
 const ProjectDashboard: React.FC = () => {
@@ -69,8 +125,11 @@ const ProjectDashboard: React.FC = () => {
       key: 'task',
       label: 'Tarea',
       sortable: true,
-      render: (value: string) => (
-        <div className="font-semibold text-theme-text-primary">{value}</div>
+      render: (value: string, row: any) => (
+        <div className="flex flex-col">
+          <div className="font-semibold text-theme-text-primary">{value}</div>
+          <div className="text-xs text-theme-text-muted">{row.category}</div>
+        </div>
       )
     },
     {
@@ -79,19 +138,25 @@ const ProjectDashboard: React.FC = () => {
       sortable: true,
       align: 'center' as const,
       render: (value: string) => {
-        const getStatusColor = (status: string) => {
+        const getStatusStyle = (status: string) => {
           switch (status) {
             case 'Completado':
-              return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+              return mode === 'dark' 
+                ? 'bg-green-900/30 text-green-400 border-green-700/50' 
+                : 'bg-green-100 text-green-800 border-green-300';
             case 'En progreso':
-              return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
+              return mode === 'dark' 
+                ? 'bg-blue-900/30 text-blue-400 border-blue-700/50' 
+                : 'bg-blue-100 text-blue-800 border-blue-300';
             default:
-              return 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400';
+              return mode === 'dark' 
+                ? 'bg-gray-800/50 text-gray-400 border-gray-600/50' 
+                : 'bg-gray-100 text-gray-700 border-gray-300';
           }
         };
         
         return (
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(value)}`}>
+          <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusStyle(value)}`}>
             {value}
           </span>
         );
@@ -111,6 +176,7 @@ const ProjectDashboard: React.FC = () => {
             showPercentage={true}
             size="sm"
             animated={false}
+            variant={value === 100 ? 'success' : value > 50 ? 'default' : 'warning'}
           />
         </div>
       )
@@ -121,7 +187,11 @@ const ProjectDashboard: React.FC = () => {
       sortable: true,
       render: (value: string) => (
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-theme-accent to-theme-highlight rounded-full flex items-center justify-center text-white text-sm font-semibold">
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-br from-theme-accent to-theme-highlight' 
+                            : 'bg-gradient-to-br from-blue-600 to-indigo-600'
+                          }`}>
             {value.split(' ').map(n => n[0]).join('')}
           </div>
           <span className="text-theme-text-primary font-medium">{value}</span>
@@ -129,23 +199,68 @@ const ProjectDashboard: React.FC = () => {
       )
     },
     {
+      key: 'priority',
+      label: 'Prioridad',
+      sortable: true,
+      render: (value: string) => {
+        const getPriorityStyle = (priority: string) => {
+          switch (priority) {
+            case 'Alta':
+              return mode === 'dark' 
+                ? 'bg-red-900/30 text-red-400' 
+                : 'bg-red-100 text-red-800';
+            case 'Media':
+              return mode === 'dark' 
+                ? 'bg-yellow-900/30 text-yellow-400' 
+                : 'bg-yellow-100 text-yellow-800';
+            default:
+              return mode === 'dark' 
+                ? 'bg-green-900/30 text-green-400' 
+                : 'bg-green-100 text-green-800';
+          }
+        };
+        
+        return (
+          <span className={`px-2 py-1 rounded text-xs font-medium ${getPriorityStyle(value)}`}>
+            {value}
+          </span>
+        );
+      }
+    },
+    {
       key: 'dueDate',
       label: 'Fecha límite',
       sortable: true,
       render: (value: string) => (
-        <span className="text-theme-text-secondary">{new Date(value).toLocaleDateString('es-ES')}</span>
+        <span className="text-theme-text-secondary text-sm">
+          {new Date(value).toLocaleDateString('es-ES')}
+        </span>
       )
     }
   ];
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-theme-primary via-theme-secondary to-theme-tertiary flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center transition-all duration-300
+                      ${mode === 'dark' 
+                        ? 'bg-gradient-to-br from-theme-primary via-theme-secondary to-theme-tertiary' 
+                        : 'bg-gradient-to-br from-blue-50 via-white to-indigo-50'
+                      }`}>
         <div className="relative">
-          <div className="animate-spin rounded-full border-4 border-theme-light/30 border-t-theme-accent h-16 w-16"></div>
-          <div className="absolute inset-4 animate-spin rounded-full border-2 border-theme-highlight/50 border-b-transparent" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+          <div className={`animate-spin rounded-full border-4 h-16 w-16
+                          ${mode === 'dark' 
+                            ? 'border-theme-light/30 border-t-theme-accent' 
+                            : 'border-gray-200 border-t-blue-600'
+                          }`}></div>
+          <div className={`absolute inset-4 animate-spin rounded-full border-2 border-b-transparent
+                          ${mode === 'dark' 
+                            ? 'border-theme-highlight/50' 
+                            : 'border-blue-300'
+                          }`} 
+               style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Zap className="text-theme-accent animate-pulse h-6 w-6" />
+            <Zap className={`animate-pulse h-6 w-6
+                            ${mode === 'dark' ? 'text-theme-accent' : 'text-blue-600'}`} />
           </div>
         </div>
       </div>
@@ -153,16 +268,34 @@ const ProjectDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-theme-primary via-theme-secondary to-theme-tertiary p-6">
+    <div className={`min-h-screen p-6 transition-all duration-300
+                    ${mode === 'dark' 
+                      ? 'bg-gradient-to-br from-theme-primary via-theme-secondary to-theme-tertiary' 
+                      : 'bg-gradient-to-br from-blue-50 via-white to-indigo-50'
+                    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-4xl font-bold text-theme-light mb-2 gradient-text">
-            Tablero de Proyecto
-          </h1>
-          <p className="text-theme-highlight text-lg font-medium">
-            Panel de control profesional con métricas en tiempo real
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <div className={`p-4 rounded-2xl shadow-lg
+                            ${mode === 'dark' 
+                              ? 'bg-gradient-to-br from-theme-accent/20 to-theme-highlight/30 border border-theme-border' 
+                              : 'bg-gradient-to-br from-blue-100 to-indigo-100 border border-blue-200'
+                            }`}>
+              <Briefcase className={`h-8 w-8
+                                   ${mode === 'dark' ? 'text-theme-light' : 'text-blue-700'}`} />
+            </div>
+            <div>
+              <h1 className={`text-4xl font-bold mb-2 transition-colors duration-300
+                             ${mode === 'dark' ? 'text-theme-light gradient-text' : 'text-gray-900'}`}>
+                Tablero de Proyecto
+              </h1>
+              <p className={`text-lg font-medium transition-colors duration-300
+                            ${mode === 'dark' ? 'text-theme-highlight' : 'text-gray-600'}`}>
+                Panel de control profesional con métricas en tiempo real
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Main Metrics Grid */}
@@ -216,8 +349,8 @@ const ProjectDashboard: React.FC = () => {
             title="Productividad Semanal"
             subtitle="Tareas completadas por día"
             height={300}
-            primaryColor="#5483B3"
-            secondaryColor="#7DA0CA"
+            primaryColor={mode === 'dark' ? '#5483B3' : '#3B82F6'}
+            secondaryColor={mode === 'dark' ? '#7DA0CA' : '#60A5FA'}
             className="animate-slide-in-right animate-delay-100"
           />
           
@@ -227,19 +360,19 @@ const ProjectDashboard: React.FC = () => {
             title="Rendimiento Mensual"
             subtitle="Métricas de los últimos 6 meses"
             height={300}
-            primaryColor="#1B3B6F"
-            secondaryColor="#5483B3"
+            primaryColor={mode === 'dark' ? '#1B3B6F' : '#1E40AF'}
+            secondaryColor={mode === 'dark' ? '#5483B3' : '#3B82F6'}
             className="animate-slide-in-right animate-delay-200"
           />
         </div>
 
-        {/* Progress Indicators */}
+        {/* Performance Indicators */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <DashboardCard
             title="Desarrollo Frontend"
             value="85%"
             subtitle="React + TypeScript"
-            icon={Activity}
+            icon={Code}
             variant="primary"
             className="animate-fade-in-scale animate-delay-100"
           >
@@ -303,22 +436,46 @@ const ProjectDashboard: React.FC = () => {
 
         {/* Footer Stats */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-theme-bg-secondary/80 to-theme-bg-tertiary/60 backdrop-blur-md border border-theme-border rounded-xl p-6 text-center animate-rotate-in animate-delay-100">
-            <BarChart3 className="h-12 w-12 text-theme-accent mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-theme-text-primary mb-2">95%</h3>
-            <p className="text-theme-text-secondary">Satisfacción del cliente</p>
+          <div className={`p-6 text-center animate-rotate-in animate-delay-100 rounded-xl border transition-all duration-300
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-br from-theme-bg-secondary/80 to-theme-bg-tertiary/60 backdrop-blur-md border-theme-border' 
+                            : 'bg-white/80 backdrop-blur-md border-gray-200 shadow-lg'
+                          }`}>
+            <BarChart3 className={`h-12 w-12 mx-auto mb-4
+                                  ${mode === 'dark' ? 'text-theme-accent' : 'text-blue-600'}`} />
+            <h3 className={`text-2xl font-bold mb-2
+                           ${mode === 'dark' ? 'text-theme-text-primary' : 'text-gray-900'}`}>95%</h3>
+            <p className={`${mode === 'dark' ? 'text-theme-text-secondary' : 'text-gray-600'}`}>
+              Satisfacción del cliente
+            </p>
           </div>
           
-          <div className="bg-gradient-to-br from-theme-accent/15 to-theme-highlight/25 backdrop-blur-md border border-theme-border rounded-xl p-6 text-center animate-rotate-in animate-delay-200">
-            <Calendar className="h-12 w-12 text-theme-highlight mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-theme-text-primary mb-2">18</h3>
-            <p className="text-theme-text-secondary">Días por delante del cronograma</p>
+          <div className={`p-6 text-center animate-rotate-in animate-delay-200 rounded-xl border transition-all duration-300
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-br from-theme-accent/15 to-theme-highlight/25 backdrop-blur-md border-theme-border' 
+                            : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 shadow-lg'
+                          }`}>
+            <Calendar className={`h-12 w-12 mx-auto mb-4
+                                 ${mode === 'dark' ? 'text-theme-highlight' : 'text-indigo-600'}`} />
+            <h3 className={`text-2xl font-bold mb-2
+                           ${mode === 'dark' ? 'text-theme-text-primary' : 'text-gray-900'}`}>18</h3>
+            <p className={`${mode === 'dark' ? 'text-theme-text-secondary' : 'text-gray-600'}`}>
+              Días por delante del cronograma
+            </p>
           </div>
           
-          <div className="bg-gradient-to-br from-theme-highlight/15 to-theme-light/25 backdrop-blur-md border border-theme-border rounded-xl p-6 text-center animate-rotate-in animate-delay-300">
-            <TrendingUp className="h-12 w-12 text-theme-light mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-theme-text-primary mb-2">+24%</h3>
-            <p className="text-theme-text-secondary">Mejora en productividad</p>
+          <div className={`p-6 text-center animate-rotate-in animate-delay-300 rounded-xl border transition-all duration-300
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-br from-theme-highlight/15 to-theme-light/25 backdrop-blur-md border-theme-border' 
+                            : 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg'
+                          }`}>
+            <TrendingUp className={`h-12 w-12 mx-auto mb-4
+                                   ${mode === 'dark' ? 'text-theme-light' : 'text-green-600'}`} />
+            <h3 className={`text-2xl font-bold mb-2
+                           ${mode === 'dark' ? 'text-theme-text-primary' : 'text-gray-900'}`}>+24%</h3>
+            <p className={`${mode === 'dark' ? 'text-theme-text-secondary' : 'text-gray-600'}`}>
+              Mejora en productividad
+            </p>
           </div>
         </div>
       </div>
