@@ -6,6 +6,7 @@ import {
   LayoutDashboard, 
   Users, 
   Waves, 
+  ChefHat,
   LogOut,
   X
 } from 'lucide-react';
@@ -38,6 +39,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       show: userRole === 'superadmin',
       iconColor: 'text-cyan-500',
       activeColor: 'from-cyan-500 to-blue-500'
+    },
+    {
+      path: '/superadmin/restaurant',
+      icon: ChefHat,
+      label: 'Restaurante',
+      show: userRole === 'superadmin',
+      iconColor: 'text-orange-500',
+      activeColor: 'from-orange-500 to-red-500'
     },
     {
       path: '/superadmin/users',
