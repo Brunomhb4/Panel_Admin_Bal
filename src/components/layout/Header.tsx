@@ -44,13 +44,14 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
         </button>
         
         <div className="min-w-0 flex-1">
-          <h1 className="gradient-text truncate font-bold transition-all duration-300 hover:scale-105 origin-left
+          <h1 className={`truncate font-bold transition-all duration-300 hover:scale-105 origin-left
+                         ${mode === 'dark' ? 'gradient-text' : 'text-gray-900'}
                          text-sm
                          xs:text-base
                          sm:text-lg
                          md:text-xl
                          lg:text-2xl
-                         xl:text-3xl">
+                         xl:text-3xl`}>
             {title}
           </h1>
         </div>

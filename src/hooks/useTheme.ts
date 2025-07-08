@@ -29,18 +29,18 @@ export const useTheme = () => {
       root.style.setProperty('--theme-border', 'rgba(193, 232, 255, 0.2)');
       root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.3)');
     } else {
-      // Light mode - Inverted corporate palette
-      root.style.setProperty('--theme-bg-primary', '#C1E8FF');
-      root.style.setProperty('--theme-bg-secondary', '#FFFFFF');
-      root.style.setProperty('--theme-bg-tertiary', '#F8F9FA');
+      // Light mode - Optimized corporate palette with accessibility
+      root.style.setProperty('--theme-bg-primary', '#FFFFFF');
+      root.style.setProperty('--theme-bg-secondary', '#F8F9FA');
+      root.style.setProperty('--theme-bg-tertiary', '#F1F5F9');
       root.style.setProperty('--theme-text-primary', '#021024');
       root.style.setProperty('--theme-text-secondary', '#052659');
       root.style.setProperty('--theme-text-muted', '#1B3B6F');
       root.style.setProperty('--theme-accent', '#052659');
       root.style.setProperty('--theme-highlight', '#5483B3');
       root.style.setProperty('--theme-light', '#7DA0CA');
-      root.style.setProperty('--theme-border', 'rgba(27, 59, 111, 0.2)');
-      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.1)');
+      root.style.setProperty('--theme-border', 'rgba(27, 59, 111, 0.15)');
+      root.style.setProperty('--theme-shadow', 'rgba(2, 16, 36, 0.08)');
     }
   }, [mode]);
 

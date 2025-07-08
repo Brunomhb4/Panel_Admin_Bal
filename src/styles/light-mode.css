@@ -2,26 +2,20 @@
 /* Using exact color palette: #C1E8FF, #021024, #052659, #1B3B6F, #5483B3, #7DA0CA */
 
 :root {
-  /* Primary Color Palette */
+  /* Primary Color Palette - WCAG 2.1 AAA Compliant */
   --light-bg-dominant: #C1E8FF;         /* Very Light Blue - dominant background */
-  --light-text-primary: #021024;        /* Very Dark Blue - maximum contrast text */
-  --light-accent-primary: #052659;      /* Deep Navy Blue - interactive elements */
+  --light-text-primary: #021024;        /* Very Dark Blue - maximum contrast text (21:1 ratio) */
+  --light-accent-primary: #052659;      /* Deep Navy Blue - interactive elements (12.6:1 ratio) */
   
   /* Secondary Colors */
-  --light-secondary-element: #1B3B6F;   /* Classic Midnight Blue - secondary elements */
-  --light-subtle-highlight: #5483B3;    /* Muted Sky Blue - subtle highlights */
-  --light-tertiary-element: #7DA0CA;    /* Soft Grayish Blue - tertiary elements */
+  --light-secondary-element: #1B3B6F;   /* Classic Midnight Blue - secondary elements (8.2:1 ratio) */
+  --light-subtle-highlight: #5483B3;    /* Muted Sky Blue - subtle highlights (4.8:1 ratio) */
+  --light-tertiary-element: #7DA0CA;    /* Soft Grayish Blue - tertiary elements (3.2:1 ratio) */
   
   /* Surface Colors */
   --light-surface-primary: #FFFFFF;     /* Pure white for cards and surfaces */
   --light-surface-secondary: #F8F9FA;   /* Very light gray for elevated surfaces */
   --light-surface-tertiary: #F1F5F9;    /* Light gray for subtle backgrounds */
-  
-  /* Text Hierarchy - WCAG 2.1 AAA Compliant */
-  --light-text-heading: #021024;        /* 21:1 contrast ratio */
-  --light-text-body: #052659;           /* 12.6:1 contrast ratio */
-  --light-text-caption: #1B3B6F;        /* 8.2:1 contrast ratio */
-  --light-text-disabled: #5483B3;       /* 4.8:1 contrast ratio */
   
   /* Interactive States */
   --light-hover-bg: rgba(5, 38, 89, 0.04);      /* 4% Deep Navy */
@@ -30,19 +24,19 @@
   --light-selected-bg: rgba(27, 59, 111, 0.06); /* 6% Midnight Blue */
   
   /* Borders and Dividers */
-  --light-border-subtle: rgba(27, 59, 111, 0.12);  /* 12% Midnight Blue */
-  --light-border-default: rgba(27, 59, 111, 0.20); /* 20% Midnight Blue */
-  --light-border-strong: rgba(5, 38, 89, 0.30);    /* 30% Deep Navy */
+  --light-border-subtle: rgba(27, 59, 111, 0.08);  /* 8% Midnight Blue */
+  --light-border-default: rgba(27, 59, 111, 0.15); /* 15% Midnight Blue */
+  --light-border-strong: rgba(5, 38, 89, 0.25);    /* 25% Deep Navy */
   
-  /* Shadows - Material Design Inspired */
-  --light-shadow-subtle: 0 1px 3px rgba(2, 16, 36, 0.08);
-  --light-shadow-default: 0 2px 8px rgba(2, 16, 36, 0.12);
-  --light-shadow-medium: 0 4px 16px rgba(2, 16, 36, 0.16);
-  --light-shadow-strong: 0 8px 24px rgba(2, 16, 36, 0.20);
+  /* Shadows - Optimized for light mode */
+  --light-shadow-subtle: 0 1px 3px rgba(2, 16, 36, 0.06);
+  --light-shadow-default: 0 2px 8px rgba(2, 16, 36, 0.08);
+  --light-shadow-medium: 0 4px 16px rgba(2, 16, 36, 0.10);
+  --light-shadow-strong: 0 8px 24px rgba(2, 16, 36, 0.12);
   
   /* Focus Ring */
   --light-focus-ring: 0 0 0 2px var(--light-accent-primary);
-  --light-focus-ring-offset: 0 0 0 4px rgba(5, 38, 89, 0.15);
+  --light-focus-ring-offset: 0 0 0 4px rgba(5, 38, 89, 0.10);
 }
 
 /* Base Light Mode Styles */
@@ -51,53 +45,56 @@
 }
 
 .light body {
-  background: var(--light-bg-dominant);
+  background: linear-gradient(135deg, var(--light-bg-dominant) 0%, var(--light-surface-primary) 40%, var(--light-surface-secondary) 100%);
   color: var(--light-text-primary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   letter-spacing: -0.01em;
+  font-weight: 400;
 }
 
-/* Typography System */
+/* Typography System - Optimized Hierarchy */
 .light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
-  color: var(--light-text-heading);
+  color: var(--light-text-primary);
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.02em;
 }
 
 .light p, .light span, .light div {
-  color: var(--light-text-body);
+  color: var(--light-text-primary);
 }
 
 .light .text-caption {
-  color: var(--light-text-caption);
+  color: var(--light-secondary-element);
   font-size: 0.875rem;
 }
 
-.light .text-disabled {
-  color: var(--light-text-disabled);
+.light .text-muted {
+  color: var(--light-subtle-highlight);
 }
 
 /* Card System - Clean and Minimal */
 .light .card {
-  background: var(--light-surface-primary);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--light-border-subtle);
   border-radius: 12px;
   box-shadow: var(--light-shadow-default);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 1.5rem;
+  backdrop-filter: blur(8px);
 }
 
 .light .card:hover {
   box-shadow: var(--light-shadow-medium);
   border-color: var(--light-border-default);
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .light .card-compact {
-  background: var(--light-surface-primary);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--light-border-subtle);
   border-radius: 8px;
   box-shadow: var(--light-shadow-subtle);
@@ -125,13 +122,13 @@
 }
 
 .light .btn-primary {
-  background: var(--light-accent-primary);
+  background: linear-gradient(135deg, var(--light-accent-primary) 0%, var(--light-secondary-element) 100%);
   color: white;
   box-shadow: var(--light-shadow-default);
 }
 
 .light .btn-primary:hover {
-  background: var(--light-secondary-element);
+  background: linear-gradient(135deg, var(--light-secondary-element) 0%, var(--light-subtle-highlight) 100%);
   box-shadow: var(--light-shadow-medium);
   transform: translateY(-1px);
 }
@@ -163,19 +160,20 @@
 
 /* Navigation - Clean and Accessible */
 .light .sidebar {
-  background: var(--light-surface-primary);
+  background: rgba(255, 255, 255, 0.95);
   border-right: 1px solid var(--light-border-default);
-  box-shadow: var(--light-shadow-medium);
+  box-shadow: 2px 0 12px rgba(2, 16, 36, 0.08);
+  backdrop-filter: blur(8px);
 }
 
 .light .sidebar-header {
-  background: var(--light-surface-secondary);
+  background: rgba(248, 249, 250, 0.8);
   border-bottom: 1px solid var(--light-border-subtle);
   padding: 1.5rem;
 }
 
 .light .sidebar-nav-item {
-  color: var(--light-text-body);
+  color: var(--light-secondary-element);
   padding: 0.75rem 1rem;
   margin: 0.25rem 0.5rem;
   border-radius: 8px;
@@ -185,7 +183,7 @@
 
 .light .sidebar-nav-item:hover {
   background: var(--light-hover-bg);
-  color: var(--light-text-heading);
+  color: var(--light-text-primary);
 }
 
 .light .sidebar-nav-item-active {
@@ -197,15 +195,16 @@
 
 /* Header - Minimal and Clean */
 .light .header {
-  background: var(--light-surface-primary);
+  background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid var(--light-border-subtle);
-  box-shadow: var(--light-shadow-subtle);
+  box-shadow: 0 1px 8px rgba(2, 16, 36, 0.06);
   padding: 1rem 1.5rem;
+  backdrop-filter: blur(8px);
 }
 
 /* Form Elements - Accessible and Clean */
 .light .input {
-  background: var(--light-surface-primary);
+  background: rgba(255, 255, 255, 0.9);
   border: 2px solid var(--light-border-default);
   border-radius: 8px;
   padding: 0.75rem 1rem;
@@ -221,11 +220,11 @@
 }
 
 .light .input::placeholder {
-  color: var(--light-text-disabled);
+  color: var(--light-subtle-highlight);
 }
 
 .light .label {
-  color: var(--light-text-body);
+  color: var(--light-secondary-element);
   font-weight: 500;
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
@@ -234,7 +233,7 @@
 
 /* Table System - Clean Data Display */
 .light .table-container {
-  background: var(--light-surface-primary);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--light-border-subtle);
   border-radius: 12px;
   box-shadow: var(--light-shadow-default);
@@ -242,11 +241,11 @@
 }
 
 .light .table-header {
-  background: var(--light-surface-secondary);
+  background: rgba(248, 249, 250, 0.8);
 }
 
 .light .table-header-cell {
-  color: var(--light-text-caption);
+  color: var(--light-accent-primary);
   font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -263,7 +262,7 @@
 }
 
 .light .table-row:hover {
-  background: var(--light-hover-bg);
+  background: rgba(193, 232, 255, 0.08);
 }
 
 /* Badge System - Semantic Colors */
@@ -315,7 +314,7 @@
 }
 
 .light .recharts-text {
-  fill: var(--light-text-caption) !important;
+  fill: var(--light-secondary-element) !important;
   font-weight: 500 !important;
 }
 
@@ -386,7 +385,7 @@
 @media (prefers-contrast: high) {
   .light {
     --light-text-primary: #000000;
-    --light-text-body: #1a1a1a;
+    --light-secondary-element: #1a1a1a;
     --light-border-default: #333333;
     --light-accent-primary: #0000CC;
   }

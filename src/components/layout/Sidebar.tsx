@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
+import { useThemeStore } from '../../stores/themeStore';
 import { 
   Home, 
   LayoutDashboard, 
@@ -18,6 +19,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   const { userRole, logout } = useAuthStore();
+  const { mode } = useThemeStore();
   const location = useLocation();
   
   const isActive = (path: string) => {
@@ -98,17 +100,22 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                           xs:ml-3
                           sm:ml-4
                           lg:ml-5">
-            <h1 className="gradient-text truncate font-bold transition-all duration-300 hover:scale-105 origin-left
+            <h1 className={`truncate font-bold transition-all duration-300 hover:scale-105 origin-left
+                           ${mode === 'dark' ? 'gradient-text' : 'text-gray-900'}
                            text-sm
                            xs:text-base
                            sm:text-lg
-                           lg:text-xl">
+                           lg:text-xl`}>
               Balnearios
             </h1>
-            <p className="text-[#5483B3] truncate font-semibold transition-all duration-300 hover:text-[#7DA0CA]
+            <p className={`truncate font-semibold transition-all duration-300
+                          ${mode === 'dark' 
+                            ? 'text-[#5483B3] hover:text-[#7DA0CA]' 
+                            : 'text-gray-600 hover:text-gray-800'
+                          }
                           text-xs
                           xs:text-xs
-                          sm:text-sm">
+                          sm:text-sm`}>
               Panel Admin
             </p>
           </div>

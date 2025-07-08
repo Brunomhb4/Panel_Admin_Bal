@@ -10,12 +10,12 @@ const ThemeToggle: React.FC = () => {
       <button
         onClick={toggleMode}
         className={`
-          relative p-2 rounded-xl transition-all duration-300 ease-in-out
+          relative p-2.5 rounded-xl transition-all duration-300 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-offset-2
-          group overflow-hidden
+          group overflow-hidden shadow-sm hover:shadow-md
           ${mode === 'light' 
-            ? 'bg-gray-100 hover:bg-gray-200 focus:ring-blue-500 text-gray-700' 
-            : 'bg-gray-800 hover:bg-gray-700 focus:ring-blue-400 text-gray-300'
+            ? 'bg-white/90 hover:bg-white border border-gray-200 focus:ring-blue-500 text-gray-700 hover:text-blue-600' 
+            : 'bg-gray-800/90 hover:bg-gray-700 border border-gray-600 focus:ring-blue-400 text-gray-300 hover:text-blue-400'
           }
         `}
         aria-label={`Cambiar a modo ${mode === 'light' ? 'oscuro' : 'claro'}`}
@@ -23,7 +23,7 @@ const ThemeToggle: React.FC = () => {
       >
         {/* Background animation */}
         <div className={`
-          absolute inset-0 transition-opacity duration-300
+          absolute inset-0 transition-opacity duration-300 rounded-xl
           ${mode === 'light' 
             ? 'bg-gradient-to-r from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100' 
             : 'bg-gradient-to-r from-blue-900/20 to-indigo-900/20 opacity-0 group-hover:opacity-100'
@@ -52,7 +52,7 @@ const ThemeToggle: React.FC = () => {
           absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 
           transition-opacity duration-300 pointer-events-none
           ${mode === 'light' 
-            ? 'bg-blue-500/10' 
+            ? 'bg-blue-500/5' 
             : 'bg-yellow-400/10'
           }
         `}></div>

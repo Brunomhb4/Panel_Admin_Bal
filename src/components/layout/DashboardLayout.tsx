@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { useThemeStore } from '../../stores/themeStore';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -9,13 +10,18 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { mode } = useThemeStore();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F] particle-bg overflow-hidden">
+    <div className={`flex h-screen particle-bg overflow-hidden transition-all duration-300
+                    ${mode === 'dark' 
+                      ? 'bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F]' 
+                      : 'bg-gradient-to-br from-[#C1E8FF] via-white to-[#F8F9FA]'
+                    }`}>
       {/* Mobile sidebar backdrop */}
       {isSidebarOpen && (
         <div
