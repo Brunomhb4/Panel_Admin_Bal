@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
+import { useThemeStore } from '../stores/themeStore';
 import { Waves, AtSign, Lock, AlertOctagon, Eye, EyeOff } from 'lucide-react';
 
 const LoginPage: React.FC = () => {
@@ -12,6 +13,7 @@ const LoginPage: React.FC = () => {
   
   const navigate = useNavigate();
   const { login, userRole, isAuthenticated } = useAuthStore();
+  const { mode } = useThemeStore();
   
   React.useEffect(() => {
     if (isAuthenticated) {
@@ -65,7 +67,11 @@ const LoginPage: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-light via-white to-blue-soft/30 particle-bg flex flex-col justify-center responsive-padding">
+    <div className={`min-h-screen flex flex-col justify-center responsive-padding transition-all duration-300
+                     ${mode === 'dark' 
+                       ? 'bg-gradient-to-br from-sky-light via-white to-blue-soft/30 particle-bg' 
+                       : 'bg-gradient-to-br from-blue-50 via-white to-indigo-50'
+                     }`}>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center
                         mb-4
@@ -73,12 +79,16 @@ const LoginPage: React.FC = () => {
                         sm:mb-6
                         md:mb-8
                         lg:mb-10">
-          <div className="flex items-center justify-center bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted shadow-large hover:shadow-xl transition-all duration-300 hover:scale-110 animate-float
+          <div className={`flex items-center justify-center shadow-large hover:shadow-xl transition-all duration-300 hover:scale-110 animate-float
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-br from-midnight-blue via-navy-blue to-sky-muted' 
+                            : 'bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600'
+                          }
                           w-12 h-12 rounded-2xl
                           xs:w-14 xs:h-14 xs:rounded-3xl
                           sm:w-16 sm:h-16
                           md:w-20 md:h-20 md:rounded-4xl
-                          lg:w-24 lg:h-24">
+                          lg:w-24 lg:h-24`}>
             <Waves className="text-white
                               h-6 w-6
                               xs:h-7 xs:w-7
@@ -87,20 +97,22 @@ const LoginPage: React.FC = () => {
                               lg:h-12 lg:w-12" />
           </div>
         </div>
-        <h2 className="text-center gradient-text font-bold
+        <h2 className={`text-center font-bold transition-colors duration-300
+                        ${mode === 'dark' ? 'gradient-text' : 'text-gray-900'}
                        text-xl mb-2
                        xs:text-2xl xs:mb-3
                        sm:text-3xl sm:mb-3
                        md:text-4xl md:mb-4
-                       lg:text-5xl lg:mb-4">
+                       lg:text-5xl lg:mb-4`}>
           Panel de Administración
         </h2>
-        <p className="text-center text-sky-muted font-semibold
+        <p className={`text-center font-semibold transition-colors duration-300
+                       ${mode === 'dark' ? 'text-sky-muted' : 'text-gray-600'}
                       text-sm
                       xs:text-base
                       sm:text-base
                       md:text-lg
-                      lg:text-lg">
+                      lg:text-lg`}>
           Gestión integral de balnearios
         </p>
       </div>

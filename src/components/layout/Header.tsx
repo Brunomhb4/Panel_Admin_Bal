@@ -16,14 +16,22 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
       <div className="flex items-center min-w-0 flex-1">
         <button 
           onClick={toggleSidebar}
-          className="lg:hidden focus:outline-none focus:ring-2 focus:ring-sky-muted/20 transition-all duration-300 hover:scale-110 rounded-xl hover:bg-gradient-to-r hover:from-sky-light/30 hover:to-blue-soft/20 text-midnight-blue group relative overflow-hidden
+          className={`lg:hidden focus:outline-none focus:ring-2 transition-all duration-300 hover:scale-110 rounded-xl group relative overflow-hidden
+                      ${mode === 'dark' 
+                        ? 'focus:ring-sky-muted/20 hover:bg-gradient-to-r hover:from-sky-light/30 hover:to-blue-soft/20 text-midnight-blue' 
+                        : 'focus:ring-blue-500/20 hover:bg-gray-100 text-gray-700'
+                      }
                      p-1.5 mr-2
                      xs:p-2 xs:mr-3
                      sm:p-2.5 sm:mr-3
                      md:p-3 md:mr-4"
         >
           {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/10 to-sky-muted/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-r from-midnight-blue/10 to-sky-muted/10' 
+                            : 'bg-gradient-to-r from-blue-50 to-indigo-50'
+                          }`}></div>
           
           {/* Icon with enhanced styling */}
           <Menu className="relative z-10 transition-all duration-300 group-hover:rotate-180 drop-shadow-sm

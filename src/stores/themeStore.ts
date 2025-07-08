@@ -12,7 +12,7 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      mode: 'light',
+      mode: 'dark',
       toggleMode: () => set((state) => ({ 
         mode: state.mode === 'light' ? 'dark' : 'light' 
       })),

@@ -32,43 +32,43 @@ const SummaryCards: React.FC = () => {
       title: 'Ingresos Totales',
       value: `$${totalRevenue.toLocaleString()}`,
       icon: DollarSign,
-      gradient: mode === 'dark' ? 'from-theme-highlight to-theme-light' : 'from-theme-accent to-theme-highlight',
-      bgGradient: mode === 'dark' ? 'from-theme-highlight/20 to-theme-light/10' : 'from-theme-accent/20 to-theme-highlight/30',
+      gradient: mode === 'dark' ? 'from-theme-highlight to-theme-light' : 'from-green-600 to-emerald-600',
+      bgGradient: mode === 'dark' ? 'from-theme-highlight/20 to-theme-light/10' : 'from-green-50 to-emerald-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90' : 'bg-gradient-to-br from-theme-accent/90 to-theme-highlight/90',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90' : 'bg-gradient-to-br from-green-600 to-emerald-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-highlight/30' : 'bg-theme-accent/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-highlight/30' : 'bg-green-500/30'
     },
     {
       title: 'Total Balnearios',
       value: totalWaterParks.toString(),
       icon: Store,
-      gradient: mode === 'dark' ? 'from-theme-light to-theme-highlight' : 'from-theme-highlight to-theme-light',
-      bgGradient: mode === 'dark' ? 'from-theme-light/15 to-theme-highlight/20' : 'from-theme-highlight/20 to-theme-light/40',
+      gradient: mode === 'dark' ? 'from-theme-light to-theme-highlight' : 'from-purple-600 to-violet-600',
+      bgGradient: mode === 'dark' ? 'from-theme-light/15 to-theme-highlight/20' : 'from-purple-50 to-violet-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-light/90 to-theme-highlight/90' : 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-light/90 to-theme-highlight/90' : 'bg-gradient-to-br from-purple-600 to-violet-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
-      iconColor: mode === 'dark' ? 'text-theme-bg-primary' : 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-light/30' : 'bg-theme-highlight/30'
+      iconColor: 'text-white',
+      pulseColor: mode === 'dark' ? 'bg-theme-light/30' : 'bg-purple-500/30'
     },
     {
       title: 'Tickets Vendidos',
       value: totalSoldTickets.toLocaleString(),
       icon: TrendingUp,
-      gradient: mode === 'dark' ? 'from-theme-bg-tertiary to-theme-accent' : 'from-theme-bg-secondary to-theme-bg-tertiary',
-      bgGradient: mode === 'dark' ? 'from-theme-bg-tertiary/15 to-theme-accent/20' : 'from-theme-bg-secondary/10 to-theme-bg-tertiary/20',
+      gradient: mode === 'dark' ? 'from-theme-bg-tertiary to-theme-accent' : 'from-orange-600 to-amber-600',
+      bgGradient: mode === 'dark' ? 'from-theme-bg-tertiary/15 to-theme-accent/20' : 'from-orange-50 to-amber-50',
       borderColor: 'border-theme-border',
       textColor: 'text-theme-text-primary',
       subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90' : 'bg-gradient-to-br from-theme-bg-secondary/90 to-theme-bg-tertiary/90',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90' : 'bg-gradient-to-br from-orange-600 to-amber-600',
       iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-bg-tertiary/30' : 'bg-theme-bg-secondary/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-bg-tertiary/30' : 'bg-orange-500/30'
     }
   ];
   
