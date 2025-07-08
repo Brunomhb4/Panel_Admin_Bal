@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import DashboardLayout from '../components/layout/DashboardLayout';
+import DashboardLayout from './DashboardLayout';
 import { useWaterParksStore } from '../stores/waterParksStore';
 import { Plus, BarChart3, TrendingUp, Users, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
