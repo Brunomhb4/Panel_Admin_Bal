@@ -129,9 +129,101 @@ const SuperAdminDashboard: React.FC = () => {
               period: "mes anterior",
               isPositive: true
             }}
+          />
+          <MetricCard
+            title="Ingresos Totales"
+            value={totalRevenue}
+            icon={BarChart3}
+            variant="success"
+            format="currency"
+            trend={{
+              value: 8.3,
+              period: "mes anterior",
+              isPositive: true
+            }}
+          />
+          <MetricCard
+            title="Tickets Vendidos"
+            value={totalSoldTickets}
+            icon={Users}
+            variant="info"
+            trend={{
+              value: 15.2,
+              period: "mes anterior",
+              isPositive: true
+            }}
+          />
+          <MetricCard
+            title="Balnearios Activos"
+            value={waterParks.length}
+            icon={Building}
+            variant="warning"
+            trend={{
+              value: 2.1,
+              period: "mes anterior",
+              isPositive: true
+            }}
+          />
+        </div>
+        
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <DashboardCard title="Ingresos Mensuales" className="hover-lift">
+            <InteractiveChart
+              data={revenueData}
+              type="area"
+              color="#3B82F6"
+              height={300}
+            />
+          </DashboardCard>
+          
+          <DashboardCard title="Tickets Vendidos (Última Semana)" className="hover-lift">
+            <InteractiveChart
+              data={ticketsData}
+              type="bar"
+              color="#10B981"
+              height={300}
+            />
+          </DashboardCard>
+        </div>
+        
+        {/* Water Parks Table */}
+        <DashboardCard title="Balnearios Registrados" className="hover-lift">
+          <DataTable
+            data={waterParks}
+            columns={tableColumns}
+            searchable
+            pagination
+            emptyMessage="No hay balnearios registrados"
+          />
+        </DashboardCard>
+        
+        {/* Progress Indicators */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <ProgressIndicator
+            label="Ocupación Promedio"
+            value={75}
+            maxValue={100}
+            color="blue"
+            showPercentage
+          />
+          <ProgressIndicator
+            label="Satisfacción Cliente"
+            value={4.2}
+            maxValue={5}
+            color="green"
+            format="rating"
+          />
+          <ProgressIndicator
+            label="Eficiencia Operativa"
+            value={88}
+            maxValue={100}
+            color="purple"
+            showPercentage
+          />
+        </div>
       </div>
     </DashboardLayout>
-  )
   );
 };
 
