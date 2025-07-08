@@ -78,49 +78,53 @@ const WaterParkDetail: React.FC = () => {
       title: 'Tickets Activos',
       value: waterPark.activeTickets,
       icon: Ticket,
-      bgColor: 'bg-gradient-to-br from-midnight-blue/10 to-navy-blue/20',
-      iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-midnight-blue/90 to-navy-blue/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(27,59,111,0.4)]',
-      textColor: 'text-deep-navy',
-      borderColor: 'border-midnight-blue/20',
-      pulseColor: 'bg-midnight-blue/30'
+      bgColor: 'bg-gradient-to-br from-[#C1E8FF]/30 via-white/95 to-[#7DA0CA]/20',
+      iconColor: 'text-[#C1E8FF]',
+      iconBg: 'bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F]',
+      iconGlow: 'shadow-[0_0_30px_rgba(2,16,36,0.6)]',
+      textColor: 'text-[#021024]',
+      borderColor: 'border-[#1B3B6F]/40',
+      pulseColor: 'bg-[#021024]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
       title: 'Tickets Vendidos',
       value: waterPark.soldTickets,
       icon: TrendingUp,
-      bgColor: 'bg-gradient-to-br from-sky-muted/10 to-blue-soft/20',
-      iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-sky-muted/90 to-blue-soft/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(84,131,179,0.4)]',
-      textColor: 'text-deep-navy',
-      borderColor: 'border-sky-muted/20',
-      pulseColor: 'bg-sky-muted/30'
+      bgColor: 'bg-gradient-to-br from-[#7DA0CA]/25 via-white/90 to-[#C1E8FF]/30',
+      iconColor: 'text-[#C1E8FF]',
+      iconBg: 'bg-gradient-to-br from-[#052659] via-[#1B3B6F] to-[#5483B3]',
+      iconGlow: 'shadow-[0_0_30px_rgba(5,38,89,0.6)]',
+      textColor: 'text-[#021024]',
+      borderColor: 'border-[#5483B3]/40',
+      pulseColor: 'bg-[#052659]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
       title: 'Tickets Impresos',
       value: waterPark.printedTickets,
       icon: Printer,
-      bgColor: 'bg-gradient-to-br from-blue-soft/10 to-sky-light/30',
-      iconColor: 'text-deep-navy',
-      iconBg: 'bg-gradient-to-br from-blue-soft/90 to-sky-light/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(125,160,202,0.4)]',
-      textColor: 'text-deep-navy',
-      borderColor: 'border-blue-soft/20',
-      pulseColor: 'bg-blue-soft/30'
+      bgColor: 'bg-gradient-to-br from-[#5483B3]/20 via-white/85 to-[#7DA0CA]/35',
+      iconColor: 'text-[#C1E8FF]',
+      iconBg: 'bg-gradient-to-br from-[#1B3B6F] via-[#5483B3] to-[#7DA0CA]',
+      iconGlow: 'shadow-[0_0_30px_rgba(27,59,111,0.6)]',
+      textColor: 'text-[#021024]',
+      borderColor: 'border-[#7DA0CA]/40',
+      pulseColor: 'bg-[#1B3B6F]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
       title: 'Tickets Inactivos',
       value: waterPark.inactiveTickets,
       icon: TicketX,
-      bgColor: 'bg-gradient-to-br from-navy-blue/10 to-deep-navy/20',
-      iconColor: 'text-white',
-      iconBg: 'bg-gradient-to-br from-navy-blue/90 to-deep-navy/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(5,38,89,0.4)]',
-      textColor: 'text-deep-navy',
-      borderColor: 'border-navy-blue/20',
-      pulseColor: 'bg-navy-blue/30'
+      bgColor: 'bg-gradient-to-br from-[#C1E8FF]/35 via-white/80 to-[#5483B3]/25',
+      iconColor: 'text-[#C1E8FF]',
+      iconBg: 'bg-gradient-to-br from-[#5483B3] via-[#7DA0CA] to-[#C1E8FF]',
+      iconGlow: 'shadow-[0_0_30px_rgba(84,131,179,0.6)]',
+      textColor: 'text-[#021024]',
+      borderColor: 'border-[#C1E8FF]/50',
+      pulseColor: 'bg-[#5483B3]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     }
   ];
   
@@ -134,7 +138,7 @@ const WaterParkDetail: React.FC = () => {
             return (
               <div 
                 key={stat.title}
-                className={`card-compact ${stat.bgColor} border-2 ${stat.borderColor} floating-card animate-slide-up hover:scale-105 group relative overflow-hidden transition-all duration-500`}
+                className={`card-compact ${stat.bgColor} border-3 ${stat.borderColor} floating-card animate-slide-up hover:scale-110 group relative overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-lg`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 {/* Animated background particles */}
@@ -146,7 +150,7 @@ const WaterParkDetail: React.FC = () => {
 
                 <div className="flex items-center relative z-10">
                   {/* Enhanced icon container with blue palette */}
-                  <div className={`${stat.iconBg} ${stat.iconGlow} border-2 border-white/30 backdrop-blur-sm flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden
+                  <div className={`${stat.iconBg} ${stat.iconGlow} border-3 border-[#C1E8FF]/60 backdrop-blur-lg flex-shrink-0 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 relative overflow-hidden
                                    rounded-xl p-2 mr-2
                                    xs:rounded-2xl xs:p-2.5 xs:mr-3
                                    sm:p-3 sm:mr-4
@@ -154,34 +158,47 @@ const WaterParkDetail: React.FC = () => {
                                    lg:p-5 lg:mr-6`}>
                     
                     {/* Icon glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
                     
                     {/* Animated shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C1E8FF]/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 skew-x-12"></div>
                     
-                    <Icon className={`${stat.iconColor} relative z-10 drop-shadow-lg transition-all duration-300 group-hover:drop-shadow-2xl group-hover:scale-110
+                    {/* Borde interno brillante */}
+                    <div className="absolute inset-1 rounded-full border border-[#C1E8FF]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <Icon className={`${stat.iconColor} relative z-10 transition-all duration-300 group-hover:scale-125 font-black
                                      h-4 w-4
                                      xs:h-4 xs:w-4
                                      sm:h-5 sm:w-5
                                      md:h-6 md:w-6
-                                     lg:h-7 lg:w-7`} />
+                                     lg:h-7 lg:w-7`}
+                          style={{
+                            filter: `${stat.iconShadow} drop-shadow(0_2px_4px_rgba(0,0,0,0.5))`,
+                            textShadow: '0 0 10px rgba(193, 232, 255, 0.8)'
+                          }} />
                   </div>
                   
                   <div className="min-w-0 flex-1">
-                    <p className="text-sky-muted truncate font-semibold transition-all duration-300 group-hover:text-opacity-80
+                    <p className={`${stat.textColor} truncate font-bold transition-all duration-300 group-hover:scale-105 origin-left opacity-80
                                   text-xs mb-0.5
                                   xs:text-xs xs:mb-1
                                   sm:text-sm sm:mb-1
                                   md:text-sm md:mb-1.5
-                                  lg:text-base lg:mb-2">
+                                  lg:text-base lg:mb-2`}
+                          style={{
+                            textShadow: '0 1px 2px rgba(2, 16, 36, 0.1)'
+                          }}>
                       {stat.title}
                     </p>
-                    <h3 className={`${stat.textColor} truncate font-bold transition-all duration-300 group-hover:scale-105 origin-left
+                    <h3 className={`${stat.textColor} truncate font-black transition-all duration-300 group-hover:scale-110 origin-left
                                     text-sm
                                     xs:text-base
                                     sm:text-lg
                                     md:text-xl
-                                    lg:text-2xl`}>
+                                    lg:text-2xl`}
+                        style={{
+                          textShadow: '0 2px 4px rgba(2, 16, 36, 0.15)'
+                        }}>
                       {stat.value.toLocaleString()}
                     </h3>
                   </div>
@@ -189,7 +206,8 @@ const WaterParkDetail: React.FC = () => {
 
                 {/* Subtle animated border */}
                 <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div className={`absolute inset-0 ${stat.iconBg} opacity-5 rounded-xl animate-pulse`}></div>
+                  <div className={`absolute inset-0 ${stat.iconBg} opacity-10 rounded-xl animate-pulse`}></div>
+                  <div className="absolute inset-0 border-2 border-[#C1E8FF]/30 rounded-xl animate-pulse"></div>
                 </div>
               </div>
             );

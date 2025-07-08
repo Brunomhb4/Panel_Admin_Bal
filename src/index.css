@@ -109,10 +109,10 @@
   
   /* Ultra Responsive Card Components */
   .card {
-    background: var(--theme-bg-primary);
-    border: 1px solid var(--theme-border);
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid rgba(193, 232, 255, 0.25);
     @apply backdrop-blur-md transition-all duration-300 hover:-translate-y-1;
-    box-shadow: 0 4px 6px -1px var(--theme-shadow), 0 2px 4px -1px var(--theme-shadow);
+    box-shadow: 0 8px 32px rgba(2, 16, 36, 0.4), inset 0 1px 0 rgba(193, 232, 255, 0.1);
     /* Ultra small screens */
     @apply p-2 rounded-lg;
     /* Small phones */
@@ -334,10 +334,10 @@
   }
   
   .card-compact {
-    background: var(--theme-bg-secondary);
-    border: 1px solid var(--theme-border);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(193, 232, 255, 0.02) 100%);
+    border: 2px solid rgba(193, 232, 255, 0.2);
     @apply backdrop-blur-sm transition-all duration-300;
-    box-shadow: 0 1px 3px 0 var(--theme-shadow), 0 1px 2px 0 var(--theme-shadow);
+    box-shadow: 0 4px 20px rgba(2, 16, 36, 0.3), inset 0 1px 0 rgba(193, 232, 255, 0.15);
     /* Ultra small screens */
     @apply p-2 rounded-lg;
     /* Small phones */
@@ -352,6 +352,21 @@
     @apply xl:p-6 xl:rounded-2xl;
   }
   
+  /* Enhanced card hover states */
+  .card:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(193, 232, 255, 0.05) 100%);
+    border-color: rgba(125, 160, 202, 0.4);
+    box-shadow: 0 12px 48px rgba(2, 16, 36, 0.5), inset 0 1px 0 rgba(193, 232, 255, 0.2);
+    transform: translateY(-3px) scale(1.02);
+  }
+  
+  .card-compact:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(193, 232, 255, 0.08) 100%);
+    border-color: rgba(125, 160, 202, 0.5);
+    box-shadow: 0 8px 32px rgba(2, 16, 36, 0.4), inset 0 1px 0 rgba(193, 232, 255, 0.25);
+    transform: translateY(-2px) scale(1.05);
+  }
+  
   .card-floating {
     @apply transform transition-all duration-300;
     @apply hover:-translate-y-0.5;
@@ -359,6 +374,15 @@
     @apply sm:hover:-translate-y-1;
     @apply md:hover:-translate-y-1.5;
     @apply lg:hover:-translate-y-2;
+  }
+  
+  /* Enhanced border styles */
+  .border-3 {
+    border-width: 3px;
+  }
+  
+  .border-4 {
+    border-width: 4px;
   }
   
   /* Ultra Responsive Form Components */
@@ -898,9 +922,11 @@
   .spacing-xl { gap: 2rem; }
   
   /* Professional shadow system */
-  .shadow-soft { box-shadow: 0 2px 15px -3px rgba(2, 16, 36, 0.1), 0 4px 6px -2px rgba(2, 16, 36, 0.05); }
-  .shadow-medium { box-shadow: 0 4px 25px -5px rgba(2, 16, 36, 0.15), 0 10px 10px -5px rgba(2, 16, 36, 0.04); }
-  .shadow-large { box-shadow: 0 10px 40px -10px rgba(2, 16, 36, 0.25), 0 20px 25px -5px rgba(2, 16, 36, 0.1); }
+  .shadow-soft { box-shadow: 0 4px 20px rgba(2, 16, 36, 0.15), 0 2px 8px rgba(2, 16, 36, 0.08); }
+  .shadow-medium { box-shadow: 0 8px 32px rgba(2, 16, 36, 0.2), 0 4px 16px rgba(2, 16, 36, 0.1); }
+  .shadow-large { box-shadow: 0 12px 48px rgba(2, 16, 36, 0.3), 0 8px 24px rgba(2, 16, 36, 0.15); }
+  .shadow-2xl { box-shadow: 0 16px 64px rgba(2, 16, 36, 0.4), 0 12px 32px rgba(2, 16, 36, 0.2); }
+  .shadow-3xl { box-shadow: 0 24px 80px rgba(2, 16, 36, 0.5), 0 16px 40px rgba(2, 16, 36, 0.25); }
   
   /* Light mode specific shadows */
   .light .shadow-soft { box-shadow: 0 2px 8px rgba(2, 16, 36, 0.06), 0 1px 3px rgba(2, 16, 36, 0.04); }
@@ -911,6 +937,33 @@
   .rounded-soft { border-radius: 0.75rem; }
   .rounded-medium { border-radius: 1rem; }
   .rounded-large { border-radius: 1.5rem; }
+}
+
+/* Enhanced animations for cards */
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(2, 16, 36, 0.4);
+  }
+  50% {
+    box-shadow: 0 12px 48px rgba(2, 16, 36, 0.6);
+  }
+}
+
+.animate-card-float {
+  animation: cardFloat 3s ease-in-out infinite;
+}
+
+.animate-card-pulse {
+  animation: cardPulse 2s ease-in-out infinite;
 }
 
 /* Ultra Responsive Custom scrollbar */

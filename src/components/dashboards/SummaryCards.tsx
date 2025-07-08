@@ -18,57 +18,79 @@ const SummaryCards: React.FC = () => {
       title: 'Tickets Activos',
       value: totalActiveTickets.toLocaleString(),
       icon: Ticket,
-      gradient: mode === 'dark' ? 'from-theme-accent to-theme-highlight' : 'from-blue-600 to-indigo-600',
-      bgGradient: mode === 'dark' ? 'from-theme-accent/20 to-theme-highlight/10' : 'from-blue-50 to-indigo-50',
-      borderColor: 'border-theme-border',
-      textColor: 'text-theme-text-primary',
-      subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-accent/90 to-theme-highlight/90' : 'bg-gradient-to-br from-blue-600 to-indigo-600',
-      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
-      iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-accent/30' : 'bg-blue-500/30'
+      gradient: 'from-[#021024] to-[#052659]',
+      bgGradient: mode === 'dark' 
+        ? 'from-[#052659]/20 via-[#1B3B6F]/15 to-[#5483B3]/10' 
+        : 'from-[#C1E8FF]/40 via-white/95 to-[#7DA0CA]/25',
+      borderColor: mode === 'dark' ? 'border-[#C1E8FF]/30' : 'border-[#1B3B6F]/40',
+      textColor: mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]',
+      subTextColor: mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#052659]',
+      iconBg: 'bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F]',
+      iconGlow: mode === 'dark' 
+        ? 'shadow-[0_0_30px_rgba(2,16,36,0.8)]' 
+        : 'shadow-[0_0_25px_rgba(2,16,36,0.6)]',
+      iconColor: 'text-[#C1E8FF]',
+      pulseColor: mode === 'dark' ? 'bg-[#021024]/30' : 'bg-[#021024]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
       title: 'Ingresos Totales',
       value: `$${totalRevenue.toLocaleString()}`,
       icon: DollarSign,
-      gradient: mode === 'dark' ? 'from-theme-highlight to-theme-light' : 'from-emerald-600 to-green-600',
-      bgGradient: mode === 'dark' ? 'from-theme-highlight/20 to-theme-light/10' : 'from-emerald-50 to-green-50',
-      borderColor: 'border-theme-border',
-      textColor: 'text-theme-text-primary',
-      subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90' : 'bg-gradient-to-br from-emerald-600 to-green-600',
-      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
-      iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-highlight/30' : 'bg-emerald-500/30'
+      gradient: 'from-[#052659] to-[#1B3B6F]',
+      bgGradient: mode === 'dark' 
+        ? 'from-[#1B3B6F]/20 via-[#5483B3]/15 to-[#7DA0CA]/10' 
+        : 'from-[#7DA0CA]/35 via-white/90 to-[#C1E8FF]/30',
+      borderColor: mode === 'dark' ? 'border-[#C1E8FF]/30' : 'border-[#5483B3]/40',
+      textColor: mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]',
+      subTextColor: mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#052659]',
+      iconBg: 'bg-gradient-to-br from-[#052659] via-[#1B3B6F] to-[#5483B3]',
+      iconGlow: mode === 'dark' 
+        ? 'shadow-[0_0_30px_rgba(5,38,89,0.8)]' 
+        : 'shadow-[0_0_25px_rgba(5,38,89,0.6)]',
+      iconColor: 'text-[#C1E8FF]',
+      pulseColor: mode === 'dark' ? 'bg-[#052659]/30' : 'bg-[#052659]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
       title: 'Total Balnearios',
       value: totalWaterParks.toString(),
       icon: Store,
-      gradient: mode === 'dark' ? 'from-theme-light to-theme-highlight' : 'from-violet-600 to-purple-600',
-      bgGradient: mode === 'dark' ? 'from-theme-light/15 to-theme-highlight/20' : 'from-violet-50 to-purple-50',
-      borderColor: 'border-theme-border',
-      textColor: 'text-theme-text-primary',
-      subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-light/90 to-theme-highlight/90' : 'bg-gradient-to-br from-violet-600 to-purple-600',
-      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
-      iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-light/30' : 'bg-violet-500/30'
+      gradient: 'from-[#1B3B6F] to-[#5483B3]',
+      bgGradient: mode === 'dark' 
+        ? 'from-[#5483B3]/20 via-[#7DA0CA]/15 to-[#C1E8FF]/10' 
+        : 'from-[#5483B3]/30 via-white/85 to-[#7DA0CA]/35',
+      borderColor: mode === 'dark' ? 'border-[#C1E8FF]/30' : 'border-[#7DA0CA]/40',
+      textColor: mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]',
+      subTextColor: mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#052659]',
+      iconBg: 'bg-gradient-to-br from-[#1B3B6F] via-[#5483B3] to-[#7DA0CA]',
+      iconGlow: mode === 'dark' 
+        ? 'shadow-[0_0_30px_rgba(27,59,111,0.8)]' 
+        : 'shadow-[0_0_25px_rgba(27,59,111,0.6)]',
+      iconColor: 'text-[#C1E8FF]',
+      pulseColor: mode === 'dark' ? 'bg-[#1B3B6F]/30' : 'bg-[#1B3B6F]/20',
+      iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
       title: 'Tickets Vendidos',
       value: totalSoldTickets.toLocaleString(),
       icon: TrendingUp,
-      gradient: mode === 'dark' ? 'from-theme-bg-tertiary to-theme-accent' : 'from-amber-600 to-orange-600',
-      bgGradient: mode === 'dark' ? 'from-theme-bg-tertiary/15 to-theme-accent/20' : 'from-amber-50 to-orange-50',
-      borderColor: 'border-theme-border',
-      textColor: 'text-theme-text-primary',
-      subTextColor: 'text-theme-text-secondary',
-      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90' : 'bg-gradient-to-br from-amber-600 to-orange-600',
-      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
-      iconColor: 'text-white',
-      pulseColor: mode === 'dark' ? 'bg-theme-bg-tertiary/30' : 'bg-amber-500/30'
+      gradient: 'from-[#5483B3] to-[#7DA0CA]',
+      bgGradient: mode === 'dark' 
+        ? 'from-[#7DA0CA]/20 via-[#C1E8FF]/15 to-[#5483B3]/10' 
+        : 'from-[#C1E8FF]/40 via-white/80 to-[#5483B3]/30',
+      borderColor: mode === 'dark' ? 'border-[#C1E8FF]/30' : 'border-[#C1E8FF]/50',
+      textColor: mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]',
+      subTextColor: mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#052659]',
+      iconBg: 'bg-gradient-to-br from-[#5483B3] via-[#7DA0CA] to-[#C1E8FF]',
+      iconGlow: mode === 'dark' 
+        ? 'shadow-[0_0_30px_rgba(84,131,179,0.8)]' 
+        : 'shadow-[0_0_25px_rgba(84,131,179,0.6)]',
+      iconColor: mode === 'dark' ? 'text-[#021024]' : 'text-[#C1E8FF]',
+      pulseColor: mode === 'dark' ? 'bg-[#5483B3]/30' : 'bg-[#5483B3]/20',
+      iconShadow: mode === 'dark' 
+        ? 'drop-shadow-[0_0_6px_rgba(2,16,36,0.8)]' 
+        : 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     }
   ];
   
@@ -79,7 +101,7 @@ const SummaryCards: React.FC = () => {
         return (
           <div 
             key={card.title}
-            className={`card-compact bg-gradient-to-br ${card.bgGradient} border-2 ${card.borderColor} hover:shadow-large transition-all duration-500 animate-slide-up floating-card hover:scale-105 group relative overflow-hidden`}
+            className={`card-compact bg-gradient-to-br ${card.bgGradient} border-3 ${card.borderColor} hover:shadow-2xl transition-all duration-500 animate-slide-up floating-card hover:scale-110 group relative overflow-hidden backdrop-blur-lg`}
             style={{ animationDelay: `${index * 150}ms` }}
           >
             {/* Animated background particles */}
@@ -90,7 +112,7 @@ const SummaryCards: React.FC = () => {
             </div>
 
             <div className="flex items-center relative z-10">
-              <div className={`${card.iconBg} ${card.iconGlow} border-2 border-white/30 backdrop-blur-sm flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden
+              <div className={`${card.iconBg} ${card.iconGlow} border-3 border-[#C1E8FF]/60 backdrop-blur-lg flex-shrink-0 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 relative overflow-hidden
                                rounded-xl p-2
                                xs:rounded-2xl xs:p-2.5
                                sm:rounded-2xl sm:p-3
@@ -98,17 +120,26 @@ const SummaryCards: React.FC = () => {
                                lg:rounded-3xl lg:p-5`}>
                 
                 {/* Icon glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
                 
                 {/* Animated shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C1E8FF]/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 skew-x-12"></div>
                 
-                <Icon className={`${card.iconColor} relative z-10 drop-shadow-lg transition-all duration-300 group-hover:drop-shadow-2xl group-hover:scale-110
+                {/* Borde interno brillante */}
+                <div className="absolute inset-1 rounded-full border border-[#C1E8FF]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <Icon className={`${card.iconColor} relative z-10 transition-all duration-300 group-hover:scale-125 font-black
                                  h-4 w-4
                                  xs:h-4 xs:w-4
                                  sm:h-5 sm:w-5
                                  md:h-6 md:w-6
-                                 lg:h-7 lg:w-7`} />
+                                 lg:h-7 lg:w-7`}
+                      style={{
+                        filter: `${card.iconShadow} drop-shadow(0_2px_4px_rgba(0,0,0,0.5))`,
+                        textShadow: mode === 'dark' 
+                          ? '0 0 10px rgba(193, 232, 255, 0.8)' 
+                          : '0 0 8px rgba(193, 232, 255, 0.9)'
+                      }} />
               </div>
               
               <div className="min-w-0 flex-1
@@ -116,20 +147,30 @@ const SummaryCards: React.FC = () => {
                               xs:ml-3
                               sm:ml-4
                               lg:ml-6">
-                <p className={`${card.subTextColor} truncate font-semibold transition-all duration-300 group-hover:text-opacity-80
+                <p className={`${card.subTextColor} truncate font-bold transition-all duration-300 group-hover:scale-105 origin-left opacity-90
                                text-xs mb-0.5
                                xs:text-xs xs:mb-1
                                sm:text-sm sm:mb-1
                                md:text-sm md:mb-1.5
-                               lg:text-base lg:mb-2`}>
+                               lg:text-base lg:mb-2`}
+                      style={{
+                        textShadow: mode === 'dark' 
+                          ? '0 0 4px rgba(125, 160, 202, 0.4)' 
+                          : '0 1px 2px rgba(5, 38, 89, 0.1)'
+                      }}>
                   {card.title}
                 </p>
-                <h3 className={`${card.textColor} truncate font-bold transition-all duration-300 group-hover:scale-105 origin-left
+                <h3 className={`${card.textColor} truncate font-black transition-all duration-300 group-hover:scale-110 origin-left
                                 text-sm
                                 xs:text-base
                                 sm:text-lg
                                 md:text-xl
-                                lg:text-2xl`}>
+                                lg:text-2xl`}
+                    style={{
+                      textShadow: mode === 'dark' 
+                        ? '0 0 6px rgba(193, 232, 255, 0.6), 0 2px 4px rgba(0,0,0,0.3)' 
+                        : '0 2px 4px rgba(2, 16, 36, 0.15)'
+                    }}>
                   {card.value}
                 </h3>
               </div>
@@ -137,7 +178,8 @@ const SummaryCards: React.FC = () => {
 
             {/* Subtle animated border */}
             <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-              <div className={`absolute inset-0 bg-gradient-to-r ${card.gradient} opacity-10 rounded-xl animate-pulse`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-r ${card.gradient} opacity-15 rounded-xl animate-pulse`}></div>
+              <div className="absolute inset-0 border-2 border-[#C1E8FF]/30 rounded-xl animate-pulse"></div>
             </div>
           </div>
         );
