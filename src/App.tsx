@@ -9,6 +9,7 @@ import WaterParkDetail from './pages/WaterParkDetail';
 import UserManagement from './pages/UserManagement';
 import WaterParkManagement from './pages/WaterParkManagement';
 import RestaurantManagement from './pages/RestaurantManagement';
+import ProjectDashboardPage from './pages/ProjectDashboardPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -30,6 +31,19 @@ function App() {
           </ProtectedRoute>
         } 
       />
+      
+      {/* Project Dashboard - Available for all authenticated users */}
+      <Route 
+        path="/project-dashboard" 
+        element={
+          isAuthenticated ? (
+            <ProjectDashboardPage />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        } 
+      />
+      
       <Route 
         path="/admin/waterpark/:id" 
         element={
