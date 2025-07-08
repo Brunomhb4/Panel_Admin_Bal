@@ -52,14 +52,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       activeColor: 'from-orange-500 to-red-500'
     },
     {
-      path: '/project-dashboard',
-      icon: Briefcase,
-      label: 'Tablero de Proyecto',
-      show: true,
-      iconColor: 'text-indigo-500',
-      activeColor: 'from-indigo-500 to-purple-500'
-    },
-    {
       path: '/superadmin/users',
       icon: Users,
       label: 'Gestión de Usuarios',

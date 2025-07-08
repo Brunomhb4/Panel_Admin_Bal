@@ -34,17 +34,6 @@ function App() {
       
       {/* Project Dashboard - Available for all authenticated users */}
       <Route 
-        path="/project-dashboard" 
-        element={
-          isAuthenticated ? (
-            <ProjectDashboardPage />
-          ) : (
-            <Navigate to="/login" replace />
-          )
-        } 
-      />
-      
-      <Route 
         path="/admin/waterpark/:id" 
         element={
           <ProtectedRoute requiredRole="admin">
