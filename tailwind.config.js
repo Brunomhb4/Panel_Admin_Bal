@@ -40,6 +40,9 @@ export default {
         'theme-highlight': '#7DA0CA',    // Azul grisáceo suave
         'theme-light': '#C1E8FF',        // Azul muy claro / celeste
         
+        // Additional color aliases for compatibility
+        'deep-navy': '#021024',          // Alias for theme-primary
+        
         // CSS Variables para modo dinámico
         'theme-bg-primary': 'var(--theme-bg-primary)',
         'theme-bg-secondary': 'var(--theme-bg-secondary)',
