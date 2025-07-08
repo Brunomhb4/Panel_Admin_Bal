@@ -3,11 +3,11 @@ import DashboardLayout from './DashboardLayout';
 import { useWaterParksStore } from '../../stores/waterParksStore';
 import { Plus, BarChart3, TrendingUp, Users, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import DashboardCard from '../components/ui/DashboardCard';
-import MetricCard from '../components/ui/MetricCard';
-import InteractiveChart from '../components/ui/InteractiveChart';
-import DataTable from '../components/ui/DataTable';
-import ProgressIndicator from '../components/ui/ProgressIndicator';
+import DashboardCard from '../ui/DashboardCard';
+import MetricCard from '../ui/MetricCard';
+import InteractiveChart from '../ui/InteractiveChart';
+import DataTable from '../ui/DataTable';
+import ProgressIndicator from '../ui/ProgressIndicator';
 
 const SuperAdminDashboard: React.FC = () => {
   const { fetchWaterParks, loading } = useWaterParksStore();
