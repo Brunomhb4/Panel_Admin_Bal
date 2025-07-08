@@ -66,7 +66,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       <div className="sidebar-header">
         <div className="flex items-center min-w-0 flex-1">
           {/* Enhanced logo */}
-          <div className="flex items-center justify-center bg-gradient-to-br from-[#052659] via-[#1B3B6F] to-[#5483B3] shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-white/20
           <div className="flex items-center justify-center bg-gradient-to-br from-[#021024] via-[#052659] to-[#1B3B6F] shadow-2xl animate-float flex-shrink-0 group relative overflow-hidden border-2 border-[#C1E8FF]/30
                           w-8 h-8 rounded-xl
                           xs:w-9 xs:h-9 xs:rounded-2xl
