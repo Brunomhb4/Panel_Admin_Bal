@@ -2,46 +2,65 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
 import { useWaterParksStore } from '../../stores/waterParksStore';
+import { useThemeStore } from '../../stores/themeStore';
 import { ExternalLink, Activity, Sparkles } from 'lucide-react';
 
 const WaterParksTable: React.FC = () => {
   const { waterParks } = useWaterParksStore();
   const { userRole } = useAuthStore();
+  const { mode } = useThemeStore();
   
   const basePath = userRole === 'admin' ? '/admin' : '/superadmin';
   
   return (
-    <div className="card floating-card">
+    <div className={`card floating-card transition-all duration-300
+                    ${mode === 'dark' 
+                      ? 'bg-gradient-to-br from-[#052659]/90 to-[#1B3B6F]/70 border-[#C1E8FF]/25' 
+                      : 'bg-white/95 border-gray-200 shadow-lg'
+                    }`}>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 xs:gap-4 sm:gap-4 md:gap-5 lg:gap-6
                       mb-4 xs:mb-5 sm:mb-6 md:mb-8 lg:mb-10">
         <div className="min-w-0 flex-1">
-          <h2 className="gradient-text font-bold transition-all duration-300 hover:scale-105 origin-left
+          <h2 className={`font-bold transition-all duration-300 hover:scale-105 origin-left
+                         ${mode === 'dark' ? 'gradient-text' : 'text-gray-900'}
                          text-base mb-1
                          xs:text-lg xs:mb-1.5
                          sm:text-xl sm:mb-2
                          md:text-2xl md:mb-2.5
-                         lg:text-3xl lg:mb-3">
+                         lg:text-3xl lg:mb-3`}>
             Resumen de Balnearios
           </h2>
-          <p className="text-sky-muted font-medium transition-all duration-300 hover:text-blue-soft
+          <p className={`font-medium transition-all duration-300
+                        ${mode === 'dark' 
+                          ? 'text-sky-muted hover:text-blue-soft' 
+                          : 'text-gray-600 hover:text-gray-800'
+                        }
                         text-xs
                         xs:text-sm
                         sm:text-base
-                        md:text-base">
+                        md:text-base`}>
             Información general de todos los balnearios
           </p>
         </div>
         
         {/* Enhanced activity indicator */}
-        <div className="flex items-center text-[#1B3B6F] bg-gradient-to-r from-[#C1E8FF]/40 to-[#7DA0CA]/20 border border-[#C1E8FF]/40 backdrop-blur-sm shadow-soft flex-shrink-0 group relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105
+        <div className={`flex items-center backdrop-blur-sm shadow-soft flex-shrink-0 group relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 border
+                        ${mode === 'dark' 
+                          ? 'text-[#C1E8FF] bg-gradient-to-r from-[#5483B3]/40 to-[#7DA0CA]/20 border-[#5483B3]/40' 
+                          : 'text-[#1B3B6F] bg-gradient-to-r from-[#C1E8FF]/40 to-[#7DA0CA]/20 border-[#C1E8FF]/40'
+                        }
                         px-2 py-1.5 text-xs rounded-lg
                         xs:px-3 xs:py-2 xs:text-xs xs:rounded-xl
                         sm:px-4 sm:py-2.5 sm:text-sm sm:rounded-xl
                         md:px-5 md:py-3 md:text-sm md:rounded-2xl
-                        lg:px-6 lg:py-3 lg:text-base lg:rounded-2xl">
+                        lg:px-6 lg:py-3 lg:text-base lg:rounded-2xl`}>
           
           {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1B3B6F]/5 to-[#5483B3]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+                          ${mode === 'dark' 
+                            ? 'bg-gradient-to-r from-[#5483B3]/10 to-[#7DA0CA]/5' 
+                            : 'bg-gradient-to-r from-[#1B3B6F]/5 to-[#5483B3]/5'
+                          }`}></div>
           
           {/* Enhanced activity icon */}
           <div className="relative z-10 mr-1.5 xs:mr-2 sm:mr-3">
@@ -52,16 +71,18 @@ const WaterParksTable: React.FC = () => {
                                md:h-5 md:w-5" />
             
             {/* Pulse effect */}
-            <div className="absolute inset-0 bg-[#1B3B6F]/20 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+            <div className={`absolute inset-0 rounded-full animate-ping opacity-0 group-hover:opacity-75
+                            ${mode === 'dark' ? 'bg-[#5483B3]/20' : 'bg-[#1B3B6F]/20'}`}></div>
           </div>
           
           <span className="font-semibold relative z-10">{waterParks.length} balnearios</span>
           
           {/* Sparkle effect */}
-          <Sparkles className="ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 text-[#5483B3] animate-pulse
+          <Sparkles className={`ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse
+                              ${mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#5483B3]'}
                               h-3 w-3
                               xs:h-4 xs:w-4
-                              sm:h-4 sm:w-4" />
+                              sm:h-4 sm:w-4`} />
         </div>
       </div>
       
@@ -104,19 +125,27 @@ const WaterParksTable: React.FC = () => {
                       </div>
                       
                       <div className="min-w-0 flex-1">
-                        <div className="font-bold text-[#021024] truncate transition-all duration-300 hover:text-[#1B3B6F] hover:scale-105 origin-left
+                        <div className={`font-bold truncate transition-all duration-300 hover:scale-105 origin-left
+                                        ${mode === 'dark' 
+                                          ? 'text-[#C1E8FF] hover:text-white' 
+                                          : 'text-[#021024] hover:text-[#1B3B6F]'
+                                        }
                                         text-xs
                                         xs:text-sm
                                         sm:text-base
                                         md:text-base
-                                        lg:text-lg">
+                                        lg:text-lg`}>
                           {park.name}
                         </div>
-                        <div className="text-[#5483B3] font-medium transition-all duration-300 hover:text-[#7DA0CA]
+                        <div className={`font-medium transition-all duration-300
+                                        ${mode === 'dark' 
+                                          ? 'text-[#5483B3] hover:text-[#7DA0CA]' 
+                                          : 'text-blue-500 hover:text-blue-600'
+                                        }
                                         text-xs mt-0.5
                                         xs:text-xs xs:mt-0.5
                                         sm:text-xs sm:mt-1
-                                        md:text-sm">
+                                        md:text-sm`}>
                           ID: {park.id}
                         </div>
                       </div>
@@ -142,11 +171,15 @@ const WaterParksTable: React.FC = () => {
                   </td>
                   
                   <td className="table-body-cell hidden md:table-cell">
-                    <span className="font-bold text-[#5483B3] transition-all duration-300 hover:text-[#7DA0CA] hover:scale-105 origin-left
+                    <span className={`font-bold transition-all duration-300 hover:scale-105 origin-left
+                                     ${mode === 'dark' 
+                                       ? 'text-[#5483B3] hover:text-[#7DA0CA]' 
+                                       : 'text-blue-600 hover:text-blue-700'
+                                     }
                                      text-xs
                                      xs:text-sm
                                      sm:text-base
-                                     lg:text-lg">
+                                     lg:text-lg`}>
                       ${park.totalRevenue.toLocaleString()}
                     </span>
                   </td>
@@ -154,15 +187,23 @@ const WaterParksTable: React.FC = () => {
                   <td className="table-body-cell">
                     <Link
                       to={`${basePath}/waterpark/${park.id}`}
-                      className="inline-flex items-center font-semibold text-[#1B3B6F] hover:text-white hover:bg-gradient-to-r hover:from-[#1B3B6F] hover:to-[#052659] transition-all duration-300 hover:shadow-lg hover:scale-105 border border-[#C1E8FF]/40 bg-white/50 backdrop-blur-sm group relative overflow-hidden
+                      className={`inline-flex items-center font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 border backdrop-blur-sm group relative overflow-hidden
+                                 ${mode === 'dark' 
+                                   ? 'text-[#C1E8FF] hover:text-white hover:bg-gradient-to-r hover:from-[#5483B3] hover:to-[#1B3B6F] border-[#5483B3]/40 bg-[#052659]/50' 
+                                   : 'text-[#1B3B6F] hover:text-white hover:bg-gradient-to-r hover:from-[#1B3B6F] hover:to-[#052659] border-[#C1E8FF]/40 bg-white/50'
+                                 }
                                  px-2 py-1.5 text-xs rounded-lg
                                  xs:px-3 xs:py-2 xs:text-xs xs:rounded-xl
                                  sm:px-4 sm:py-2.5 sm:text-sm sm:rounded-xl
                                  md:px-5 md:py-3 md:text-sm md:rounded-2xl
-                                 lg:px-6 lg:py-3 lg:text-base lg:rounded-2xl"
+                                 lg:px-6 lg:py-3 lg:text-base lg:rounded-2xl`}
                     >
                       {/* Animated background */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#1B3B6F]/5 to-[#052659]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+                                      ${mode === 'dark' 
+                                        ? 'bg-gradient-to-r from-[#5483B3]/10 to-[#1B3B6F]/5' 
+                                        : 'bg-gradient-to-r from-[#1B3B6F]/5 to-[#052659]/5'
+                                      }`}></div>
                       
                       <span className="mr-1.5 xs:mr-2 sm:mr-3 hidden xs:inline relative z-10">Ver detalles</span>
                       <span className="mr-1.5 xs:hidden relative z-10">Ver</span>
