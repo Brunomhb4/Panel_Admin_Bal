@@ -7,12 +7,13 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
-    @apply antialiased transition-colors duration-300;
-    background: var(--theme-bg-gradient, linear-gradient(135deg, #C1E8FF 0%, #FFFFFF 50%, rgba(125, 160, 202, 0.2) 100%));
-    color: var(--theme-text-primary, #021024);
+    @apply antialiased;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* Dark mode styles */
@@ -23,7 +24,7 @@
   
   /* Light mode styles */
   .light body {
-    background: linear-gradient(135deg, #C1E8FF 0%, #FFFFFF 50%, rgba(125, 160, 202, 0.2) 100%);
+    background: #C1E8FF;
     color: #021024;
   }
 }
