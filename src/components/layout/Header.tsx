@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuthStore } from '../../stores/authStore';
+import { useThemeStore } from '../../stores/themeStore';
 import { Menu, Bell, User } from 'lucide-react';
 import ThemeToggle from '../ui/ThemeToggle';
 
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
   const { user } = useAuthStore();
+  const { mode } = useThemeStore();
   
   return (
     <header className="header">
@@ -24,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
                      p-1.5 mr-2
                      xs:p-2 xs:mr-3
                      sm:p-2.5 sm:mr-3
-                     md:p-3 md:mr-4"
+                     md:p-3 md:mr-4`}
         >
           {/* Animated background */}
           <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
