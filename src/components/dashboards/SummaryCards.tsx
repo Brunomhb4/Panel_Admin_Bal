@@ -1,9 +1,11 @@
 import React from 'react';
 import { Ticket, DollarSign, Store, TrendingUp } from 'lucide-react';
 import { useWaterParksStore } from '../../stores/waterParksStore';
+import { useThemeStore } from '../../stores/themeStore';
 
 const SummaryCards: React.FC = () => {
   const { waterParks } = useWaterParksStore();
+  const { mode } = useThemeStore();
   
   // Calculate totals
   const totalActiveTickets = waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
@@ -16,57 +18,57 @@ const SummaryCards: React.FC = () => {
       title: 'Tickets Activos',
       value: totalActiveTickets.toLocaleString(),
       icon: Ticket,
-      gradient: 'from-midnight-blue to-navy-blue',
-      bgGradient: 'from-sky-light/30 to-blue-soft/20',
-      borderColor: 'border-sky-light/40',
-      textColor: 'text-deep-navy',
-      subTextColor: 'text-midnight-blue',
-      iconBg: 'bg-gradient-to-br from-midnight-blue/90 to-navy-blue/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(27,59,111,0.4)]',
+      gradient: mode === 'dark' ? 'from-theme-accent to-theme-highlight' : 'from-theme-bg-tertiary to-theme-accent',
+      bgGradient: mode === 'dark' ? 'from-theme-accent/20 to-theme-highlight/10' : 'from-theme-highlight/30 to-theme-light/20',
+      borderColor: 'border-theme-border',
+      textColor: 'text-theme-text-primary',
+      subTextColor: 'text-theme-text-secondary',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-accent/90 to-theme-highlight/90' : 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90',
+      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: 'bg-midnight-blue/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-accent/30' : 'bg-theme-bg-tertiary/30'
     },
     {
       title: 'Ingresos Totales',
       value: `$${totalRevenue.toLocaleString()}`,
       icon: DollarSign,
-      gradient: 'from-sky-muted to-blue-soft',
-      bgGradient: 'from-sky-muted/20 to-blue-soft/30',
-      borderColor: 'border-sky-muted/30',
-      textColor: 'text-deep-navy',
-      subTextColor: 'text-sky-muted',
-      iconBg: 'bg-gradient-to-br from-sky-muted/90 to-blue-soft/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(84,131,179,0.4)]',
+      gradient: mode === 'dark' ? 'from-theme-highlight to-theme-light' : 'from-theme-accent to-theme-highlight',
+      bgGradient: mode === 'dark' ? 'from-theme-highlight/20 to-theme-light/10' : 'from-theme-accent/20 to-theme-highlight/30',
+      borderColor: 'border-theme-border',
+      textColor: 'text-theme-text-primary',
+      subTextColor: 'text-theme-text-secondary',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90' : 'bg-gradient-to-br from-theme-accent/90 to-theme-highlight/90',
+      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: 'bg-sky-muted/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-highlight/30' : 'bg-theme-accent/30'
     },
     {
       title: 'Total Balnearios',
       value: totalWaterParks.toString(),
       icon: Store,
-      gradient: 'from-blue-soft to-sky-light',
-      bgGradient: 'from-blue-soft/20 to-sky-light/40',
-      borderColor: 'border-blue-soft/30',
-      textColor: 'text-deep-navy',
-      subTextColor: 'text-blue-soft',
-      iconBg: 'bg-gradient-to-br from-blue-soft/90 to-sky-light/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(125,160,202,0.4)]',
-      iconColor: 'text-deep-navy',
-      pulseColor: 'bg-blue-soft/30'
+      gradient: mode === 'dark' ? 'from-theme-light to-theme-highlight' : 'from-theme-highlight to-theme-light',
+      bgGradient: mode === 'dark' ? 'from-theme-light/15 to-theme-highlight/20' : 'from-theme-highlight/20 to-theme-light/40',
+      borderColor: 'border-theme-border',
+      textColor: 'text-theme-text-primary',
+      subTextColor: 'text-theme-text-secondary',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-light/90 to-theme-highlight/90' : 'bg-gradient-to-br from-theme-highlight/90 to-theme-light/90',
+      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
+      iconColor: mode === 'dark' ? 'text-theme-bg-primary' : 'text-white',
+      pulseColor: mode === 'dark' ? 'bg-theme-light/30' : 'bg-theme-highlight/30'
     },
     {
       title: 'Tickets Vendidos',
       value: totalSoldTickets.toLocaleString(),
       icon: TrendingUp,
-      gradient: 'from-navy-blue to-sky-muted',
-      bgGradient: 'from-navy-blue/10 to-sky-muted/20',
-      borderColor: 'border-navy-blue/20',
-      textColor: 'text-deep-navy',
-      subTextColor: 'text-navy-blue',
-      iconBg: 'bg-gradient-to-br from-navy-blue/90 to-sky-muted/90',
-      iconGlow: 'shadow-[0_0_25px_rgba(5,38,89,0.4)]',
+      gradient: mode === 'dark' ? 'from-theme-bg-tertiary to-theme-accent' : 'from-theme-bg-secondary to-theme-bg-tertiary',
+      bgGradient: mode === 'dark' ? 'from-theme-bg-tertiary/15 to-theme-accent/20' : 'from-theme-bg-secondary/10 to-theme-bg-tertiary/20',
+      borderColor: 'border-theme-border',
+      textColor: 'text-theme-text-primary',
+      subTextColor: 'text-theme-text-secondary',
+      iconBg: mode === 'dark' ? 'bg-gradient-to-br from-theme-bg-tertiary/90 to-theme-accent/90' : 'bg-gradient-to-br from-theme-bg-secondary/90 to-theme-bg-tertiary/90',
+      iconGlow: 'shadow-[0_0_25px_var(--theme-shadow)]',
       iconColor: 'text-white',
-      pulseColor: 'bg-navy-blue/30'
+      pulseColor: mode === 'dark' ? 'bg-theme-bg-tertiary/30' : 'bg-theme-bg-secondary/30'
     }
   ];
   

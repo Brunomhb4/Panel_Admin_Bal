@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuthStore } from '../../stores/authStore';
 import { Menu, Bell, User } from 'lucide-react';
+import ThemeToggle from '../ui/ThemeToggle';
 
 interface HeaderProps {
   title: string;
@@ -46,6 +47,9 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
       </div>
       
       <div className="flex items-center space-x-2 xs:space-x-3 sm:space-x-4 md:space-x-5 lg:space-x-6 xl:space-x-8">
+        {/* Theme Toggle */}
+        <ThemeToggle />
+        
         {/* Enhanced notification button */}
         <button className="focus:outline-none focus:ring-2 focus:ring-sky-muted/20 transition-all duration-300 relative hover:scale-110 rounded-xl hover:bg-gradient-to-r hover:from-sky-light/30 hover:to-blue-soft/20 text-midnight-blue group overflow-hidden
                            p-1.5

@@ -32,25 +32,36 @@ export default {
       },
       colors: {
         // Paleta de azules armoniosa
-        'deep-navy': '#021024',      // Azul muy oscuro (casi negro)
-        'navy-blue': '#052659',      // Azul marino profundo
-        'midnight-blue': '#1B3B6F',  // Azul medianoche clásico
-        'sky-muted': '#5483B3',      // Azul cielo apagado
-        'blue-soft': '#7DA0CA',      // Azul grisáceo suave
-        'sky-light': '#C1E8FF',      // Azul muy claro / celeste
+        // Paleta corporativa
+        'theme-primary': '#021024',      // Azul muy oscuro (casi negro)
+        'theme-secondary': '#052659',    // Azul marino profundo
+        'theme-tertiary': '#1B3B6F',     // Azul medianoche clásico
+        'theme-accent': '#5483B3',       // Azul cielo apagado
+        'theme-highlight': '#7DA0CA',    // Azul grisáceo suave
+        'theme-light': '#C1E8FF',        // Azul muy claro / celeste
+        
+        // CSS Variables para modo dinámico
+        'theme-bg-primary': 'var(--theme-bg-primary)',
+        'theme-bg-secondary': 'var(--theme-bg-secondary)',
+        'theme-bg-tertiary': 'var(--theme-bg-tertiary)',
+        'theme-text-primary': 'var(--theme-text-primary)',
+        'theme-text-secondary': 'var(--theme-text-secondary)',
+        'theme-text-muted': 'var(--theme-text-muted)',
+        'theme-border': 'var(--theme-border)',
+        'theme-shadow': 'var(--theme-shadow)',
         
         // Variaciones para diferentes usos
         primary: {
-          50: '#C1E8FF',
-          100: '#A8DCFF',
-          200: '#7DA0CA',
-          300: '#5483B3',
-          400: '#1B3B6F',
-          500: '#052659',
-          600: '#021024',
-          700: '#011020',
-          800: '#010C1A',
-          900: '#000814',
+          50: 'var(--theme-light, #C1E8FF)',
+          100: 'var(--theme-highlight, #7DA0CA)',
+          200: 'var(--theme-accent, #5483B3)',
+          300: 'var(--theme-tertiary, #1B3B6F)',
+          400: 'var(--theme-secondary, #052659)',
+          500: 'var(--theme-primary, #021024)',
+          600: '#011020',
+          700: '#010C1A',
+          800: '#000814',
+          900: '#000408',
         },
         
         // Colores de sistema manteniendo la armonía

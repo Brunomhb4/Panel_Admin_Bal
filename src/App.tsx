@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './stores/authStore';
+import { useTheme } from './hooks/useTheme';
 import LoginPage from './pages/LoginPage';
 import AdminDashboard from './pages/AdminDashboard';
 import SuperAdminDashboard from './pages/SuperAdminDashboard';
@@ -12,6 +13,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const { isAuthenticated } = useAuthStore();
+  
+  // Initialize theme system
+  useTheme();
 
   return (
     <Routes>
