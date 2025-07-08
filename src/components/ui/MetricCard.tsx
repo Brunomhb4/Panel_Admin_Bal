@@ -59,30 +59,30 @@ const MetricCard: React.FC<MetricCardProps> = ({
         return {
           ...baseStyles,
           background: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-bg-secondary/90 to-theme-bg-tertiary/70' 
+            ? 'bg-gradient-to-br from-[#052659]/90 to-[#1B3B6F]/70' 
             : 'bg-gradient-to-br from-blue-50 to-indigo-50',
-          border: mode === 'dark' ? 'border-theme-accent/40' : 'border-blue-200',
+          border: mode === 'dark' ? 'border-[#5483B3]/40' : 'border-blue-200',
           iconBg: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-accent to-theme-highlight' 
+            ? 'bg-gradient-to-br from-[#5483B3] to-[#7DA0CA]' 
             : 'bg-gradient-to-br from-blue-600 to-indigo-600',
           iconColor: 'text-white',
           glowColor: mode === 'dark' 
-            ? 'shadow-[0_0_20px_rgba(84,131,179,0.3)]' 
+            ? 'shadow-[0_0_20px_rgba(84,131,179,0.4)]' 
             : 'shadow-[0_0_20px_rgba(59,130,246,0.3)]'
         };
       case 'accent':
         return {
           ...baseStyles,
           background: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-accent/15 to-theme-highlight/25' 
+            ? 'bg-gradient-to-br from-[#5483B3]/15 to-[#7DA0CA]/25' 
             : 'bg-gradient-to-br from-purple-50 to-violet-50',
-          border: mode === 'dark' ? 'border-theme-highlight/50' : 'border-purple-200',
+          border: mode === 'dark' ? 'border-[#7DA0CA]/50' : 'border-purple-200',
           iconBg: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-highlight to-theme-light' 
+            ? 'bg-gradient-to-br from-[#7DA0CA] to-[#C1E8FF]' 
             : 'bg-gradient-to-br from-purple-600 to-violet-600',
-          iconColor: mode === 'dark' ? 'text-theme-bg-primary' : 'text-white',
+          iconColor: mode === 'dark' ? 'text-[#021024]' : 'text-white',
           glowColor: mode === 'dark' 
-            ? 'shadow-[0_0_20px_rgba(125,160,202,0.3)]' 
+            ? 'shadow-[0_0_20px_rgba(125,160,202,0.4)]' 
             : 'shadow-[0_0_20px_rgba(147,51,234,0.3)]'
         };
       case 'success':

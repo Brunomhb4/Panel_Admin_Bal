@@ -42,19 +42,19 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
     switch (variant) {
       case 'success':
         return mode === 'dark' 
-          ? 'from-green-600 to-green-700' 
+          ? 'from-[#7DA0CA] to-[#C1E8FF]' 
           : 'from-green-500 to-green-600';
       case 'warning':
         return mode === 'dark' 
-          ? 'from-yellow-600 to-orange-600' 
+          ? 'from-[#5483B3] to-[#7DA0CA]' 
           : 'from-yellow-500 to-orange-500';
       case 'error':
         return mode === 'dark' 
-          ? 'from-red-600 to-red-700' 
+          ? 'from-[#052659] to-[#1B3B6F]' 
           : 'from-red-500 to-red-600';
       default:
         return mode === 'dark' 
-          ? 'from-theme-accent to-theme-highlight' 
+          ? 'from-[#5483B3] to-[#7DA0CA]' 
           : 'from-blue-500 to-indigo-500';
     }
   };

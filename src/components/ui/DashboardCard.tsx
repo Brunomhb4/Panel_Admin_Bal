@@ -46,11 +46,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         return {
           ...baseStyles,
           background: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-bg-secondary/80 to-theme-bg-tertiary/60' 
+            ? 'bg-gradient-to-br from-[#052659]/80 to-[#1B3B6F]/60' 
             : 'bg-gradient-to-br from-blue-50/80 to-indigo-50/60',
-          border: mode === 'dark' ? 'border-theme-accent/30' : 'border-blue-200/50',
+          border: mode === 'dark' ? 'border-[#5483B3]/30' : 'border-blue-200/50',
           iconBg: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-accent to-theme-highlight' 
+            ? 'bg-gradient-to-br from-[#5483B3] to-[#7DA0CA]' 
             : 'bg-gradient-to-br from-blue-600 to-indigo-600',
           iconColor: 'text-white'
         };
@@ -58,31 +58,31 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         return {
           ...baseStyles,
           background: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-accent/10 to-theme-highlight/20' 
+            ? 'bg-gradient-to-br from-[#5483B3]/10 to-[#7DA0CA]/20' 
             : 'bg-gradient-to-br from-purple-50/80 to-violet-50/60',
-          border: mode === 'dark' ? 'border-theme-highlight/40' : 'border-purple-200/50',
+          border: mode === 'dark' ? 'border-[#7DA0CA]/40' : 'border-purple-200/50',
           iconBg: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-highlight to-theme-light' 
+            ? 'bg-gradient-to-br from-[#7DA0CA] to-[#C1E8FF]' 
             : 'bg-gradient-to-br from-purple-600 to-violet-600',
-          iconColor: mode === 'dark' ? 'text-theme-bg-primary' : 'text-white'
+          iconColor: mode === 'dark' ? 'text-[#021024]' : 'text-white'
         };
       case 'highlight':
         return {
           ...baseStyles,
           background: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-highlight/15 to-theme-light/25' 
+            ? 'bg-gradient-to-br from-[#7DA0CA]/15 to-[#C1E8FF]/25' 
             : 'bg-gradient-to-br from-orange-50/80 to-amber-50/60',
-          border: mode === 'dark' ? 'border-theme-light/50' : 'border-orange-200/50',
+          border: mode === 'dark' ? 'border-[#C1E8FF]/50' : 'border-orange-200/50',
           iconBg: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-light to-white' 
+            ? 'bg-gradient-to-br from-[#C1E8FF] to-white' 
             : 'bg-gradient-to-br from-orange-600 to-amber-600',
-          iconColor: mode === 'dark' ? 'text-theme-bg-tertiary' : 'text-white'
+          iconColor: mode === 'dark' ? 'text-[#1B3B6F]' : 'text-white'
         };
       default:
         return {
           ...baseStyles,
           iconBg: mode === 'dark' 
-            ? 'bg-gradient-to-br from-theme-bg-tertiary to-theme-accent' 
+            ? 'bg-gradient-to-br from-[#1B3B6F] to-[#5483B3]' 
             : 'bg-gradient-to-br from-gray-600 to-gray-700',
           iconColor: 'text-white'
         };

@@ -52,8 +52,8 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   // Use theme-aware colors if not provided
-  const defaultPrimaryColor = primaryColor || (mode === 'dark' ? '#5483B3' : '#3B82F6');
-  const defaultSecondaryColor = secondaryColor || (mode === 'dark' ? '#7DA0CA' : '#60A5FA');
+  const defaultPrimaryColor = primaryColor || (mode === 'dark' ? '#5483B3' : '#1B3B6F');
+  const defaultSecondaryColor = secondaryColor || (mode === 'dark' ? '#7DA0CA' : '#5483B3');
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -88,8 +88,8 @@ const InteractiveChart: React.FC<InteractiveChartProps> = ({
       onMouseLeave: () => setActiveIndex(null)
     };
 
-    const gridColor = mode === 'dark' ? 'rgba(193, 232, 255, 0.1)' : 'rgba(107, 114, 128, 0.2)';
-    const textColor = mode === 'dark' ? '#7DA0CA' : '#6B7280';
+    const gridColor = mode === 'dark' ? '#1B3B6F' : '#C1E8FF';
+    const textColor = mode === 'dark' ? '#C1E8FF' : '#052659';
 
     switch (type) {
       case 'bar':

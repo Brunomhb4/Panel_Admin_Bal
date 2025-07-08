@@ -8,6 +8,7 @@ import {
   Tooltip, 
   ResponsiveContainer
 } from 'recharts';
+import { useThemeStore } from '../../stores/themeStore';
 import { DailyStats } from '../../stores/waterParksStore';
 
 interface DailyChartProps {
@@ -15,6 +16,8 @@ interface DailyChartProps {
 }
 
 const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
+  const { mode } = useThemeStore();
+  
   // Format the data for display
   const formattedData = data.map(item => ({
     ...item,
@@ -73,21 +76,32 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
 
   const config = getResponsiveConfig();
 
+  // Theme-aware colors using exact palette
+  const primaryColor = mode === 'dark' ? '#5483B3' : '#1B3B6F';
+  const secondaryColor = mode === 'dark' ? '#7DA0CA' : '#5483B3';
+  const gridColor = mode === 'dark' ? '#1B3B6F' : '#C1E8FF';
+  const textColor = mode === 'dark' ? '#C1E8FF' : '#052659';
+
   return (
-    <div className="card floating-card
+    <div className={`card floating-card transition-all duration-300
+                    ${mode === 'dark' 
+                      ? 'bg-gradient-to-br from-[#052659]/80 to-[#1B3B6F]/60 border-[#C1E8FF]/20' 
+                      : 'bg-white/95 border-gray-200 shadow-lg'
+                    }
                     h-48
                     xs:h-56
                     sm:h-64
                     md:h-72
                     lg:h-80
-                    xl:h-96">
-      <h3 className="gradient-text font-bold
+                    xl:h-96`}>
+      <h3 className={`font-bold transition-colors duration-300
+                     ${mode === 'dark' ? 'gradient-text' : 'text-gray-900'}
                      text-sm mb-3
                      xs:text-base xs:mb-4
                      sm:text-lg sm:mb-4
                      md:text-xl md:mb-5
                      lg:text-2xl lg:mb-6
-                     xl:text-2xl xl:mb-8">
+                     xl:text-2xl xl:mb-8`}>
         Ventas Semanales
       </h3>
       
@@ -98,19 +112,19 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
         >
           <defs>
             <linearGradient id="colorTickets" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#1B3B6F" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#1B3B6F" stopOpacity={0.1} />
+              <stop offset="5%" stopColor={primaryColor} stopOpacity={0.8} />
+              <stop offset="95%" stopColor={primaryColor} stopOpacity={0.1} />
             </linearGradient>
             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#5483B3" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#5483B3" stopOpacity={0.1} />
+              <stop offset="5%" stopColor={secondaryColor} stopOpacity={0.8} />
+              <stop offset="95%" stopColor={secondaryColor} stopOpacity={0.1} />
             </linearGradient>
           </defs>
           <XAxis 
             dataKey="formattedDate" 
             tick={{ 
               fontSize: config.fontSize, 
-              fill: '#1B3B6F', 
+              fill: textColor, 
               fontWeight: 600 
             }}
             axisLine={false}
@@ -122,7 +136,7 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
             orientation="left"
             tick={{ 
               fontSize: config.fontSize, 
-              fill: '#1B3B6F', 
+              fill: textColor, 
               fontWeight: 600 
             }}
             axisLine={false}
@@ -134,7 +148,7 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
             orientation="right"
             tick={{ 
               fontSize: config.fontSize, 
-              fill: '#1B3B6F', 
+              fill: textColor, 
               fontWeight: 600 
             }}
             domain={[0, 'dataMax + 5000']}
@@ -142,15 +156,15 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
             tickLine={false}
             hide={config.hideYAxis}
           />
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#7DA0CA" opacity={0.4} />
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridColor} opacity={0.4} />
           <Tooltip 
             contentStyle={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-              border: '2px solid #C1E8FF',
+              backgroundColor: mode === 'dark' ? 'rgba(5, 38, 89, 0.95)' : 'rgba(255, 255, 255, 0.95)', 
+              border: `2px solid ${mode === 'dark' ? '#C1E8FF' : '#1B3B6F'}`,
               borderRadius: typeof window !== 'undefined' && window.innerWidth < 640 ? '12px' : '16px',
-              color: '#021024',
+              color: mode === 'dark' ? '#C1E8FF' : '#021024',
               backdropFilter: 'blur(12px)',
-              boxShadow: '0 10px 40px rgba(2, 16, 36, 0.15)',
+              boxShadow: `0 10px 40px ${mode === 'dark' ? 'rgba(2, 16, 36, 0.3)' : 'rgba(2, 16, 36, 0.15)'}`,
               fontWeight: 600,
               fontSize: config.fontSize
             }}
@@ -160,7 +174,7 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
             type="monotone" 
             dataKey="tickets" 
             name="Tickets"
-            stroke="#1B3B6F" 
+            stroke={primaryColor} 
             strokeWidth={config.strokeWidth}
             fillOpacity={1} 
             fill="url(#colorTickets)" 
@@ -170,7 +184,7 @@ const DailyChart: React.FC<DailyChartProps> = ({ data }) => {
             type="monotone" 
             dataKey="revenue" 
             name="Ingresos ($)"
-            stroke="#5483B3" 
+            stroke={secondaryColor} 
             strokeWidth={config.strokeWidth}
             fillOpacity={1} 
             fill="url(#colorRevenue)" 

@@ -9,6 +9,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import { useThemeStore } from '../../stores/themeStore';
 import { MonthlyStats } from '../../stores/waterParksStore';
 
 interface MonthlyChartProps {
@@ -16,6 +17,8 @@ interface MonthlyChartProps {
 }
 
 const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
+  const { mode } = useThemeStore();
+  
   // Responsive configuration based on screen size
   const getResponsiveConfig = () => {
     const width = typeof window !== 'undefined' ? window.innerWidth : 1024;
@@ -59,22 +62,33 @@ const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
   };
 
   const config = getResponsiveConfig();
+  
+  // Theme-aware colors using exact palette
+  const primaryColor = mode === 'dark' ? '#1B3B6F' : '#052659';
+  const secondaryColor = mode === 'dark' ? '#5483B3' : '#7DA0CA';
+  const gridColor = mode === 'dark' ? '#1B3B6F' : '#C1E8FF';
+  const textColor = mode === 'dark' ? '#C1E8FF' : '#052659';
 
   return (
-    <div className="card floating-card
+    <div className={`card floating-card transition-all duration-300
+                    ${mode === 'dark' 
+                      ? 'bg-gradient-to-br from-[#052659]/80 to-[#1B3B6F]/60 border-[#C1E8FF]/20' 
+                      : 'bg-white/95 border-gray-200 shadow-lg'
+                    }
                     h-48
                     xs:h-56
                     sm:h-64
                     md:h-72
                     lg:h-80
-                    xl:h-96">
-      <h3 className="gradient-text font-bold
+                    xl:h-96`}>
+      <h3 className={`font-bold transition-colors duration-300
+                     ${mode === 'dark' ? 'gradient-text' : 'text-gray-900'}
                      text-sm mb-3
                      xs:text-base xs:mb-4
                      sm:text-lg sm:mb-4
                      md:text-xl md:mb-5
                      lg:text-2xl lg:mb-6
-                     xl:text-2xl xl:mb-8">
+                     xl:text-2xl xl:mb-8`}>
         Ventas Mensuales
       </h3>
       
@@ -83,12 +97,12 @@ const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
           data={data}
           margin={config.margin}
         >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#7DA0CA" opacity={0.4} />
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridColor} opacity={0.4} />
           <XAxis 
             dataKey="month" 
             tick={{ 
               fontSize: config.fontSize, 
-              fill: '#1B3B6F', 
+              fill: textColor, 
               fontWeight: 600 
             }} 
             axisLine={false}
@@ -99,7 +113,7 @@ const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
             orientation="left"
             tick={{ 
               fontSize: config.fontSize, 
-              fill: '#1B3B6F', 
+              fill: textColor, 
               fontWeight: 600 
             }}
             axisLine={false}
@@ -111,7 +125,7 @@ const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
             orientation="right"
             tick={{ 
               fontSize: config.fontSize, 
-              fill: '#1B3B6F', 
+              fill: textColor, 
               fontWeight: 600 
             }}
             domain={[0, 'dataMax + 50000']}
@@ -121,12 +135,12 @@ const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
           />
           <Tooltip 
             contentStyle={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-              border: '2px solid #C1E8FF',
+              backgroundColor: mode === 'dark' ? 'rgba(5, 38, 89, 0.95)' : 'rgba(255, 255, 255, 0.95)', 
+              border: `2px solid ${mode === 'dark' ? '#C1E8FF' : '#1B3B6F'}`,
               borderRadius: typeof window !== 'undefined' && window.innerWidth < 640 ? '12px' : '16px',
-              color: '#021024',
+              color: mode === 'dark' ? '#C1E8FF' : '#021024',
               backdropFilter: 'blur(12px)',
-              boxShadow: '0 10px 40px rgba(2, 16, 36, 0.15)',
+              boxShadow: `0 10px 40px ${mode === 'dark' ? 'rgba(2, 16, 36, 0.3)' : 'rgba(2, 16, 36, 0.15)'}`,
               fontWeight: 600,
               fontSize: config.fontSize
             }}
@@ -136,14 +150,14 @@ const MonthlyChart: React.FC<MonthlyChartProps> = ({ data }) => {
             yAxisId="left"
             dataKey="tickets" 
             name="Tickets" 
-            fill="#1B3B6F" 
+            fill={primaryColor} 
             radius={[4, 4, 0, 0]}
           />
           <Bar 
             yAxisId="right"
             dataKey="revenue" 
             name="Ingresos ($)" 
-            fill="#5483B3" 
+            fill={secondaryColor} 
             radius={[4, 4, 0, 0]}
           />
         </BarChart>
