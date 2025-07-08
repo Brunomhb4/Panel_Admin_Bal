@@ -83,6 +83,22 @@ function App() {
           </ProtectedRoute>
         } 
       />
+      <Route 
+        path="/superadmin/snacks" 
+        element={
+          <ProtectedRoute requiredRole="superadmin">
+            <RestaurantManagement />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/superadmin/store" 
+        element={
+          <ProtectedRoute requiredRole="superadmin">
+            <RestaurantManagement />
+          </ProtectedRoute>
+        } 
+      />
 
       {/* Default routes */}
       <Route path="/" element={

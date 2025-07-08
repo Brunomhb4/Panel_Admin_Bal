@@ -8,9 +8,14 @@ import {
   Users, 
   Waves, 
   ChefHat,
+  UtensilsCrossed,
+  Coffee,
+  ShoppingBag,
   Briefcase,
   LogOut,
-  X
+  X,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -20,10 +25,15 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   const { userRole, logout } = useAuthStore();
   const { mode } = useThemeStore();
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
   
   const isActive = (path: string) => {
     return location.pathname === path || location.pathname.startsWith(path + '/');
+  };
+  
+  const toggleSubmenu = (key: string) => {
+    setOpenSubmenu(openSubmenu === key ? null : key);
   };
 
   const navItems = [
@@ -46,13 +56,39 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       hoverBg: mode === 'dark' ? 'from-[#1B3B6F]/30 to-[#5483B3]/20' : 'from-[#7DA0CA]/40 to-[#C1E8FF]/30'
     },
     {
-      path: '/superadmin/restaurant',
-      icon: ChefHat,
-      label: 'Restaurante',
+      key: 'food-services',
+      icon: UtensilsCrossed,
+      label: 'Servicios de Comida',
       show: userRole === 'superadmin',
       iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
       activeGradient: 'from-[#1B3B6F] via-[#5483B3] to-[#7DA0CA]',
-      hoverBg: mode === 'dark' ? 'from-[#5483B3]/30 to-[#7DA0CA]/20' : 'from-[#5483B3]/40 to-[#7DA0CA]/30'
+      hoverBg: mode === 'dark' ? 'from-[#5483B3]/30 to-[#7DA0CA]/20' : 'from-[#5483B3]/40 to-[#7DA0CA]/30',
+      submenu: [
+        {
+          path: '/superadmin/restaurant',
+          icon: ChefHat,
+          label: 'Restaurante',
+          iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
+          activeGradient: 'from-[#5483B3] via-[#7DA0CA] to-[#C1E8FF]',
+          hoverBg: mode === 'dark' ? 'from-[#7DA0CA]/30 to-[#C1E8FF]/20' : 'from-[#7DA0CA]/40 to-[#C1E8FF]/30'
+        },
+        {
+          path: '/superadmin/snacks',
+          icon: Coffee,
+          label: 'Snacks',
+          iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
+          activeGradient: 'from-[#7DA0CA] via-[#C1E8FF] to-white',
+          hoverBg: mode === 'dark' ? 'from-[#C1E8FF]/30 to-white/20' : 'from-[#C1E8FF]/40 to-white/30'
+        },
+        {
+          path: '/superadmin/store',
+          icon: ShoppingBag,
+          label: 'Tienda',
+          iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
+          activeGradient: 'from-[#1B3B6F] via-[#5483B3] to-[#7DA0CA]',
+          hoverBg: mode === 'dark' ? 'from-[#1B3B6F]/30 to-[#5483B3]/20' : 'from-[#1B3B6F]/40 to-[#5483B3]/30'
+        }
+      ]
     },
     {
       path: '/superadmin/users',
@@ -167,81 +203,255 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       <nav className="sidebar-nav custom-scrollbar">
         <ul className="space-y-1 xs:space-y-1.5 sm:space-y-2">
           {navItems.filter(item => item.show).map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.path);
+            const Icon = item.icon; 
+            const hasSubmenu = 'submenu' in item;
+            const active = hasSubmenu ? false : isActive(item.path);
+            const isSubmenuOpen = openSubmenu === item.key;
+            const isSubmenuActive = hasSubmenu && item.submenu?.some(subItem => isActive(subItem.path));
             
             return (
-              <li key={item.path}>
-                <Link 
-                  to={item.path}
-                  className={`sidebar-nav-item group relative overflow-hidden transition-all duration-300 border-2 ${
-                    active 
-                      ? `bg-gradient-to-r ${item.activeGradient} text-[#C1E8FF] shadow-2xl scale-105 border-[#C1E8FF]/60 shadow-[0_0_25px_rgba(193,232,255,0.4)]` 
-                      : `hover:bg-gradient-to-r hover:${item.hoverBg} hover:shadow-lg hover:scale-102 border-transparent hover:border-[#C1E8FF]/30 ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`
-                  }`}
-                  onClick={onClose}
-                >
-                  {/* Fondo animado para elementos inactivos */}
-                  {!active && (
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
-                                    ${mode === 'dark' 
-                                      ? 'bg-gradient-to-r from-[#1B3B6F]/10 to-[#5483B3]/5' 
-                                      : 'bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/10'
-                                    }`}></div>
-                  )}
-                  
-                  {/* Contenedor de icono mejorado */}
-                  <div className={`relative z-10 flex-shrink-0 transition-all duration-300 ${active ? 'scale-125' : 'group-hover:scale-110'}`}>
-                    <Icon className={`transition-all duration-300 drop-shadow-lg ${
-                      active 
-                        ? 'text-[#C1E8FF]' 
-                        : item.iconColor
-                    }
-                                     mr-2 h-4 w-4
-                                     xs:mr-2.5 xs:h-5 xs:w-5
-                                     sm:mr-3 sm:h-5 sm:w-5
-                                     md:mr-3.5 md:h-6 md:w-6
-                                     lg:mr-4 lg:h-7 lg:w-7`}
-                          style={{
-                            filter: active 
-                              ? 'drop-shadow(0 0 8px rgba(193, 232, 255, 0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.3))' 
-                              : mode === 'dark' 
-                                ? 'drop-shadow(0 0 4px rgba(193, 232, 255, 0.4)) drop-shadow(0 1px 2px rgba(0,0,0,0.2))' 
-                                : 'drop-shadow(0 1px 2px rgba(2, 16, 36, 0.2))',
-                            textShadow: active ? '0 0 6px rgba(193, 232, 255, 0.6)' : 'none'
-                          }} />
-                  </div>
-                  
-                  <span className={`truncate font-semibold relative z-10 transition-all duration-300 ${
-                    active 
-                      ? 'text-[#C1E8FF] drop-shadow-lg font-bold' 
-                      : mode === 'dark' 
-                        ? 'text-[#C1E8FF] group-hover:text-white' 
-                        : 'text-[#021024] group-hover:text-[#052659]'
-                  }
-                                   text-xs
-                                   xs:text-xs
-                                   sm:text-sm
-                                   md:text-sm
-                                   lg:text-base`}
-                        style={{
-                          textShadow: active 
-                            ? '0 0 6px rgba(193, 232, 255, 0.6), 0 1px 2px rgba(0,0,0,0.3)' 
+              <li key={hasSubmenu ? item.key : item.path}>
+                {hasSubmenu ? (
+                  <div className="space-y-1">
+                    {/* Submenu header */}
+                    <button
+                      onClick={() => toggleSubmenu(item.key)}
+                      className={`sidebar-nav-item group relative overflow-hidden transition-all duration-300 border-2 w-full flex items-center justify-between
+                                 ${isSubmenuActive 
+                                   ? `bg-gradient-to-r ${item.activeGradient} text-[#C1E8FF] shadow-2xl scale-105 border-[#C1E8FF]/60 shadow-[0_0_25px_rgba(193,232,255,0.4)]` 
+                                   : `hover:bg-gradient-to-r hover:${item.hoverBg} hover:shadow-lg hover:scale-102 border-transparent hover:border-[#C1E8FF]/30 ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`
+                                 }`}
+                    >
+                      {/* Fondo animado para elementos inactivos */}
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+                                      ${mode === 'dark' 
+                                        ? 'bg-gradient-to-r from-[#1B3B6F]/10 to-[#5483B3]/5' 
+                                        : 'bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/10'
+                                      }`}></div>
+                      
+                      <div className="flex items-center flex-1">
+                        {/* Contenedor de icono mejorado */}
+                        <div className={`relative z-10 flex-shrink-0 transition-all duration-300 ${isSubmenuActive ? 'scale-125' : 'group-hover:scale-110'}`}>
+                          <Icon className={`transition-all duration-300 drop-shadow-lg ${
+                            isSubmenuActive 
+                              ? 'text-[#C1E8FF]' 
+                              : item.iconColor
+                          }
+                                         mr-2 h-4 w-4
+                                         xs:mr-2.5 xs:h-5 xs:w-5
+                                         sm:mr-3 sm:h-5 sm:w-5
+                                         md:mr-3.5 md:h-6 md:w-6
+                                         lg:mr-4 lg:h-7 lg:w-7`}
+                                style={{
+                                  filter: isSubmenuActive 
+                                    ? 'drop-shadow(0 0 8px rgba(193, 232, 255, 0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.3))' 
+                                    : mode === 'dark' 
+                                      ? 'drop-shadow(0 0 4px rgba(193, 232, 255, 0.4)) drop-shadow(0 1px 2px rgba(0,0,0,0.2))' 
+                                      : 'drop-shadow(0 1px 2px rgba(2, 16, 36, 0.2))',
+                                  textShadow: isSubmenuActive ? '0 0 6px rgba(193, 232, 255, 0.6)' : 'none'
+                                }} />
+                        </div>
+                        
+                        <span className={`truncate font-semibold relative z-10 transition-all duration-300 ${
+                          isSubmenuActive 
+                            ? 'text-[#C1E8FF] drop-shadow-lg font-bold' 
                             : mode === 'dark' 
-                              ? '0 0 2px rgba(193, 232, 255, 0.3)' 
-                              : '0 1px 1px rgba(2, 16, 36, 0.1)'
-                        }}>
-                    {item.label}
-                  </span>
-                  
-                  {/* Indicador activo con brillo */}
-                  {active && (
-                    <>
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-transparent opacity-60 rounded-xl animate-pulse"></div>
-                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C1E8FF] to-[#7DA0CA] rounded-r-full shadow-[0_0_10px_rgba(193,232,255,0.8)]"></div>
-                    </>
-                  )}
-                </Link>
+                              ? 'text-[#C1E8FF] group-hover:text-white' 
+                              : 'text-[#021024] group-hover:text-[#052659]'
+                        }
+                                         text-xs
+                                         xs:text-xs
+                                         sm:text-sm
+                                         md:text-sm
+                                         lg:text-base`}
+                              style={{
+                                textShadow: isSubmenuActive 
+                                  ? '0 0 6px rgba(193, 232, 255, 0.6), 0 1px 2px rgba(0,0,0,0.3)' 
+                                  : mode === 'dark' 
+                                    ? '0 0 2px rgba(193, 232, 255, 0.3)' 
+                                    : '0 1px 1px rgba(2, 16, 36, 0.1)'
+                              }}>
+                          {item.label}
+                        </span>
+                      </div>
+                      
+                      {/* Chevron icon */}
+                      {isSubmenuOpen ? (
+                        <ChevronDown className={`relative z-10 transition-all duration-300 ${
+                          isSubmenuActive ? 'text-[#C1E8FF]' : item.iconColor
+                        } h-4 w-4 xs:h-5 xs:w-5`} />
+                      ) : (
+                        <ChevronRight className={`relative z-10 transition-all duration-300 ${
+                          isSubmenuActive ? 'text-[#C1E8FF]' : item.iconColor
+                        } h-4 w-4 xs:h-5 xs:w-5`} />
+                      )}
+                      
+                      {/* Indicador activo con brillo */}
+                      {isSubmenuActive && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-transparent opacity-60 rounded-xl animate-pulse"></div>
+                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C1E8FF] to-[#7DA0CA] rounded-r-full shadow-[0_0_10px_rgba(193,232,255,0.8)]"></div>
+                        </>
+                      )}
+                    </button>
+                    
+                    {/* Submenu items */}
+                    <div className={`overflow-hidden transition-all duration-300 pl-4 ${isSubmenuOpen ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-1 border-l-2 border-[#5483B3]/30 pl-2">
+                        {item.submenu?.map(subItem => {
+                          const SubIcon = subItem.icon;
+                          const subActive = isActive(subItem.path);
+                          
+                          return (
+                            <li key={subItem.path}>
+                              <Link 
+                                to={subItem.path}
+                                className={`sidebar-nav-item group relative overflow-hidden transition-all duration-300 border-2 ${
+                                  subActive 
+                                    ? `bg-gradient-to-r ${subItem.activeGradient} text-[#C1E8FF] shadow-2xl scale-105 border-[#C1E8FF]/60 shadow-[0_0_25px_rgba(193,232,255,0.4)]` 
+                                    : `hover:bg-gradient-to-r hover:${subItem.hoverBg} hover:shadow-lg hover:scale-102 border-transparent hover:border-[#C1E8FF]/30 ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`
+                                }`}
+                                onClick={onClose}
+                              >
+                                {/* Fondo animado para elementos inactivos */}
+                                {!subActive && (
+                                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+                                                  ${mode === 'dark' 
+                                                    ? 'bg-gradient-to-r from-[#1B3B6F]/10 to-[#5483B3]/5' 
+                                                    : 'bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/10'
+                                                  }`}></div>
+                                )}
+                                
+                                {/* Contenedor de icono mejorado */}
+                                <div className={`relative z-10 flex-shrink-0 transition-all duration-300 ${subActive ? 'scale-125' : 'group-hover:scale-110'}`}>
+                                  <SubIcon className={`transition-all duration-300 drop-shadow-lg ${
+                                    subActive 
+                                      ? 'text-[#C1E8FF]' 
+                                      : subItem.iconColor
+                                  }
+                                                   mr-2 h-4 w-4
+                                                   xs:mr-2.5 xs:h-5 xs:w-5
+                                                   sm:mr-3 sm:h-5 sm:w-5
+                                                   md:mr-3.5 md:h-6 md:w-6
+                                                   lg:mr-4 lg:h-7 lg:w-7`}
+                                        style={{
+                                          filter: subActive 
+                                            ? 'drop-shadow(0 0 8px rgba(193, 232, 255, 0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.3))' 
+                                            : mode === 'dark' 
+                                              ? 'drop-shadow(0 0 4px rgba(193, 232, 255, 0.4)) drop-shadow(0 1px 2px rgba(0,0,0,0.2))' 
+                                              : 'drop-shadow(0 1px 2px rgba(2, 16, 36, 0.2))',
+                                          textShadow: subActive ? '0 0 6px rgba(193, 232, 255, 0.6)' : 'none'
+                                        }} />
+                                </div>
+                                
+                                <span className={`truncate font-semibold relative z-10 transition-all duration-300 ${
+                                  subActive 
+                                    ? 'text-[#C1E8FF] drop-shadow-lg font-bold' 
+                                    : mode === 'dark' 
+                                      ? 'text-[#C1E8FF] group-hover:text-white' 
+                                      : 'text-[#021024] group-hover:text-[#052659]'
+                                }
+                                                 text-xs
+                                                 xs:text-xs
+                                                 sm:text-sm
+                                                 md:text-sm
+                                                 lg:text-base`}
+                                      style={{
+                                        textShadow: subActive 
+                                          ? '0 0 6px rgba(193, 232, 255, 0.6), 0 1px 2px rgba(0,0,0,0.3)' 
+                                          : mode === 'dark' 
+                                            ? '0 0 2px rgba(193, 232, 255, 0.3)' 
+                                            : '0 1px 1px rgba(2, 16, 36, 0.1)'
+                                      }}>
+                                  {subItem.label}
+                                </span>
+                                
+                                {/* Indicador activo con brillo */}
+                                {subActive && (
+                                  <>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-transparent opacity-60 rounded-xl animate-pulse"></div>
+                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C1E8FF] to-[#7DA0CA] rounded-r-full shadow-[0_0_10px_rgba(193,232,255,0.8)]"></div>
+                                  </>
+                                )}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <Link 
+                    to={item.path}
+                    className={`sidebar-nav-item group relative overflow-hidden transition-all duration-300 border-2 ${
+                      active 
+                        ? `bg-gradient-to-r ${item.activeGradient} text-[#C1E8FF] shadow-2xl scale-105 border-[#C1E8FF]/60 shadow-[0_0_25px_rgba(193,232,255,0.4)]` 
+                        : `hover:bg-gradient-to-r hover:${item.hoverBg} hover:shadow-lg hover:scale-102 border-transparent hover:border-[#C1E8FF]/30 ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`
+                    }`}
+                    onClick={onClose}
+                  >
+                    {/* Fondo animado para elementos inactivos */}
+                    {!active && (
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+                                      ${mode === 'dark' 
+                                        ? 'bg-gradient-to-r from-[#1B3B6F]/10 to-[#5483B3]/5' 
+                                        : 'bg-gradient-to-r from-[#C1E8FF]/20 to-[#7DA0CA]/10'
+                                      }`}></div>
+                    )}
+                    
+                    {/* Contenedor de icono mejorado */}
+                    <div className={`relative z-10 flex-shrink-0 transition-all duration-300 ${active ? 'scale-125' : 'group-hover:scale-110'}`}>
+                      <Icon className={`transition-all duration-300 drop-shadow-lg ${
+                        active 
+                          ? 'text-[#C1E8FF]' 
+                          : item.iconColor
+                      }
+                                       mr-2 h-4 w-4
+                                       xs:mr-2.5 xs:h-5 xs:w-5
+                                       sm:mr-3 sm:h-5 sm:w-5
+                                       md:mr-3.5 md:h-6 md:w-6
+                                       lg:mr-4 lg:h-7 lg:w-7`}
+                            style={{
+                              filter: active 
+                                ? 'drop-shadow(0 0 8px rgba(193, 232, 255, 0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.3))' 
+                                : mode === 'dark' 
+                                  ? 'drop-shadow(0 0 4px rgba(193, 232, 255, 0.4)) drop-shadow(0 1px 2px rgba(0,0,0,0.2))' 
+                                  : 'drop-shadow(0 1px 2px rgba(2, 16, 36, 0.2))',
+                              textShadow: active ? '0 0 6px rgba(193, 232, 255, 0.6)' : 'none'
+                            }} />
+                    </div>
+                    
+                    <span className={`truncate font-semibold relative z-10 transition-all duration-300 ${
+                      active 
+                        ? 'text-[#C1E8FF] drop-shadow-lg font-bold' 
+                        : mode === 'dark' 
+                          ? 'text-[#C1E8FF] group-hover:text-white' 
+                          : 'text-[#021024] group-hover:text-[#052659]'
+                    }
+                                     text-xs
+                                     xs:text-xs
+                                     sm:text-sm
+                                     md:text-sm
+                                     lg:text-base`}
+                          style={{
+                            textShadow: active 
+                              ? '0 0 6px rgba(193, 232, 255, 0.6), 0 1px 2px rgba(0,0,0,0.3)' 
+                              : mode === 'dark' 
+                                ? '0 0 2px rgba(193, 232, 255, 0.3)' 
+                                : '0 1px 1px rgba(2, 16, 36, 0.1)'
+                          }}>
+                      {item.label}
+                    </span>
+                    
+                    {/* Indicador activo con brillo */}
+                    {active && (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/20 to-transparent opacity-60 rounded-xl animate-pulse"></div>
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#C1E8FF] to-[#7DA0CA] rounded-r-full shadow-[0_0_10px_rgba(193,232,255,0.8)]"></div>
+                      </>
+                    )}
+                  </Link>
+                )}
               </li>
             );
           })}
