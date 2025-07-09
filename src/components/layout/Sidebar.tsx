@@ -15,7 +15,8 @@ import {
   LogOut,
   X,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  BarChart3
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -87,6 +88,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
           iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
           activeGradient: 'from-[#1B3B6F] via-[#5483B3] to-[#7DA0CA]',
           hoverBg: mode === 'dark' ? 'from-[#1B3B6F]/30 to-[#5483B3]/20' : 'from-[#1B3B6F]/40 to-[#5483B3]/30'
+        },
+        {
+          path: '/superadmin/analytics',
+          icon: BarChart3,
+          label: 'Informe Analítico',
+          iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
+          activeGradient: 'from-[#052659] via-[#1B3B6F] to-[#5483B3]',
+          hoverBg: mode === 'dark' ? 'from-[#052659]/30 to-[#1B3B6F]/20' : 'from-[#052659]/40 to-[#1B3B6F]/30'
         }
       ]
     },

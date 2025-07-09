@@ -10,6 +10,7 @@ import UserManagement from './pages/UserManagement';
 import WaterParkManagement from './pages/WaterParkManagement';
 import RestaurantManagement from './pages/RestaurantManagement';
 import ProjectDashboardPage from './pages/ProjectDashboardPage';
+import AnalyticalSalesReport from './pages/AnalyticalSalesReport';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -96,6 +97,14 @@ function App() {
         element={
           <ProtectedRoute requiredRole="superadmin">
             <RestaurantManagement />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/superadmin/analytics" 
+        element={
+          <ProtectedRoute requiredRole="superadmin">
+            <AnalyticalSalesReport />
           </ProtectedRoute>
         } 
       />
