@@ -306,7 +306,7 @@ const StoreManagement: React.FC = () => {
   const weeklySalesData = getWeeklySalesData();
 
   return (
-    <DashboardLayout title="Tienda Cristal">
+    <DashboardLayout title="Tienda Dios Padre">
       <div className="animate-fade-in relative">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
@@ -321,7 +321,7 @@ const StoreManagement: React.FC = () => {
             </div>
             <div className="relative">
               <h2 className={`${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'} font-extrabold text-3xl drop-shadow-[0_0_10px_rgba(193,232,255,0.6)]`}>
-                Tienda Cristal
+                Tienda Dios Padre
               </h2>
               <p className={`${mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#5483B3]'} font-medium text-lg`}>
                 Gestión de productos y ventas

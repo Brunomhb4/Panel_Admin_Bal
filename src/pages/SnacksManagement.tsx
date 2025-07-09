@@ -279,7 +279,7 @@ const SnacksManagement: React.FC = () => {
   const COLORS = ['#1B3B6F', '#5483B3', '#7DA0CA', '#C1E8FF', '#052659'];
 
   return (
-    <DashboardLayout title="Snacks Cristal">
+    <DashboardLayout title="Snacks Dios Padre">
       <div className="animate-fade-in relative">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
@@ -294,7 +294,7 @@ const SnacksManagement: React.FC = () => {
             </div>
             <div className="relative">
               <h2 className={`${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'} font-extrabold text-3xl drop-shadow-[0_0_10px_rgba(193,232,255,0.6)]`}>
-                Snacks Cristal
+                Snacks Dios Padre
               </h2>
               <p className={`${mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#5483B3]'} font-medium text-lg`}>
                 Gestión de snacks y bebidas

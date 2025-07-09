@@ -216,7 +216,7 @@ const RestaurantManagement: React.FC = () => {
   });
 
   return (
-    <DashboardLayout title="Restaurante Cristal">
+    <DashboardLayout title="Restaurante Dios Padre">
       <div className="animate-fade-in relative">
         {/* Decorative glass elements */}
         <div className="absolute -top-10 -right-10 w-64 h-64 bg-gradient-to-br from-[#C1E8FF]/10 to-[#7DA0CA]/5 rounded-full blur-3xl"></div>
@@ -239,7 +239,7 @@ const RestaurantManagement: React.FC = () => {
             <div className="relative">
               <h2 className={`${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'} font-extrabold text-3xl drop-shadow-[0_0_10px_rgba(193,232,255,0.6)]`} 
                   style={{textShadow: mode === 'dark' ? '0 0 15px rgba(193, 232, 255, 0.4)' : '0 0 10px rgba(193, 232, 255, 0.3)'}}>
-                Restaurante Cristal
+                Restaurante Dios Padre
               </h2>
               <p className={`${mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#5483B3]'} font-medium text-lg`}>
                 Gestión gastronómica y métricas de servicio
