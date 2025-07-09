@@ -9,6 +9,8 @@ import WaterParkDetail from './pages/WaterParkDetail';
 import UserManagement from './pages/UserManagement';
 import WaterParkManagement from './pages/WaterParkManagement';
 import RestaurantManagement from './pages/RestaurantManagement';
+import SnacksManagement from './pages/SnacksManagement';
+import StoreManagement from './pages/StoreManagement';
 import ProjectDashboardPage from './pages/ProjectDashboardPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -87,7 +89,7 @@ function App() {
         path="/superadmin/snacks" 
         element={
           <ProtectedRoute requiredRole="superadmin">
-            <RestaurantManagement />
+            <SnacksManagement />
           </ProtectedRoute>
         } 
       />
@@ -95,7 +97,7 @@ function App() {
         path="/superadmin/store" 
         element={
           <ProtectedRoute requiredRole="superadmin">
-            <RestaurantManagement />
+            <StoreManagement />
           </ProtectedRoute>
         } 
       />

@@ -307,6 +307,15 @@ const RestaurantManagement: React.FC = () => {
                   group relative overflow-hidden transition-all duration-500`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
+                {/* Etiqueta de identificación */}
+                <div className={`absolute top-2 right-2 px-2 py-1 rounded-lg text-xs font-bold backdrop-blur-sm border
+                                ${mode === 'dark' 
+                                  ? 'bg-[#C1E8FF]/20 text-[#C1E8FF] border-[#C1E8FF]/40' 
+                                  : 'bg-[#1B3B6F]/10 text-[#1B3B6F] border-[#1B3B6F]/30'
+                                }`}>
+                  {metric.title.split(' ')[0]}
+                </div>
+                
                 {/* Animated background particles */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent backdrop-blur-sm"></div>
                 
@@ -340,6 +349,7 @@ const RestaurantManagement: React.FC = () => {
                     <p className={`${mode === 'dark' ? 'text-[#7DA0CA]' : 'text-[#1B3B6F]'} 
                                   truncate font-bold transition-all duration-300 
                                   group-hover:text-opacity-80 text-sm mb-1.5`}>
+                      {metric.title}
                     </p>
                     <h3 className={`${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'} 
                                   truncate font-black transition-all duration-300 
