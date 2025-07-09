@@ -487,3 +487,258 @@ npm --version
 ¡El proyecto está listo para usar! 🎉
 
 Navega a `http://localhost:5173` y comienza a explorar el Panel de Administración de Balnearios.
+
+---
+
+## 🍽️ Nuevos Módulos de Servicios de Alimentación
+
+### Acceso a los Nuevos Módulos
+
+Una vez que el proyecto esté ejecutándose, puedes acceder a los nuevos módulos de servicios de alimentación:
+
+#### Para Super Administradores
+```
+http://localhost:5173/superadmin/restaurant  # Restaurante Dios Padre
+http://localhost:5173/superadmin/snacks      # Snacks Dios Padre  
+http://localhost:5173/superadmin/store       # Tienda Dios Padre
+```
+
+### Navegación en la Aplicación
+
+1. **Inicia sesión** con la cuenta de Super Admin:
+   ```
+   Email: superadmin@example.com
+   Contraseña: password
+   ```
+
+2. **Navega al menú lateral** y busca "Servicios de Comida"
+
+3. **Expande el submenú** para ver las opciones:
+   - 🍽️ Restaurante
+   - ☕ Snacks  
+   - 🛍️ Tienda
+
+### Funcionalidades Disponibles
+
+#### Restaurante Dios Padre
+- ✅ Gestión de notas diarias/semanales
+- ✅ Métricas de mesas atendidas
+- ✅ Ingresos y personas atendidas
+- ✅ Etiquetas de identificación en métricas
+- ✅ Interfaz cristalina mejorada
+
+#### Snacks Dios Padre
+- ✅ Panel de totales (día actual vs histórico)
+- ✅ Gráfica de ventas por hora
+- ✅ Gráfica comparativa semanal
+- ✅ Productos más vendidos (pie chart)
+- ✅ Métricas en tiempo real
+
+#### Tienda Dios Padre
+- ✅ Panel de métricas avanzadas
+- ✅ Datos numéricos y porcentuales
+- ✅ Gráficas de tendencias diarias/semanales
+- ✅ Resumen de rendimiento
+- ✅ Indicadores de crecimiento
+
+---
+
+## 🔧 Configuración Adicional para Nuevos Módulos
+
+### Variables de Entorno Actualizadas
+
+Si planeas integrar con APIs reales en el futuro, agrega estas variables a tu archivo `.env`:
+
+```bash
+# .env - Configuración para servicios de alimentación
+VITE_RESTAURANT_API_URL="http://localhost:3001/api/restaurant"
+VITE_SNACKS_API_URL="http://localhost:3001/api/snacks"
+VITE_STORE_API_URL="http://localhost:3001/api/store"
+
+# Configuración de actualización en tiempo real
+VITE_REALTIME_INTERVAL=30000  # 30 segundos
+VITE_ENABLE_REALTIME=true
+
+# Configuración de gráficas
+VITE_CHART_ANIMATION_DURATION=300
+VITE_CHART_RESPONSIVE=true
+```
+
+### Configuración de Desarrollo
+
+Para trabajar específicamente con los nuevos módulos:
+
+```bash
+# Ejecutar solo con los módulos de alimentación
+npm run dev -- --mode=food-services
+
+# Ejecutar con datos mock extendidos
+npm run dev:mock-extended
+
+# Ejecutar con métricas de desarrollo
+npm run dev:metrics
+```
+
+### Configuración de Testing
+
+Para probar los nuevos módulos:
+
+```bash
+# Tests específicos para servicios de alimentación
+npm run test:food-services
+
+# Tests de gráficas
+npm run test:charts
+
+# Tests de métricas
+npm run test:metrics
+```
+
+---
+
+## 📊 Datos de Prueba
+
+### Generación de Datos Mock
+
+Los nuevos módulos incluyen generadores de datos realistas:
+
+#### Snacks
+- **Productos**: Papas, Refrescos, Helados, Dulces, Nachos, Hot Dogs, Palomitas
+- **Horarios**: 8:00 AM - 8:00 PM
+- **Ventas diarias**: 20-70 transacciones
+- **Precios**: $20 - $100 por producto
+
+#### Tienda
+- **Categorías**: Cuidado Personal, Accesorios, Juguetes, Calzado, Ropa
+- **Productos**: Protector Solar, Toallas, Gafas, Flotadores, etc.
+- **Ventas diarias**: 10-35 transacciones
+- **Precios**: $80 - $300 por producto
+
+#### Restaurante
+- **Mesas**: 1-20
+- **Capacidad**: 1-6 personas por mesa
+- **Notas diarias**: 10-25 notas
+- **Ticket promedio**: $200 - $1000
+
+### Personalización de Datos
+
+Para personalizar los datos de prueba, edita los archivos:
+
+```
+src/pages/SnacksManagement.tsx     # Línea 45: generateSnacksData()
+src/pages/StoreManagement.tsx      # Línea 52: generateStoreData()
+src/pages/RestaurantManagement.tsx # Línea 38: generateMockData()
+```
+
+---
+
+## 🎨 Personalización de Temas
+
+### Colores por Módulo
+
+Cada módulo tiene su propia paleta de colores que puedes personalizar en:
+
+```css
+/* src/index.css - Líneas 850+ */
+
+/* Restaurante - Azules profundos */
+--restaurant-primary: #1B3B6F;
+--restaurant-secondary: #5483B3;
+--restaurant-accent: #7DA0CA;
+
+/* Snacks - Azules medios */
+--snacks-primary: #5483B3;
+--snacks-secondary: #7DA0CA;
+--snacks-accent: #C1E8FF;
+
+/* Tienda - Azules claros */
+--store-primary: #7DA0CA;
+--store-secondary: #C1E8FF;
+--store-accent: #FFFFFF;
+```
+
+### Iconos Personalizados
+
+Para cambiar los iconos de cada módulo, edita:
+
+```typescript
+// src/components/layout/Sidebar.tsx - Líneas 25-45
+{
+  path: '/superadmin/restaurant',
+  icon: ChefHat,        // Cambiar aquí
+  label: 'Restaurante',
+},
+{
+  path: '/superadmin/snacks',
+  icon: Coffee,         // Cambiar aquí
+  label: 'Snacks',
+},
+{
+  path: '/superadmin/store',
+  icon: ShoppingBag,    // Cambiar aquí
+  label: 'Tienda',
+}
+```
+
+---
+
+## 🚀 Optimización de Performance
+
+### Configuración Recomendada para Desarrollo
+
+```bash
+# .env.development
+VITE_ENABLE_DEVTOOLS=true
+VITE_MOCK_DELAY=500           # Simular latencia de API
+VITE_CHART_ANIMATIONS=true   # Habilitar animaciones
+VITE_DEBUG_MODE=true         # Logs de desarrollo
+```
+
+### Configuración para Producción
+
+```bash
+# .env.production
+VITE_ENABLE_DEVTOOLS=false
+VITE_MOCK_DELAY=0
+VITE_CHART_ANIMATIONS=true
+VITE_DEBUG_MODE=false
+VITE_OPTIMIZE_CHARTS=true
+```
+
+---
+
+## 📱 Testing en Dispositivos
+
+### Testing de Nuevos Módulos
+
+Para probar los nuevos módulos en diferentes dispositivos:
+
+```bash
+# Servidor accesible desde red local
+npm run dev -- --host 0.0.0.0
+
+# Acceder desde móvil usando IP local
+# http://192.168.1.100:5173/superadmin/snacks
+# http://192.168.1.100:5173/superadmin/store
+# http://192.168.1.100:5173/superadmin/restaurant
+```
+
+### Breakpoints de Testing
+
+Los nuevos módulos están optimizados para:
+- **Móvil**: 320px - 767px
+- **Tablet**: 768px - 1023px  
+- **Desktop**: 1024px+
+
+### Funcionalidades Móviles
+- ✅ Gráficas responsivas
+- ✅ Tooltips adaptados
+- ✅ Navegación táctil
+- ✅ Métricas simplificadas
+- ✅ Scroll horizontal en tablas
+
+---
+
+¡Los nuevos módulos de servicios de alimentación están listos para usar! 🍽️
+
+Explora las funcionalidades de **Restaurante Dios Padre**, **Snacks Dios Padre** y **Tienda Dios Padre** para ver todas las métricas, gráficas y análisis disponibles.

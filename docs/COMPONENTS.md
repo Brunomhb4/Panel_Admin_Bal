@@ -452,3 +452,256 @@ return <Navigate to="/admin" replace />;
 ---
 
 Esta documentación cubre todos los componentes del sistema con ejemplos de uso, props, y consideraciones especiales para cada uno.
+
+## 🍽️ Componentes de Servicios de Alimentación
+
+### SnacksManagement
+**Ubicación**: `src/pages/SnacksManagement.tsx`
+
+#### Características
+- **Panel de totales**: Ventas del día actual y ventas históricas
+- **Gráficas de visualización**:
+  - Gráfica de ventas por hora (AreaChart)
+  - Gráfica comparativa semanal (BarChart)
+  - Productos más vendidos (PieChart)
+- **Métricas en tiempo real**: Actualización automática de datos
+- **Interfaz cristalina**: Diseño con efectos glass y gradientes
+
+#### Estructura de Datos
+```typescript
+interface SnackSale {
+  id: string;
+  product: string;
+  quantity: number;
+  price: number;
+  timestamp: string;
+}
+
+interface SnacksStats {
+  dailySales: number;
+  historicalSales: number;
+  dailyRevenue: number;
+  historicalRevenue: number;
+  totalProducts: number;
+  averageTicket: number;
+}
+```
+
+#### Uso
+```jsx
+<SnacksManagement />
+```
+
+---
+
+### StoreManagement
+**Ubicación**: `src/pages/StoreManagement.tsx`
+
+#### Características
+- **Panel de métricas**: Total de ventas del día, semanal y productos vendidos
+- **Datos numéricos y porcentuales**: Crecimiento y tendencias
+- **Gráficas avanzadas**:
+  - Ventas diarias (LineChart)
+  - Tendencia semanal (BarChart)
+- **Resumen de rendimiento**: Ticket promedio, productos por venta, crecimiento
+- **Actualización en tiempo real**: Datos dinámicos con animaciones
+
+#### Estructura de Datos
+```typescript
+interface StoreSale {
+  id: string;
+  product: string;
+  category: string;
+  quantity: number;
+  price: number;
+  timestamp: string;
+}
+
+interface StoreStats {
+  dailySales: number;
+  weeklySales: number;
+  dailyRevenue: number;
+  weeklyRevenue: number;
+  productsCount: number;
+  dailyGrowth: number;
+  weeklyGrowth: number;
+}
+```
+
+#### Uso
+```jsx
+<StoreManagement />
+```
+
+---
+
+### RestaurantManagement (Mejorado)
+**Ubicación**: `src/pages/RestaurantManagement.tsx`
+
+#### Nuevas Características
+- **Etiquetas de identificación**: Cada mosaico muestra etiquetas identificativas
+- **Interfaz mejorada**: Mejor organización visual de métricas
+- **Nombre actualizado**: Cambio de "Restaurante Cristal" a "Restaurante Dios Padre"
+
+#### Etiquetas Implementadas
+```jsx
+{/* Etiqueta de identificación */}
+<div className="absolute top-2 right-2 px-2 py-1 rounded-lg text-xs font-bold backdrop-blur-sm border">
+  {metric.title.split(' ')[0]}
+</div>
+```
+
+---
+
+## 🎨 Nuevos Estilos y Efectos
+
+### Efectos Glass Mejorados
+- **Backdrop blur**: Efectos de desenfoque de fondo más pronunciados
+- **Gradientes cristalinos**: Nuevos gradientes con transparencias
+- **Animaciones de brillo**: Efectos shimmer en barras de progreso
+- **Bordes luminosos**: Bordes con efectos de luz y sombra
+
+### Sistema de Colores Actualizado
+```css
+/* Nuevos colores para servicios de alimentación */
+--snacks-primary: #C1E8FF;
+--snacks-secondary: #7DA0CA;
+--store-primary: #5483B3;
+--store-secondary: #1B3B6F;
+```
+
+### Animaciones Avanzadas
+- **Shimmer effect**: Animación de brillo en elementos interactivos
+- **Pulse glow**: Efectos de pulso luminoso
+- **Scale bounce**: Animaciones de escala con rebote
+- **Staggered animations**: Animaciones escalonadas con delay
+
+---
+
+## 📊 Nuevos Componentes de Gráficas
+
+### Gráfica de Ventas por Hora
+```jsx
+<AreaChart data={hourlySales}>
+  <defs>
+    <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#5483B3" stopOpacity={0.8} />
+      <stop offset="95%" stopColor="#5483B3" stopOpacity={0.1} />
+    </linearGradient>
+  </defs>
+  <Area 
+    type="monotone" 
+    dataKey="sales" 
+    stroke="#5483B3" 
+    strokeWidth={3}
+    fillOpacity={1} 
+    fill="url(#salesGradient)" 
+  />
+</AreaChart>
+```
+
+### Gráfica de Productos Más Vendidos
+```jsx
+<PieChart>
+  <Pie
+    data={topProducts}
+    cx="50%"
+    cy="50%"
+    outerRadius={80}
+    dataKey="quantity"
+    label={({ name, percentage }) => `${name} (${percentage.toFixed(1)}%)`}
+  >
+    {topProducts.map((entry, index) => (
+      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+    ))}
+  </Pie>
+</PieChart>
+```
+
+### Gráfica de Tendencias Semanales
+```jsx
+<LineChart data={dailySalesData}>
+  <Line 
+    type="monotone" 
+    dataKey="revenue" 
+    stroke="#5483B3" 
+    strokeWidth={3}
+    dot={{ fill: '#5483B3', strokeWidth: 2, r: 4 }}
+    activeDot={{ r: 6, fill: '#7DA0CA', stroke: '#5483B3', strokeWidth: 2 }}
+  />
+</LineChart>
+```
+
+---
+
+## 🔧 Nuevas Utilidades y Helpers
+
+### Generadores de Datos Mock
+```typescript
+// Generador de datos para snacks
+const generateSnacksData = () => {
+  const products = ['Papas', 'Refrescos', 'Helados', 'Dulces', 'Nachos'];
+  // Lógica de generación...
+};
+
+// Generador de datos para tienda
+const generateStoreData = () => {
+  const products = [
+    { name: 'Protector Solar', category: 'Cuidado Personal', price: 150 },
+    { name: 'Toalla', category: 'Accesorios', price: 200 }
+  ];
+  // Lógica de generación...
+};
+```
+
+### Calculadores de Métricas
+```typescript
+// Cálculo de crecimiento porcentual
+const calculateGrowth = (current: number, previous: number): number => {
+  return previous > 0 ? ((current - previous) / previous) * 100 : 0;
+};
+
+// Cálculo de ticket promedio
+const calculateAverageTicket = (revenue: number, sales: number): number => {
+  return sales > 0 ? revenue / sales : 0;
+};
+```
+
+---
+
+## 🎯 Mejoras de UX/UI
+
+### Indicadores de Rendimiento
+- **Badges de crecimiento**: Indicadores visuales de crecimiento positivo/negativo
+- **Barras de progreso animadas**: Con efectos shimmer
+- **Tooltips informativos**: Información contextual en gráficas
+- **Estados de carga mejorados**: Spinners temáticos por módulo
+
+### Responsive Design Mejorado
+- **Grids adaptativos**: Layouts que se ajustan según el contenido
+- **Tipografía escalable**: Tamaños de fuente que se adaptan al viewport
+- **Espaciado inteligente**: Márgenes y padding que responden al dispositivo
+- **Interacciones táctiles**: Elementos optimizados para touch
+
+---
+
+## 📱 Consideraciones Móviles Actualizadas
+
+### Nuevos Breakpoints
+```css
+/* Breakpoints específicos para servicios de alimentación */
+@media (max-width: 480px) {
+  .snacks-card { padding: 1rem; }
+  .store-metrics { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .restaurant-grid { grid-template-columns: repeat(2, 1fr); }
+}
+```
+
+### Optimizaciones Táctiles
+- **Áreas de toque ampliadas**: Mínimo 44px en elementos interactivos
+- **Feedback visual inmediato**: Respuesta instantánea a toques
+- **Gestos intuitivos**: Soporte para swipe y pinch
+- **Navegación simplificada**: Menos niveles de profundidad en móviles

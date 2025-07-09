@@ -814,3 +814,301 @@ export const useFormValidation = <T>(schema: z.ZodSchema<T>) => {
 ---
 
 Esta documentación proporciona una base sólida para entender la estructura de datos actual y cómo migrar a una API real cuando sea necesario.
+
+---
+
+## 🍽️ Endpoints de Servicios de Alimentación
+
+### Snacks Management
+
+#### GET /snacks/sales
+Obtener ventas de snacks con filtros opcionales.
+
+**Headers**:
+```
+Authorization: Bearer <token>
+```
+
+**Query Parameters**:
+```typescript
+interface SnacksSalesQuery {
+  startDate?: string;    // Fecha inicio (YYYY-MM-DD)
+  endDate?: string;      // Fecha fin (YYYY-MM-DD)
+  product?: string;      // Filtrar por producto específico
+  hourly?: boolean;      // Agrupar por horas
+  daily?: boolean;       // Agrupar por días
+}
+```
+
+**Response**:
+```typescript
+interface SnacksSalesResponse {
+  success: boolean;
+  data: {
+    sales: SnackSale[];
+    stats: SnacksStats;
+    hourlyData?: HourlySales[];
+    topProducts?: TopProduct[];
+  };
+}
+```
+
+#### POST /snacks/sale
+Registrar nueva venta de snack.
+
+**Request**:
+```typescript
+interface CreateSnackSaleRequest {
+  product: string;
+  quantity: number;
+  price: number;
+  timestamp?: string;   // Default: now()
+}
+```
+
+---
+
+### Store Management
+
+#### GET /store/sales
+Obtener ventas de tienda con métricas avanzadas.
+
+**Headers**:
+```
+Authorization: Bearer <token>
+```
+
+**Query Parameters**:
+```typescript
+interface StoreSalesQuery {
+  period?: 'daily' | 'weekly' | 'monthly';
+  category?: string;     // Filtrar por categoría
+  includeGrowth?: boolean; // Incluir cálculos de crecimiento
+}
+```
+
+**Response**:
+```typescript
+interface StoreSalesResponse {
+  success: boolean;
+  data: {
+    sales: StoreSale[];
+    stats: StoreStats;
+    dailyData?: DailySalesData[];
+    weeklyData?: WeeklySalesData[];
+    categories?: CategoryStats[];
+  };
+}
+```
+
+#### GET /store/products
+Obtener catálogo de productos de tienda.
+
+**Response**:
+```typescript
+interface StoreProductsResponse {
+  success: boolean;
+  data: {
+    products: StoreProduct[];
+    categories: string[];
+    totalProducts: number;
+  };
+}
+
+interface StoreProduct {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  description?: string;
+}
+```
+
+---
+
+### Restaurant Management (Actualizado)
+
+#### GET /restaurant/notes
+Obtener notas de restaurante con etiquetas mejoradas.
+
+**Response actualizada**:
+```typescript
+interface RestaurantNote {
+  id: string;
+  tableNumber: number;
+  customerCount: number;
+  total: number;
+  timestamp: string;
+  items: string[];
+  tags?: string[];        // NUEVO: Etiquetas de identificación
+  category?: string;      // NUEVO: Categoría de servicio
+}
+```
+
+---
+
+## 📊 Nuevos Tipos de Datos
+
+### Snacks Data Types
+```typescript
+interface SnackSale {
+  id: string;
+  product: string;
+  quantity: number;
+  price: number;
+  timestamp: string;
+}
+
+interface HourlySales {
+  hour: string;           // "08:00", "09:00", etc.
+  sales: number;
+  revenue: number;
+}
+
+interface TopProduct {
+  name: string;
+  quantity: number;
+  revenue: number;
+  percentage: number;     // Porcentaje del total
+}
+
+interface SnacksStats {
+  dailySales: number;
+  historicalSales: number;
+  dailyRevenue: number;
+  historicalRevenue: number;
+  totalProducts: number;
+  averageTicket: number;
+}
+```
+
+### Store Data Types
+```typescript
+interface StoreSale {
+  id: string;
+  product: string;
+  category: string;
+  quantity: number;
+  price: number;
+  timestamp: string;
+}
+
+interface StoreStats {
+  dailySales: number;
+  weeklySales: number;
+  dailyRevenue: number;
+  weeklyRevenue: number;
+  productsCount: number;
+  dailyGrowth: number;    // Porcentaje de crecimiento diario
+  weeklyGrowth: number;   // Porcentaje de crecimiento semanal
+}
+
+interface DailySalesData {
+  date: string;
+  sales: number;
+  revenue: number;
+  products: number;
+}
+
+interface WeeklySalesData {
+  week: string;           // "Sem 1", "Sem 2", etc.
+  sales: number;
+  revenue: number;
+  growth: number;         // Crecimiento vs semana anterior
+}
+```
+
+---
+
+## 🔧 Nuevas Utilidades de API
+
+### Calculadores de Métricas
+```typescript
+// Utilidades para cálculos de métricas
+export const metricsUtils = {
+  calculateGrowth: (current: number, previous: number): number => {
+    return previous > 0 ? ((current - previous) / previous) * 100 : 0;
+  },
+  
+  calculateAverageTicket: (revenue: number, sales: number): number => {
+    return sales > 0 ? revenue / sales : 0;
+  },
+  
+  groupSalesByHour: (sales: SnackSale[]): HourlySales[] => {
+    // Lógica de agrupación por hora
+  },
+  
+  getTopProducts: (sales: SnackSale[], limit: number = 5): TopProduct[] => {
+    // Lógica para obtener productos más vendidos
+  }
+};
+```
+
+### Filtros y Ordenamiento
+```typescript
+// Filtros avanzados para servicios de alimentación
+export const filterUtils = {
+  filterByDateRange: (sales: Sale[], startDate: string, endDate: string) => {
+    // Filtrar por rango de fechas
+  },
+  
+  filterByProduct: (sales: Sale[], product: string) => {
+    // Filtrar por producto específico
+  },
+  
+  sortByRevenue: (products: TopProduct[]) => {
+    return products.sort((a, b) => b.revenue - a.revenue);
+  }
+};
+```
+
+---
+
+## 🚀 Migración de Datos Mock a API Real
+
+### Servicios de Snacks
+```typescript
+// src/api/services/snacksService.ts
+export const snacksService = {
+  async getSales(query?: SnacksSalesQuery): Promise<SnacksSalesResponse> {
+    const params = new URLSearchParams(query as Record<string, string>);
+    return apiClient.get<SnacksSalesResponse>(`/snacks/sales?${params}`);
+  },
+
+  async createSale(data: CreateSnackSaleRequest): Promise<SnackSale> {
+    return apiClient.post<SnackSale>('/snacks/sale', data);
+  },
+
+  async getHourlySales(date?: string): Promise<HourlySales[]> {
+    return apiClient.get<HourlySales[]>(`/snacks/hourly-sales?date=${date}`);
+  },
+
+  async getTopProducts(limit: number = 5): Promise<TopProduct[]> {
+    return apiClient.get<TopProduct[]>(`/snacks/top-products?limit=${limit}`);
+  }
+};
+```
+
+### Servicios de Tienda
+```typescript
+// src/api/services/storeService.ts
+export const storeService = {
+  async getSales(query?: StoreSalesQuery): Promise<StoreSalesResponse> {
+    const params = new URLSearchParams(query as Record<string, string>);
+    return apiClient.get<StoreSalesResponse>(`/store/sales?${params}`);
+  },
+
+  async getProducts(): Promise<StoreProductsResponse> {
+    return apiClient.get<StoreProductsResponse>('/store/products');
+  },
+
+  async getDailyTrends(days: number = 7): Promise<DailySalesData[]> {
+    return apiClient.get<DailySalesData[]>(`/store/daily-trends?days=${days}`);
+  },
+
+  async getWeeklyTrends(weeks: number = 4): Promise<WeeklySalesData[]> {
+    return apiClient.get<WeeklySalesData[]>(`/store/weekly-trends?weeks=${weeks}`);
+  }
+};
+```

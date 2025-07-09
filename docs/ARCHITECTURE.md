@@ -525,6 +525,230 @@ export const renderWithProviders = (
   ui: React.ReactElement,
   options?: RenderOptions
 ) => {
+  return (props: P) => {
+    const { mode } = useThemeStore();
+    const enhancedConfig = {
+      ...config,
+      theme: mode,
+      responsive: true
+    };
+    
+    return <WrappedComponent {...props} config={enhancedConfig} />;
+  };
+};
+
+// Uso
+const EnhancedAreaChart = withChartConfig(AreaChart, chartConfigs.snacks.hourlyChart);
+```
+
+### Sistema de Estados Mejorado
+
+#### Estados Específicos por Módulo
+```typescript
+// Estados especializados para cada servicio
+interface SnacksState {
+  sales: SnackSale[];
+  hourlySales: HourlySales[];
+  topProducts: TopProduct[];
+  stats: SnacksStats;
+  loading: boolean;
+  error: string | null;
+  
+  // Acciones específicas
+  generateHourlyData: () => void;
+  calculateTopProducts: () => void;
+  updateRealTimeStats: () => void;
+}
+
+interface StoreState {
+  sales: StoreSale[];
+  products: StoreProduct[];
+  dailyTrends: DailySalesData[];
+  weeklyTrends: WeeklySalesData[];
+  stats: StoreStats;
+  loading: boolean;
+  error: string | null;
+  
+  // Acciones específicas
+  calculateGrowthMetrics: () => void;
+  generateTrendAnalysis: () => void;
+  updateInventoryStats: () => void;
+}
+```
+
+### Arquitectura de Tiempo Real
+
+#### Sistema de Actualización Automática
+```typescript
+// Hook personalizado para actualizaciones en tiempo real
+const useRealTimeUpdates = (interval: number = 30000) => {
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLastUpdate(Date.now());
+    }, interval);
+    
+    return () => clearInterval(timer);
+  }, [interval]);
+  
+  return lastUpdate;
+};
+
+// Uso en componentes
+const SnacksManagement = () => {
+  const lastUpdate = useRealTimeUpdates(30000); // 30 segundos
+  
+  useEffect(() => {
+    // Actualizar datos cuando cambie lastUpdate
+    refreshData();
+  }, [lastUpdate]);
+};
+```
+
+### Arquitectura de Rendimiento
+
+#### Optimizaciones Específicas
+```typescript
+// Memoización de cálculos costosos
+const ExpensiveMetricsCalculation = React.memo(({ sales }: { sales: Sale[] }) => {
+  const metrics = useMemo(() => {
+    return calculateComplexMetrics(sales);
+  }, [sales]);
+  
+  return <MetricsDisplay metrics={metrics} />;
+});
+
+// Lazy loading de gráficas
+const LazyPieChart = lazy(() => import('./charts/PieChart'));
+const LazyAreaChart = lazy(() => import('./charts/AreaChart'));
+
+// Virtualización para listas grandes
+const VirtualizedSalesList = ({ sales }: { sales: Sale[] }) => {
+  return (
+    <FixedSizeList
+      height={400}
+      itemCount={sales.length}
+      itemSize={60}
+      itemData={sales}
+    >
+      {SaleItem}
+    </FixedSizeList>
+  );
+};
+```
+
+### Arquitectura de Temas Mejorada
+
+#### Temas Específicos por Módulo
+```typescript
+// Temas especializados para cada servicio
+export const serviceThemes = {
+  restaurant: {
+    primary: '#1B3B6F',
+    secondary: '#5483B3',
+    accent: '#7DA0CA',
+    background: 'from-[#052659]/40 to-[#1B3B6F]/30',
+    icon: 'ChefHat'
+  },
+  
+  snacks: {
+    primary: '#5483B3',
+    secondary: '#7DA0CA',
+    accent: '#C1E8FF',
+    background: 'from-[#1B3B6F]/40 to-[#5483B3]/30',
+    icon: 'Coffee'
+  },
+  
+  store: {
+    primary: '#7DA0CA',
+    secondary: '#C1E8FF',
+    accent: '#FFFFFF',
+    background: 'from-[#5483B3]/40 to-[#7DA0CA]/30',
+    icon: 'ShoppingBag'
+  }
+};
+
+// Hook para tema contextual
+const useServiceTheme = (service: 'restaurant' | 'snacks' | 'store') => {
+  const { mode } = useThemeStore();
+  return {
+    ...serviceThemes[service],
+    mode,
+    isDark: mode === 'dark'
+  };
+};
+```
+
+### Arquitectura de Testing (Preparada)
+
+#### Tests Específicos por Módulo
+```typescript
+// Tests para generadores de datos
+describe('SnacksDataGenerator', () => {
+  it('should generate realistic hourly sales data', () => {
+    const generator = new SnacksDataGenerator();
+    const hourlySales = generator.generateHourlySales();
+    
+    expect(hourlySales).toHaveLength(13); // 8 AM to 8 PM
+    expect(hourlySales[0].hour).toBe('8:00');
+  });
+});
+
+// Tests para calculadores de métricas
+describe('MetricsCalculator', () => {
+  it('should calculate growth percentage correctly', () => {
+    const growth = MetricsCalculator.calculateGrowth(120, 100);
+    expect(growth).toBe(20);
+  });
+});
+
+// Tests para componentes de gráficas
+describe('HourlySalesChart', () => {
+  it('should render chart with correct data points', () => {
+    const mockData = generateMockHourlySales();
+    render(<HourlySalesChart data={mockData} />);
+    
+    expect(screen.getByText('Ventas por Hora')).toBeInTheDocument();
+  });
+});
+```
+
+### Arquitectura de Escalabilidad
+
+#### Preparación para Microservicios
+```typescript
+// Interfaces preparadas para APIs independientes
+interface ServiceAPI {
+  baseURL: string;
+  endpoints: Record<string, string>;
+  auth: AuthConfig;
+}
+
+const servicesConfig: Record<string, ServiceAPI> = {
+  restaurant: {
+    baseURL: process.env.RESTAURANT_API_URL,
+    endpoints: {
+      notes: '/notes',
+      tables: '/tables',
+      stats: '/stats'
+    },
+    auth: { type: 'bearer' }
+  },
+  
+  snacks: {
+    baseURL: process.env.SNACKS_API_URL,
+    endpoints: {
+      sales: '/sales',
+      products: '/products',
+      analytics: '/analytics'
+    },
+    auth: { type: 'bearer' }
+  }
+};
+```
+
+Esta arquitectura expandida proporciona una base sólida para los nuevos módulos de servicios de alimentación, manteniendo la consistencia con el diseño existente mientras introduce funcionalidades avanzadas de análisis y métricas en tiempo real.
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <BrowserRouter>
       <QueryClient>
@@ -601,3 +825,170 @@ const useRealTimeData = (endpoint: string) => {
 ---
 
 Esta arquitectura proporciona una base sólida, escalable y mantenible para el crecimiento futuro del proyecto, manteniendo la flexibilidad para adaptarse a nuevos requerimientos y tecnologías.
+
+---
+
+## 🍽️ Arquitectura de Servicios de Alimentación
+
+### Módulos de Servicios de Alimentación
+
+```
+src/pages/
+├── RestaurantManagement.tsx    # Gestión de restaurante con etiquetas
+├── SnacksManagement.tsx       # Gestión de snacks con gráficas
+└── StoreManagement.tsx        # Gestión de tienda con métricas
+```
+
+### Patrón de Arquitectura Implementado
+
+#### 1. **Separation of Concerns Mejorada**
+```typescript
+// Cada módulo tiene responsabilidades específicas
+
+// RestaurantManagement: Gestión de notas y mesas
+interface RestaurantModule {
+  noteManagement: NoteService;
+  tableTracking: TableService;
+  revenueCalculation: RevenueService;
+}
+
+// SnacksManagement: Análisis de ventas por hora
+interface SnacksModule {
+  salesTracking: SalesService;
+  hourlyAnalytics: AnalyticsService;
+  productRanking: RankingService;
+}
+
+// StoreManagement: Métricas avanzadas y tendencias
+interface StoreModule {
+  inventoryTracking: InventoryService;
+  trendAnalysis: TrendService;
+  growthCalculation: GrowthService;
+}
+```
+
+#### 2. **Data Flow Architecture**
+```mermaid
+graph TD
+    A[User Interaction] --> B[Service Module]
+    B --> C[Data Generator/API]
+    C --> D[State Management]
+    D --> E[Chart Components]
+    E --> F[UI Rendering]
+    F --> G[Real-time Updates]
+```
+
+### Generadores de Datos Mock
+
+#### Patrón Factory para Datos
+```typescript
+// Patrón Factory implementado para cada servicio
+abstract class DataGenerator {
+  abstract generateSales(): Sale[];
+  abstract generateStats(): Stats;
+  abstract generateTrends(): Trend[];
+}
+
+class SnacksDataGenerator extends DataGenerator {
+  generateSales(): SnackSale[] {
+    // Lógica específica para snacks
+  }
+  
+  generateHourlySales(): HourlySales[] {
+    // Datos agrupados por hora
+  }
+  
+  generateTopProducts(): TopProduct[] {
+    // Productos más vendidos
+  }
+}
+
+class StoreDataGenerator extends DataGenerator {
+  generateSales(): StoreSale[] {
+    // Lógica específica para tienda
+  }
+  
+  generateGrowthMetrics(): GrowthMetrics {
+    // Cálculos de crecimiento
+  }
+  
+  generateCategoryStats(): CategoryStats[] {
+    // Estadísticas por categoría
+  }
+}
+```
+
+### Sistema de Métricas Avanzadas
+
+#### Calculadores de Métricas
+```typescript
+// Sistema modular de cálculo de métricas
+class MetricsCalculator {
+  static calculateGrowth(current: number, previous: number): number {
+    return previous > 0 ? ((current - previous) / previous) * 100 : 0;
+  }
+  
+  static calculateAverageTicket(revenue: number, sales: number): number {
+    return sales > 0 ? revenue / sales : 0;
+  }
+  
+  static calculateTrend(data: number[]): 'up' | 'down' | 'stable' {
+    // Lógica de análisis de tendencias
+  }
+}
+
+// Uso en componentes
+const dailyGrowth = MetricsCalculator.calculateGrowth(todayRevenue, yesterdayRevenue);
+const averageTicket = MetricsCalculator.calculateAverageTicket(revenue, sales);
+```
+
+### Arquitectura de Gráficas
+
+#### Configuración Modular de Charts
+```typescript
+// Configuraciones reutilizables para gráficas
+export const chartConfigs = {
+  snacks: {
+    hourlyChart: {
+      type: 'area',
+      gradient: 'salesGradient',
+      colors: ['#5483B3', '#7DA0CA'],
+      strokeWidth: 3
+    },
+    
+    weeklyChart: {
+      type: 'bar',
+      colors: ['#1B3B6F'],
+      radius: [4, 4, 0, 0]
+    },
+    
+    pieChart: {
+      type: 'pie',
+      colors: ['#1B3B6F', '#5483B3', '#7DA0CA', '#C1E8FF', '#052659'],
+      outerRadius: 80
+    }
+  },
+  
+  store: {
+    lineChart: {
+      type: 'line',
+      strokeWidth: 3,
+      dotSize: 4,
+      activeDotSize: 6
+    },
+    
+    barChart: {
+      type: 'bar',
+      colors: ['#1B3B6F'],
+      radius: [4, 4, 0, 0]
+    }
+  }
+};
+```
+
+#### Componentes de Gráficas Reutilizables
+```typescript
+// HOC para gráficas con configuración automática
+const withChartConfig = <P extends object>(
+  WrappedComponent: React.ComponentType<P>,
+  config: ChartConfig
