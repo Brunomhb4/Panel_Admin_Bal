@@ -453,3 +453,358 @@ npm audit fix
 ---
 
 Esta documentación proporciona una visión completa de todas las dependencias del proyecto, su propósito, configuración y consideraciones para el mantenimiento futuro.
+
+---
+
+## 📊 Nuevas Dependencias para Servicios de Alimentación
+
+### Recharts - Gráficas Avanzadas
+```json
+{
+  "recharts": "^2.12.2"
+}
+```
+
+#### Uso Extendido en Nuevos Módulos
+Los nuevos módulos de servicios de alimentación hacen uso extensivo de Recharts:
+
+**Componentes Utilizados**:
+```typescript
+// Gráficas de área para ventas por hora
+import { AreaChart, Area } from 'recharts';
+
+// Gráficas de barras para comparativas
+import { BarChart, Bar } from 'recharts';
+
+// Gráficas de línea para tendencias
+import { LineChart, Line } from 'recharts';
+
+// Gráficas de pastel para productos más vendidos
+import { PieChart, Pie, Cell } from 'recharts';
+
+// Componentes de soporte
+import { 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,
+  Legend 
+} from 'recharts';
+```
+
+**Configuraciones Implementadas**:
+- **Gradientes personalizados** para áreas de gráficas
+- **Tooltips temáticos** con estilos del proyecto
+- **Responsividad granular** para diferentes dispositivos
+- **Animaciones suaves** con duraciones personalizadas
+- **Colores adaptativos** según el tema (claro/oscuro)
+
+**Optimizaciones**:
+```typescript
+// Configuración responsiva automática
+const getResponsiveConfig = (width: number) => {
+  if (width < 640) return MOBILE_CONFIG;
+  if (width < 1024) return TABLET_CONFIG;
+  return DESKTOP_CONFIG;
+};
+
+// Memoización de datos de gráficas
+const chartData = useMemo(() => {
+  return processChartData(rawData);
+}, [rawData]);
+```
+
+---
+
+## 🎨 Dependencias de Iconos Expandidas
+
+### Lucide React - Iconos Adicionales
+```json
+{
+  "lucide-react": "^0.344.0"
+}
+```
+
+#### Nuevos Iconos Utilizados
+```typescript
+// Iconos para servicios de alimentación
+import { 
+  ChefHat,           // Restaurante
+  Coffee,            // Snacks
+  ShoppingBag,       // Tienda
+  Cookie,            // Productos de snacks
+  UtensilsCrossed,   // Servicios de comida
+  Wine,              // Bebidas
+  Dessert            // Postres
+} from 'lucide-react';
+
+// Iconos para métricas y análisis
+import {
+  BarChart3,         // Gráficas de barras
+  TrendingUp,        // Tendencias positivas
+  Activity,          // Actividad en tiempo real
+  Calendar,          // Filtros temporales
+  Clock,             // Horarios
+  Sparkles,          // Efectos especiales
+  Zap                // Indicadores de velocidad
+} from 'lucide-react';
+
+// Iconos para acciones
+import {
+  Package,           // Productos
+  Users,             // Clientes
+  DollarSign,        // Ingresos
+  Receipt            // Notas/tickets
+} from 'lucide-react';
+```
+
+**Optimización de Bundle**:
+- Tree-shaking automático mantiene el bundle pequeño
+- Solo se importan los iconos utilizados
+- Iconos vectoriales escalables para todas las resoluciones
+
+---
+
+## 🔧 Nuevas Utilidades de Desarrollo
+
+### Generadores de Datos Mock
+
+#### Implementación Personalizada
+```typescript
+// No requiere dependencias adicionales
+// Implementado directamente en cada módulo
+
+// src/pages/SnacksManagement.tsx
+const generateSnacksData = () => {
+  // Generación de datos realistas para snacks
+};
+
+// src/pages/StoreManagement.tsx  
+const generateStoreData = () => {
+  // Generación de datos realistas para tienda
+};
+
+// src/pages/RestaurantManagement.tsx
+const generateMockData = () => {
+  // Datos existentes mejorados
+};
+```
+
+**Ventajas del Enfoque Actual**:
+- ✅ Sin dependencias adicionales
+- ✅ Datos específicos por módulo
+- ✅ Patrones realistas de negocio
+- ✅ Fácil personalización
+- ✅ Performance optimizada
+
+---
+
+## 📊 Análisis de Bundle Size Actualizado
+
+### Impacto de Nuevos Módulos
+```
+Dependencias principales (sin cambios):
+react + react-dom: ~45KB gzipped
+react-router-dom: ~12KB gzipped
+zustand: ~3KB gzipped
+lucide-react: ~8KB gzipped (iconos adicionales)
+recharts: ~25KB gzipped (sin cambios)
+tailwindcss: ~12KB gzipped (estilos adicionales)
+
+Total estimado: ~105KB gzipped
+```
+
+### Optimizaciones Implementadas
+1. **Lazy Loading de Gráficas**: Carga diferida de componentes pesados
+2. **Memoización Inteligente**: React.memo en componentes de métricas
+3. **Tree Shaking Mejorado**: Solo iconos y componentes utilizados
+4. **Code Splitting por Módulo**: Cada servicio se carga independientemente
+
+```typescript
+// Lazy loading implementado
+const LazySnacksManagement = lazy(() => import('./pages/SnacksManagement'));
+const LazyStoreManagement = lazy(() => import('./pages/StoreManagement'));
+
+// Suspense wrapper
+<Suspense fallback={<LoadingSpinner />}>
+  <Routes>
+    <Route path="/superadmin/snacks" element={<LazySnacksManagement />} />
+    <Route path="/superadmin/store" element={<LazyStoreManagement />} />
+  </Routes>
+</Suspense>
+```
+
+---
+
+## 🚀 Dependencias Futuras Recomendadas
+
+### Para Funcionalidades Avanzadas de Alimentación
+```json
+{
+  // Manejo de fechas avanzado
+  "date-fns": "^2.x.x",
+  
+  // Validación de formularios para inventario
+  "react-hook-form": "^7.x.x",
+  "zod": "^3.x.x",
+  
+  // Exportación de reportes
+  "jspdf": "^2.x.x",
+  "xlsx": "^0.18.x",
+  
+  // Notificaciones para alertas de stock
+  "react-hot-toast": "^2.x.x",
+  
+  // Drag & Drop para organización de productos
+  "@dnd-kit/core": "^6.x.x",
+  
+  // Tablas avanzadas para inventario
+  "@tanstack/react-table": "^8.x.x",
+  
+  // Animaciones avanzadas
+  "framer-motion": "^10.x.x"
+}
+```
+
+### Para Integración con APIs de Alimentación
+```json
+{
+  // Cliente HTTP optimizado
+  "axios": "^1.x.x",
+  
+  // WebSockets para actualizaciones en tiempo real
+  "socket.io-client": "^4.x.x",
+  
+  // Gestión de caché para métricas
+  "@tanstack/react-query": "^4.x.x",
+  
+  // Validación de esquemas de API
+  "yup": "^1.x.x"
+}
+```
+
+### Para Análisis Avanzado
+```json
+{
+  // Análisis estadístico
+  "simple-statistics": "^7.x.x",
+  
+  // Procesamiento de datos
+  "lodash": "^4.x.x",
+  
+  // Formateo de números y monedas
+  "numeral": "^2.x.x",
+  
+  // Gráficas 3D avanzadas
+  "three": "^0.150.x",
+  "@react-three/fiber": "^8.x.x"
+}
+```
+
+---
+
+## ⚡ Optimizaciones de Performance
+
+### Estrategias Implementadas
+
+#### 1. Memoización Inteligente
+```typescript
+// Componentes memoizados para métricas
+const MemoizedMetricsCard = React.memo(({ metric }: { metric: Metric }) => {
+  return <MetricsCard {...metric} />;
+});
+
+// Cálculos costosos memoizados
+const processedData = useMemo(() => {
+  return expensiveDataProcessing(rawData);
+}, [rawData]);
+```
+
+#### 2. Debounce en Actualizaciones
+```typescript
+// Hook personalizado para debounce
+const useDebouncedValue = (value: any, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+  
+  return debouncedValue;
+};
+```
+
+#### 3. Lazy Loading de Gráficas
+```typescript
+// Carga diferida de componentes pesados
+const LazyAreaChart = lazy(() => 
+  import('recharts').then(module => ({ default: module.AreaChart }))
+);
+
+const LazyPieChart = lazy(() => 
+  import('recharts').then(module => ({ default: module.PieChart }))
+);
+```
+
+---
+
+## 🔍 Monitoreo de Dependencias
+
+### Scripts de Análisis
+```json
+{
+  "scripts": {
+    "analyze": "npm run build && npx webpack-bundle-analyzer dist/static/js/*.js",
+    "deps:check": "npm outdated",
+    "deps:audit": "npm audit",
+    "deps:update": "npm update",
+    "bundle:size": "npm run build && du -sh dist/",
+    "perf:lighthouse": "lighthouse http://localhost:5173 --output=json --output-path=./lighthouse-report.json"
+  }
+}
+```
+
+### Métricas de Performance
+```typescript
+// Métricas implementadas en desarrollo
+const performanceMetrics = {
+  bundleSize: '~105KB gzipped',
+  loadTime: '<2s on 3G',
+  firstContentfulPaint: '<1.5s',
+  largestContentfulPaint: '<2.5s',
+  cumulativeLayoutShift: '<0.1',
+  firstInputDelay: '<100ms'
+};
+```
+
+---
+
+## 🛡️ Seguridad de Dependencias
+
+### Auditoría Continua
+```bash
+# Comandos de seguridad implementados
+npm audit --audit-level moderate
+npm audit fix --force
+
+# Verificación de vulnerabilidades
+npx audit-ci --moderate
+
+# Actualización segura
+npx npm-check-updates -u
+```
+
+### Políticas de Actualización para Nuevos Módulos
+1. **Recharts**: Actualizar solo versiones menores (compatibilidad de API)
+2. **Lucide React**: Actualizar frecuentemente (solo iconos nuevos)
+3. **Dependencias de desarrollo**: Más flexibles para actualizar
+4. **Dependencias críticas**: Testing exhaustivo antes de actualizar
+
+---
+
+Esta documentación actualizada refleja el estado actual del proyecto con los nuevos módulos de servicios de alimentación, manteniendo la compatibilidad y optimización del bundle size mientras se agregan funcionalidades avanzadas de análisis y visualización.
