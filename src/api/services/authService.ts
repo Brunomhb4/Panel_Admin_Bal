@@ -57,7 +57,7 @@ export const authService = {
     try {
       const response = await httpClient<LogoutResponse>(
         ENDPOINTS.LOGOUT,
-        HTTP_METHODS.POST,
+        HTTP_METHODS.GET,
         undefined,
         true // Requiere autenticación
       );
