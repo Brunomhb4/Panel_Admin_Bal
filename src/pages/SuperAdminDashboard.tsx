@@ -8,35 +8,53 @@ import { Link } from 'react-router-dom';
 import apiServices from '../api';
 import { useThemeStore } from '../stores/themeStore';
 
+/**
+ * Dashboard principal para SuperAdmin
+ * Muestra resumen de balnearios y datos de taquilla de la API externa
+ */
 const SuperAdminDashboard: React.FC = () => {
   const { fetchWaterParks, loading } = useWaterParksStore();
   const { mode } = useThemeStore();
+  
+  // Estado para almacenar los datos de la API de taquilla
   const [taquillaData, setTaquillaData] = useState<{
     tickets_activos: number;
     tickets_vendidos: number;
     tickets_impresos: number;
     tickets_inactivos: number;
   } | null>(null);
+  
+  // Estados para manejar la carga y errores de la API
   const [taquillaLoading, setTaquillaLoading] = useState(false);
   const [taquillaError, setTaquillaError] = useState<string | null>(null);
   
+  /**
+   * Función para obtener los datos de taquilla desde la API externa
+   * Se ejecuta al cargar el componente y cuando el usuario hace clic en el botón de actualizar
+   */
   const fetchTaquillaData = async () => {
+    // Solo intentar obtener datos si hay un token de acceso
     if (apiServices.auth.getAccessToken()) {
       setTaquillaLoading(true);
       setTaquillaError(null);
       try {
+        // Llamada a la API para obtener los datos de taquilla
         const response = await apiServices.taquilla.getResumenTaquilla();
         if (response.success) {
-          // Asegurarse de que todos los valores sean números
+          // Log para depuración - ver los datos originales de la API
           console.log("Datos originales de la API:", response.data);
+          
+          // Convertir todos los valores a números para evitar problemas de tipo
           const data = {
             tickets_activos: Number(response.data.tickets_activos || 0),
             tickets_vendidos: Number(response.data.tickets_vendidos || 0),
+            // Manejo especial para tickets_impresos que puede ser null
             tickets_impresos: response.data.tickets_impresos !== null && response.data.tickets_impresos !== undefined 
               ? Number(response.data.tickets_impresos) 
               : 0,
             tickets_inactivos: Number(response.data.tickets_inactivos || 0)
           };
+          // Log para depuración - ver los datos procesados
           console.log("Taquilla data procesada:", data);
           setTaquillaData(data);
         }
@@ -49,11 +67,13 @@ const SuperAdminDashboard: React.FC = () => {
     }
   };
   
+  // Efecto para cargar los datos al montar el componente
   useEffect(() => {
     fetchWaterParks();
     fetchTaquillaData();
   }, []);
   
+  // Mostrar spinner de carga mientras se cargan los datos iniciales
   if (loading) {
     return (
       <DashboardLayout title="Dashboard">
@@ -67,7 +87,9 @@ const SuperAdminDashboard: React.FC = () => {
   return (
     <DashboardLayout title="Dashboard">
       <div className="fade-in">
+        {/* Botones de acción en la parte superior */}
         <div className="flex justify-end mb-6">
+          {/* Botón para crear nuevo balneario */}
           <Link 
             to="/superadmin/waterparks" 
             className="btn btn-primary inline-flex items-center"
@@ -76,6 +98,7 @@ const SuperAdminDashboard: React.FC = () => {
             Nuevo Balneario
           </Link>
         </div>
+          {/* Botón para actualizar datos de taquilla */}
 
         <div className="flex items-center mb-4">
           <button
@@ -95,7 +118,10 @@ const SuperAdminDashboard: React.FC = () => {
           )}
         </div>
 
+        {/* Tarjetas de resumen con datos de taquilla o datos mock */}
         <SummaryCards taquillaData={taquillaData} />
+        
+        {/* Tabla de balnearios */}
         <WaterParksTable />
       </div>
     </DashboardLayout>

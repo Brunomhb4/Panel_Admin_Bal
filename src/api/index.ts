@@ -1,21 +1,26 @@
-// Exportar todos los servicios desde un punto central
+/**
+ * Punto central de exportación para la API
+ * Proporciona acceso a todos los servicios y configuraciones
+ */
+
+// Importar el cliente HTTP y los servicios
 import { httpClient } from './httpClient';
 import { authService } from './services/authService';
 import { taquillaService } from './services/taquillaService';
 
-// Exportar configuración
+// Exportar toda la configuración de la API
 export * from './config';
 
-// Exportar cliente HTTP
+// Exportar el cliente HTTP para uso directo
 export { httpClient };
 
-// Exportar servicios
+// Exportar todos los servicios agrupados en un objeto
 export const apiServices = {
   auth: authService,
   taquilla: taquillaService
 };
 
-// Exportar tipos
+// Exportar tipos para uso en componentes
 export type { 
   LoginRequest, 
   LoginResponse,
@@ -26,5 +31,5 @@ export type {
   ResumenTaquillaResponse
 } from './services/taquillaService';
 
-// Exportar por defecto
+// Exportación por defecto para facilitar la importación
 export default apiServices;

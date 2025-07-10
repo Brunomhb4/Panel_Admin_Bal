@@ -3,6 +3,9 @@ import { Ticket, DollarSign, Store, TrendingUp } from 'lucide-react';
 import { useWaterParksStore } from '../../stores/waterParksStore';
 import { useThemeStore } from '../../stores/themeStore';
 
+/**
+ * Interfaz para los datos de taquilla recibidos de la API externa
+ */
 interface TaquillaData {
   tickets_activos: number;
   tickets_vendidos: number;
@@ -10,24 +13,32 @@ interface TaquillaData {
   tickets_inactivos: number;
 }
 
+/**
+ * Props para el componente SummaryCards
+ */
 interface SummaryCardsProps {
   taquillaData?: TaquillaData | null;
 }
 
+/**
+ * Componente que muestra tarjetas de resumen con estadísticas clave
+ * Puede mostrar datos de la API externa (taquillaData) o datos mock de waterParksStore
+ */
 const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
   const { waterParks } = useWaterParksStore();
   const { mode } = useThemeStore();
   
-  // Calculate totals
+  // Calcular totales - usar datos de API si están disponibles, o datos mock si no
   const totalActiveTickets = taquillaData ? taquillaData.tickets_activos : waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
   const totalSoldTickets = taquillaData ? taquillaData.tickets_vendidos : waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
+  // Manejo especial para tickets_impresos que puede ser null o undefined
   const totalPrintedTickets = taquillaData && taquillaData.tickets_impresos !== undefined ? taquillaData.tickets_impresos : waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
   const totalInactiveTickets = taquillaData ? taquillaData.tickets_inactivos : waterParks.reduce((sum, park) => sum + park.inactiveTickets, 0);
-  const totalWaterParks = waterParks.length;
-  const totalRevenue = waterParks.reduce((sum, park) => sum + park.totalRevenue, 0);
   
+  // Configuración de las tarjetas de resumen
   const cards = [
     {
+      // Tarjeta 1: Tickets Activos (tickets_activos en la API)
       title: 'Tickets Activos', // Coincide con tickets_activos
       value: totalActiveTickets.toLocaleString(),
       icon: Ticket,
@@ -47,6 +58,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
       iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
+      // Tarjeta 2: Tickets Vendidos (tickets_vendidos en la API)
       title: 'Tickets Vendidos', // Coincide con tickets_vendidos
       value: totalSoldTickets.toLocaleString(),
       icon: TrendingUp,
@@ -66,6 +78,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
       iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
+      // Tarjeta 3: Tickets Impresos (tickets_impresos en la API)
       title: 'Tickets Impresos', // Coincide con tickets_impresos
       value: totalPrintedTickets.toLocaleString(),
       icon: Store,
@@ -85,6 +98,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
       iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
+      // Tarjeta 4: Tickets Inactivos (tickets_inactivos en la API)
       title: 'Tickets Inactivos', // Coincide con tickets_inactivos
       value: totalInactiveTickets.toLocaleString(),
       icon: DollarSign,
@@ -107,16 +121,19 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
     }
   ];
   
+  // Renderizar las tarjetas en un grid responsivo
   return (
     <div className="responsive-grid mb-4 xs:mb-5 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12">
       {cards.map((card, index) => {
         const Icon = card.icon;
         return (
+          // Tarjeta individual con efectos visuales y animaciones
           <div 
             key={card.title}
             className={`card-compact bg-gradient-to-br ${card.bgGradient} border-3 ${card.borderColor} hover:shadow-2xl transition-all duration-500 animate-slide-up floating-card hover:scale-110 group relative overflow-hidden backdrop-blur-lg`}
             style={{ animationDelay: `${index * 150}ms` }}
           >
+            {/* Partículas animadas de fondo - visible al hacer hover */}
             {/* Animated background particles */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className={`absolute top-2 right-2 w-1 h-1 ${card.pulseColor} rounded-full animate-ping`}></div>
@@ -124,7 +141,9 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
               <div className={`absolute top-1/2 right-1/4 w-0.5 h-0.5 ${card.pulseColor} rounded-full animate-ping`} style={{ animationDelay: '1s' }}></div>
             </div>
 
+            {/* Contenido principal de la tarjeta */}
             <div className="flex items-center relative z-10">
+              {/* Contenedor del icono con efectos visuales */}
               <div className={`${card.iconBg} ${card.iconGlow} border-3 border-[#C1E8FF]/60 backdrop-blur-lg flex-shrink-0 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 relative overflow-hidden
                                rounded-xl p-2
                                xs:rounded-2xl xs:p-2.5
@@ -132,6 +151,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
                                md:rounded-3xl md:p-4
                                lg:rounded-3xl lg:p-5`}>
                 
+                {/* Efectos de brillo para el icono */}
                 {/* Icon glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#C1E8FF]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
                 
@@ -141,6 +161,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
                 {/* Borde interno brillante */}
                 <div className="absolute inset-1 rounded-full border border-[#C1E8FF]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
+                {/* Icono de la tarjeta */}
                 <Icon className={`${card.iconColor} relative z-10 transition-all duration-300 group-hover:scale-125 font-black
                                  h-4 w-4
                                  xs:h-4 xs:w-4
@@ -155,11 +176,13 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
                       }} />
               </div>
               
+              {/* Contenido textual de la tarjeta */}
               <div className="min-w-0 flex-1
                               ml-2
                               xs:ml-3
                               sm:ml-4
                               lg:ml-6">
+                {/* Título de la tarjeta */}
                 <p className={`${card.subTextColor} truncate font-bold transition-all duration-300 group-hover:scale-105 origin-left opacity-90
                                text-xs mb-0.5
                                xs:text-xs xs:mb-1
@@ -173,6 +196,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
                       }}>
                   {card.title}
                 </p>
+                {/* Valor numérico de la tarjeta */}
                 <h3 className={`${card.textColor} truncate font-black transition-all duration-300 group-hover:scale-110 origin-left
                                 text-sm
                                 xs:text-base
@@ -189,6 +213,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
               </div>
             </div>
 
+            {/* Borde animado sutil - visible al hacer hover */}
             {/* Subtle animated border */}
             <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
               <div className={`absolute inset-0 bg-gradient-to-r ${card.gradient} opacity-15 rounded-xl animate-pulse`}></div>
