@@ -2,16 +2,47 @@ import React from 'react';
 import { Ticket, DollarSign, Store, TrendingUp } from 'lucide-react';
 import { useWaterParksStore } from '../../stores/waterParksStore';
 import { useThemeStore } from '../../stores/themeStore';
+import { apiServices } from '../../api';
+import { useEffect, useState } from 'react';
 
 const SummaryCards: React.FC = () => {
   const { waterParks } = useWaterParksStore();
   const { mode } = useThemeStore();
+  const [taquillaData, setTaquillaData] = useState<{
+    tickets_activos: number;
+    tickets_vendidos: number;
+    tickets_impresos: number;
+    tickets_inactivos: number;
+  } | null>(null);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    const fetchTaquillaData = async () => {
+      if (apiServices.auth.getAccessToken()) {
+        setLoading(true);
+        try {
+          const response = await apiServices.taquilla.getResumenTaquilla();
+          if (response.success) {
+            setTaquillaData(response.data);
+          }
+        } catch (error) {
+          console.error('Error al obtener datos de taquilla:', error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    
+    fetchTaquillaData();
+  }, []);
   
   // Calculate totals
-  const totalActiveTickets = waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
-  const totalRevenue = waterParks.reduce((sum, park) => sum + park.totalRevenue, 0);
+  const totalActiveTickets = taquillaData ? taquillaData.tickets_activos : waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
+  const totalSoldTickets = taquillaData ? taquillaData.tickets_vendidos : waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
+  const totalPrintedTickets = taquillaData ? taquillaData.tickets_impresos : waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
+  const totalInactiveTickets = taquillaData ? taquillaData.tickets_inactivos : waterParks.reduce((sum, park) => sum + park.inactiveTickets, 0);
   const totalWaterParks = waterParks.length;
-  const totalSoldTickets = waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
+  const totalRevenue = waterParks.reduce((sum, park) => sum + park.totalRevenue, 0);
   
   const cards = [
     {

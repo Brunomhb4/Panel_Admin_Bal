@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 import { useThemeStore } from '../stores/themeStore';
-import { Waves, AtSign, Lock, AlertOctagon, Eye, EyeOff } from 'lucide-react';
+import { Waves, AtSign, Lock, AlertOctagon, Eye, EyeOff, Server } from 'lucide-react';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -58,6 +58,12 @@ const LoginPage: React.FC = () => {
       email: 'superadmin@example.com', 
       password: 'password',
       description: 'Administrador General'
+    },
+    { 
+      label: 'API Real', 
+      email: 'dashboard@aquasac.com', 
+      password: 'password',
+      description: 'Usuario API Externa'
     },
   ];
   
