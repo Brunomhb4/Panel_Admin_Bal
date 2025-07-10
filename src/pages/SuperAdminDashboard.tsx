@@ -103,7 +103,7 @@ const SuperAdminDashboard: React.FC = () => {
                   Tickets Activos
                 </p>
                 <p className={`text-2xl font-bold ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`}>
-                  {taquillaData.tickets_activos.toLocaleString()}
+                  {(taquillaData.tickets_activos ?? 0).toLocaleString()}
                 </p>
               </div>
               
@@ -114,7 +114,7 @@ const SuperAdminDashboard: React.FC = () => {
                   Tickets Vendidos
                 </p>
                 <p className={`text-2xl font-bold ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`}>
-                  {taquillaData.tickets_vendidos.toLocaleString()}
+                  {(taquillaData.tickets_vendidos ?? 0).toLocaleString()}
                 </p>
               </div>
               
@@ -125,7 +125,7 @@ const SuperAdminDashboard: React.FC = () => {
                   Tickets Impresos
                 </p>
                 <p className={`text-2xl font-bold ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`}>
-                  {taquillaData.tickets_impresos.toLocaleString()}
+                  {(taquillaData.tickets_impresos ?? 0).toLocaleString()}
                 </p>
               </div>
               
@@ -136,7 +136,7 @@ const SuperAdminDashboard: React.FC = () => {
                   Tickets Inactivos
                 </p>
                 <p className={`text-2xl font-bold ${mode === 'dark' ? 'text-[#C1E8FF]' : 'text-[#021024]'}`}>
-                  {taquillaData.tickets_inactivos.toLocaleString()}
+                  {(taquillaData.tickets_inactivos ?? 0).toLocaleString()}
                 </p>
               </div>
             </div>
