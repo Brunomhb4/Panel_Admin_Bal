@@ -13,11 +13,11 @@ export interface ResumenTaquillaResponse {
   success: boolean;
   message: string;
   data: {
-    // Los campos pueden venir como número o string desde la API
+    // Los campos vienen como números desde la API
     tickets_activos: number | string;
     tickets_vendidos: number | string;
-    // tickets_impresos puede ser null o undefined
-    tickets_impresos: number | string | null;
+    // tickets_impresos es un número válido en la API (900 en el ejemplo)
+    tickets_impresos: number | string;
     tickets_inactivos: number | string;
   };
 }

@@ -41,21 +41,19 @@ const SuperAdminDashboard: React.FC = () => {
         // Llamada a la API para obtener los datos de taquilla
         const response = await apiServices.taquilla.getResumenTaquilla();
         if (response.success) {
-          // Log para depuración - ver los datos originales de la API
-          console.log("Datos originales de la API:", response.data);
+          // Log para depuración - ver los datos originales de la API (sin procesar)
+          console.log("Datos originales de la API (sin procesar):", response.data);
           
           // Convertir todos los valores a números para evitar problemas de tipo
           const data = {
             tickets_activos: Number(response.data.tickets_activos || 0),
             tickets_vendidos: Number(response.data.tickets_vendidos || 0),
-            // Manejo especial para tickets_impresos que puede ser null
-            tickets_impresos: response.data.tickets_impresos !== null && response.data.tickets_impresos !== undefined 
-              ? Number(response.data.tickets_impresos) 
-              : 0,
+            // Usar directamente el valor de tickets_impresos, ya que es un número válido en la API
+            tickets_impresos: Number(response.data.tickets_impresos || 0),
             tickets_inactivos: Number(response.data.tickets_inactivos || 0)
           };
-          // Log para depuración - ver los datos procesados
-          console.log("Taquilla data procesada:", data);
+          // Log para depuración - ver los datos después de la conversión
+          console.log("Taquilla data después de conversión:", data);
           setTaquillaData(data);
         }
       } catch (error) {

@@ -31,8 +31,8 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
   // Calcular totales - usar datos de API si están disponibles, o datos mock si no
   const totalActiveTickets = taquillaData ? taquillaData.tickets_activos : waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
   const totalSoldTickets = taquillaData ? taquillaData.tickets_vendidos : waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
-  // Manejo especial para tickets_impresos que puede ser null o undefined
-  const totalPrintedTickets = taquillaData && taquillaData.tickets_impresos !== undefined ? taquillaData.tickets_impresos : waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
+  // Usar directamente tickets_impresos, ya que es un número válido en la API
+  const totalPrintedTickets = taquillaData ? taquillaData.tickets_impresos : waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
   const totalInactiveTickets = taquillaData ? taquillaData.tickets_inactivos : waterParks.reduce((sum, park) => sum + park.inactiveTickets, 0);
   
   // Configuración de las tarjetas de resumen
