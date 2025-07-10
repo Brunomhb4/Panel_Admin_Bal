@@ -3,13 +3,15 @@ import { Ticket, DollarSign, Store, TrendingUp } from 'lucide-react';
 import { useWaterParksStore } from '../../stores/waterParksStore';
 import { useThemeStore } from '../../stores/themeStore';
 
+interface TaquillaData {
+  tickets_activos: number | null;
+  tickets_vendidos: number | null;
+  tickets_impresos: number | null;
+  tickets_inactivos: number | null;
+}
+
 interface SummaryCardsProps {
-  taquillaData?: {
-    tickets_activos: number | null;
-    tickets_vendidos: number | null;
-    tickets_impresos: number | null;
-    tickets_inactivos: number | null;
-  } | null;
+  taquillaData?: TaquillaData | null;
 }
 
 const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
@@ -17,10 +19,10 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
   const { mode } = useThemeStore();
   
   // Calculate totals
-  const totalActiveTickets = taquillaData ? taquillaData.tickets_activos : waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
-  const totalSoldTickets = taquillaData ? taquillaData.tickets_vendidos : waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
-  const totalPrintedTickets = taquillaData && taquillaData.tickets_impresos ? taquillaData.tickets_impresos : waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
-  const totalInactiveTickets = taquillaData && taquillaData.tickets_inactivos ? taquillaData.tickets_inactivos : waterParks.reduce((sum, park) => sum + park.inactiveTickets, 0);
+  const totalActiveTickets = taquillaData?.tickets_activos ?? waterParks.reduce((sum, park) => sum + park.activeTickets, 0);
+  const totalSoldTickets = taquillaData?.tickets_vendidos ?? waterParks.reduce((sum, park) => sum + park.soldTickets, 0);
+  const totalPrintedTickets = taquillaData?.tickets_impresos ?? waterParks.reduce((sum, park) => sum + park.printedTickets, 0);
+  const totalInactiveTickets = taquillaData?.tickets_inactivos ?? waterParks.reduce((sum, park) => sum + park.inactiveTickets, 0);
   const totalWaterParks = waterParks.length;
   const totalRevenue = waterParks.reduce((sum, park) => sum + park.totalRevenue, 0);
   
@@ -45,9 +47,9 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
       iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
-      title: 'Ingresos Totales',
-      value: `$${totalRevenue.toLocaleString()}`,
-      icon: DollarSign,
+      title: 'Tickets Vendidos',
+      value: totalSoldTickets.toLocaleString(),
+      icon: TrendingUp,
       gradient: 'from-[#052659] to-[#1B3B6F]',
       bgGradient: mode === 'dark' 
         ? 'from-[#1B3B6F]/20 via-[#5483B3]/15 to-[#7DA0CA]/10' 
@@ -64,9 +66,9 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
       iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
-      title: 'Total Balnearios',
-      value: totalWaterParks.toString(),
-      icon: Store,
+      title: 'Tickets Impresos',
+      value: totalPrintedTickets.toLocaleString(),
+      icon: DollarSign,
       gradient: 'from-[#1B3B6F] to-[#5483B3]',
       bgGradient: mode === 'dark' 
         ? 'from-[#5483B3]/20 via-[#7DA0CA]/15 to-[#C1E8FF]/10' 
@@ -83,9 +85,9 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ taquillaData }) => {
       iconShadow: 'drop-shadow-[0_0_8px_rgba(193,232,255,0.8)]'
     },
     {
-      title: 'Tickets Vendidos',
-      value: totalSoldTickets.toLocaleString(),
-      icon: TrendingUp,
+      title: 'Tickets Inactivos',
+      value: totalInactiveTickets.toLocaleString(),
+      icon: Store,
       gradient: 'from-[#5483B3] to-[#7DA0CA]',
       bgGradient: mode === 'dark' 
         ? 'from-[#7DA0CA]/20 via-[#C1E8FF]/15 to-[#5483B3]/10' 

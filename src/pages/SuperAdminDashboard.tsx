@@ -5,7 +5,7 @@ import WaterParksTable from '../components/dashboards/WaterParksTable';
 import { useWaterParksStore } from '../stores/waterParksStore';
 import { Plus, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { apiServices } from '../api';
+import apiServices from '../api';
 import { useThemeStore } from '../stores/themeStore';
 
 const SuperAdminDashboard: React.FC = () => {
@@ -20,10 +20,6 @@ const SuperAdminDashboard: React.FC = () => {
   const [taquillaLoading, setTaquillaLoading] = useState(false);
   const [taquillaError, setTaquillaError] = useState<string | null>(null);
   
-  useEffect(() => {
-    fetchWaterParks();
-  }, [fetchWaterParks]);
-  
   const fetchTaquillaData = async () => {
     if (apiServices.auth.getAccessToken()) {
       setTaquillaLoading(true);
@@ -31,6 +27,7 @@ const SuperAdminDashboard: React.FC = () => {
       try {
         const response = await apiServices.taquilla.getResumenTaquilla();
         if (response.success) {
+          console.log("Taquilla data:", response.data);
           setTaquillaData(response.data);
         }
       } catch (error) {
@@ -43,6 +40,7 @@ const SuperAdminDashboard: React.FC = () => {
   };
   
   useEffect(() => {
+    fetchWaterParks();
     fetchTaquillaData();
   }, []);
   
