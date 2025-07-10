@@ -12,10 +12,10 @@ const SuperAdminDashboard: React.FC = () => {
   const { fetchWaterParks, loading } = useWaterParksStore();
   const { mode } = useThemeStore();
   const [taquillaData, setTaquillaData] = useState<{
-    tickets_activos: number | null;
-    tickets_vendidos: number | null;
-    tickets_impresos: number | null;
-    tickets_inactivos: number | null;
+    tickets_activos: number;
+    tickets_vendidos: number;
+    tickets_impresos: number;
+    tickets_inactivos: number;
   } | null>(null);
   const [taquillaLoading, setTaquillaLoading] = useState(false);
   const [taquillaError, setTaquillaError] = useState<string | null>(null);
@@ -27,8 +27,15 @@ const SuperAdminDashboard: React.FC = () => {
       try {
         const response = await apiServices.taquilla.getResumenTaquilla();
         if (response.success) {
-          console.log("Taquilla data:", response.data);
-          setTaquillaData(response.data);
+          // Asegurarse de que todos los valores sean números
+          const data = {
+            tickets_activos: Number(response.data.tickets_activos || 0),
+            tickets_vendidos: Number(response.data.tickets_vendidos || 0),
+            tickets_impresos: Number(response.data.tickets_impresos || 0),
+            tickets_inactivos: Number(response.data.tickets_inactivos || 0)
+          };
+          console.log("Taquilla data procesada:", data);
+          setTaquillaData(data);
         }
       } catch (error) {
         console.error('Error al obtener datos de taquilla:', error);
