@@ -28,10 +28,13 @@ const SuperAdminDashboard: React.FC = () => {
         const response = await apiServices.taquilla.getResumenTaquilla();
         if (response.success) {
           // Asegurarse de que todos los valores sean números
+          console.log("Datos originales de la API:", response.data);
           const data = {
             tickets_activos: Number(response.data.tickets_activos || 0),
             tickets_vendidos: Number(response.data.tickets_vendidos || 0),
-            tickets_impresos: Number(response.data.tickets_impresos || 0),
+            tickets_impresos: response.data.tickets_impresos !== null && response.data.tickets_impresos !== undefined 
+              ? Number(response.data.tickets_impresos) 
+              : 0,
             tickets_inactivos: Number(response.data.tickets_inactivos || 0)
           };
           console.log("Taquilla data procesada:", data);
