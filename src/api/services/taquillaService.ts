@@ -8,7 +8,7 @@ export interface ResumenTaquillaResponse {
   data: {
     tickets_activos: number;
     tickets_vendidos: number;
-    tickets_impresos: number;
+    tickets_impresos: number | null;
     tickets_inactivos: number;
   };
 }
