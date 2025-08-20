@@ -1,6 +1,12 @@
-/* Professional Dashboard Animations */
+/* =============================================================================
+   OPTIMIZED ANIMATIONS - PROFESSIONAL DASHBOARD EFFECTS
+   ============================================================================= */
 
-/* Keyframes for shimmer effect */
+/* -----------------------------------------------------------------------------
+   Core Animation Keyframes - Consolidated and optimized
+   ----------------------------------------------------------------------------- */
+
+/* Shimmer effect for loading states and interactive elements */
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -10,7 +16,7 @@
   }
 }
 
-/* Keyframes for floating effect */
+/* Floating effect for logos and special elements */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -20,7 +26,7 @@
   }
 }
 
-/* Keyframes for pulse glow */
+/* Pulse glow for attention-grabbing elements */
 @keyframes pulseGlow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(84, 131, 179, 0.3);
@@ -30,7 +36,7 @@
   }
 }
 
-/* Keyframes for scale bounce */
+/* Scale bounce for button interactions */
 @keyframes scaleBounce {
   0% {
     transform: scale(1);
@@ -43,7 +49,7 @@
   }
 }
 
-/* Keyframes for slide in from bottom */
+/* Slide animations for content entrance */
 @keyframes slideInBottom {
   0% {
     transform: translateY(20px);
@@ -55,7 +61,6 @@
   }
 }
 
-/* Keyframes for slide in from right */
 @keyframes slideInRight {
   0% {
     transform: translateX(20px);
@@ -67,7 +72,7 @@
   }
 }
 
-/* Keyframes for rotate in */
+/* Rotation entrance effect */
 @keyframes rotateIn {
   0% {
     transform: rotate(-10deg) scale(0.9);
@@ -79,7 +84,7 @@
   }
 }
 
-/* Keyframes for fade in scale */
+/* Fade in with scale for modals and overlays */
 @keyframes fadeInScale {
   0% {
     transform: scale(0.8);
@@ -91,7 +96,34 @@
   }
 }
 
-/* Animation utility classes */
+/* Chart line drawing animation */
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Loading dots animation */
+@keyframes dots {
+  0%, 20% {
+    content: '';
+  }
+  40% {
+    content: '.';
+  }
+  60% {
+    content: '..';
+  }
+  80%, 100% {
+    content: '...';
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Animation Utility Classes - Optimized and consolidated
+   ----------------------------------------------------------------------------- */
+
+/* Primary animations */
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
@@ -108,6 +140,7 @@
   animation: scaleBounce 0.6s ease-in-out;
 }
 
+/* Entrance animations */
 .animate-slide-in-bottom {
   animation: slideInBottom 0.5s ease-out;
 }
@@ -124,28 +157,18 @@
   animation: fadeInScale 0.4s ease-out;
 }
 
-/* Staggered animation delays */
-.animate-delay-100 {
-  animation-delay: 100ms;
-}
+/* Staggered animation delays - Optimized set */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
 
-.animate-delay-200 {
-  animation-delay: 200ms;
-}
+/* -----------------------------------------------------------------------------
+   Interactive Hover Effects - Consolidated and optimized
+   ----------------------------------------------------------------------------- */
 
-.animate-delay-300 {
-  animation-delay: 300ms;
-}
-
-.animate-delay-400 {
-  animation-delay: 400ms;
-}
-
-.animate-delay-500 {
-  animation-delay: 500ms;
-}
-
-/* Hover animations */
+/* Lift effect for cards */
 .hover-lift {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -155,6 +178,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
+/* Scale effect for buttons and interactive elements */
 .hover-scale {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -163,6 +187,7 @@
   transform: scale(1.02);
 }
 
+/* Glow effect for special elements */
 .hover-glow {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -171,37 +196,31 @@
   box-shadow: 0 0 20px rgba(84, 131, 179, 0.4);
 }
 
-/* Loading animations */
+/* -----------------------------------------------------------------------------
+   Loading and State Animations - Optimized
+   ----------------------------------------------------------------------------- */
+
+/* Loading spinner */
 .loading-spinner {
   animation: spin 1s linear infinite;
 }
 
+/* Loading dots */
 .loading-dots::after {
   content: '';
   animation: dots 1.5s steps(4, end) infinite;
 }
 
-@keyframes dots {
-  0%, 20% {
-    content: '';
-  }
-  40% {
-    content: '.';
-  }
-  60% {
-    content: '..';
-  }
-  80%, 100% {
-    content: '...';
-  }
-}
-
-/* Smooth transitions for theme switching */
+/* Theme transition for smooth mode switching */
 .theme-transition {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Interactive element animations */
+/* -----------------------------------------------------------------------------
+   Interactive Element Effects - Consolidated
+   ----------------------------------------------------------------------------- */
+
+/* Shine effect for interactive elements */
 .interactive-element {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -215,12 +234,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.5s;
 }
 
@@ -228,29 +242,33 @@
   left: 100%;
 }
 
-/* Chart animations */
+/* -----------------------------------------------------------------------------
+   Chart Specific Animations - Optimized for performance
+   ----------------------------------------------------------------------------- */
+
+/* Chart entrance animation */
 .chart-enter {
   animation: slideInBottom 0.6s ease-out;
 }
 
+/* Bar chart animation with stagger */
 .chart-bar {
   animation: slideInBottom 0.8s ease-out;
   animation-fill-mode: both;
 }
 
+/* Line chart drawing effect */
 .chart-line {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: drawLine 2s ease-out forwards;
 }
 
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
+/* -----------------------------------------------------------------------------
+   Responsive Animation Adjustments
+   ----------------------------------------------------------------------------- */
 
-/* Responsive animations - reduce motion on mobile */
+/* Reduce animation intensity on mobile */
 @media (max-width: 768px) {
   .animate-float {
     animation-duration: 4s;
@@ -265,7 +283,7 @@
   }
 }
 
-/* Reduced motion preferences */
+/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -289,11 +307,6 @@
   }
   
   .interactive-element::before {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   }
 }

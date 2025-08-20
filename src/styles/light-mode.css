@@ -1,60 +1,61 @@
-/* Minimalist Light Mode Design System */
-/* Using exact color palette: #C1E8FF, #021024, #052659, #1B3B6F, #5483B3, #7DA0CA */
+/* =============================================================================
+   OPTIMIZED LIGHT MODE DESIGN SYSTEM
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Light Mode Color Variables - WCAG 2.1 AAA Compliant
+   ----------------------------------------------------------------------------- */
 
 :root {
-  /* Primary Color Palette - WCAG 2.1 AAA Compliant */
-  --light-bg-dominant: #C1E8FF;         /* Very Light Blue - dominant background */
-  --light-text-primary: #021024;        /* Very Dark Blue - maximum contrast text (21:1 ratio) */
-  --light-accent-primary: #052659;      /* Deep Navy Blue - interactive elements (12.6:1 ratio) */
+  /* Primary Color Palette - Maximum contrast ratios */
+  --light-bg-primary: #C1E8FF;         /* Very Light Blue - dominant background */
+  --light-text-primary: #021024;       /* Very Dark Blue - maximum contrast (21:1 ratio) */
+  --light-accent-primary: #052659;     /* Deep Navy Blue - interactive elements (12.6:1 ratio) */
+  --light-secondary: #1B3B6F;          /* Midnight Blue - secondary elements (8.2:1 ratio) */
+  --light-muted: #5483B3;              /* Muted Sky Blue - subtle highlights (4.8:1 ratio) */
+  --light-tertiary: #7DA0CA;           /* Soft Blue - tertiary elements (3.2:1 ratio) */
   
-  /* Secondary Colors */
-  --light-secondary-element: #1B3B6F;   /* Classic Midnight Blue - secondary elements (8.2:1 ratio) */
-  --light-subtle-highlight: #5483B3;    /* Muted Sky Blue - subtle highlights (4.8:1 ratio) */
-  --light-tertiary-element: #7DA0CA;    /* Soft Grayish Blue - tertiary elements (3.2:1 ratio) */
+  /* Surface Colors - Clean backgrounds */
+  --light-surface-primary: #FFFFFF;
+  --light-surface-secondary: #F8F9FA;
+  --light-surface-tertiary: #F1F5F9;
   
-  /* Surface Colors */
-  --light-surface-primary: #FFFFFF;     /* Pure white for cards and surfaces */
-  --light-surface-secondary: #F8F9FA;   /* Very light gray for elevated surfaces */
-  --light-surface-tertiary: #F1F5F9;    /* Light gray for subtle backgrounds */
-  
-  /* Interactive States */
-  --light-hover-bg: rgba(5, 38, 89, 0.04);      /* 4% Deep Navy */
-  --light-focus-bg: rgba(5, 38, 89, 0.08);      /* 8% Deep Navy */
-  --light-active-bg: rgba(5, 38, 89, 0.12);     /* 12% Deep Navy */
-  --light-selected-bg: rgba(27, 59, 111, 0.06); /* 6% Midnight Blue */
+  /* Interactive States - Consistent feedback */
+  --light-hover: rgba(5, 38, 89, 0.04);
+  --light-focus: rgba(5, 38, 89, 0.08);
+  --light-active: rgba(5, 38, 89, 0.12);
+  --light-selected: rgba(27, 59, 111, 0.06);
   
   /* Borders and Dividers */
-  --light-border-subtle: rgba(27, 59, 111, 0.08);  /* 8% Midnight Blue */
-  --light-border-default: rgba(27, 59, 111, 0.15); /* 15% Midnight Blue */
-  --light-border-strong: rgba(5, 38, 89, 0.25);    /* 25% Deep Navy */
+  --light-border-subtle: rgba(27, 59, 111, 0.08);
+  --light-border-default: rgba(27, 59, 111, 0.15);
+  --light-border-strong: rgba(5, 38, 89, 0.25);
   
-  /* Shadows - Optimized for light mode */
+  /* Shadows - Optimized for light backgrounds */
   --light-shadow-subtle: 0 1px 3px rgba(2, 16, 36, 0.06);
   --light-shadow-default: 0 2px 8px rgba(2, 16, 36, 0.08);
   --light-shadow-medium: 0 4px 16px rgba(2, 16, 36, 0.10);
   --light-shadow-strong: 0 8px 24px rgba(2, 16, 36, 0.12);
-  
-  /* Focus Ring */
-  --light-focus-ring: 0 0 0 2px var(--light-accent-primary);
-  --light-focus-ring-offset: 0 0 0 4px rgba(5, 38, 89, 0.10);
 }
 
-/* Base Light Mode Styles */
+/* -----------------------------------------------------------------------------
+   Base Light Mode Styles - Clean foundation
+   ----------------------------------------------------------------------------- */
+
 .light {
   color-scheme: light;
 }
 
 .light body {
-  background: linear-gradient(135deg, var(--light-bg-dominant) 0%, var(--light-surface-primary) 40%, var(--light-surface-secondary) 100%);
+  background: linear-gradient(135deg, var(--light-bg-primary) 0%, var(--light-surface-primary) 40%, var(--light-surface-secondary) 100%);
   color: var(--light-text-primary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  font-weight: 400;
 }
 
-/* Typography System - Optimized Hierarchy */
+/* -----------------------------------------------------------------------------
+   Typography System - Optimized hierarchy
+   ----------------------------------------------------------------------------- */
+
 .light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
   color: var(--light-text-primary);
   font-weight: 600;
@@ -62,27 +63,21 @@
   letter-spacing: -0.02em;
 }
 
-.light p, .light span, .light div {
-  color: var(--light-text-primary);
-}
-
-.light .text-caption {
-  color: var(--light-secondary-element);
-  font-size: 0.875rem;
-}
-
 .light .text-muted {
-  color: var(--light-subtle-highlight);
+  color: var(--light-muted);
 }
 
-/* Card System - Clean and Minimal */
+/* -----------------------------------------------------------------------------
+   Component System - Light mode adaptations
+   ----------------------------------------------------------------------------- */
+
+/* Cards */
 .light .card {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--light-border-subtle);
   border-radius: 12px;
   box-shadow: var(--light-shadow-default);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 1.5rem;
   backdrop-filter: blur(8px);
 }
 
@@ -93,48 +88,17 @@
   background: rgba(255, 255, 255, 0.98);
 }
 
-.light .card-compact {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid var(--light-border-subtle);
-  border-radius: 8px;
-  box-shadow: var(--light-shadow-subtle);
-  padding: 1rem;
-}
-
-.light .card-elevated {
-  background: var(--light-surface-secondary);
-  box-shadow: var(--light-shadow-strong);
-}
-
-/* Button System - Minimalist Design */
-.light .btn {
-  font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
-  cursor: pointer;
-  font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
+/* Buttons */
 .light .btn-primary {
-  background: linear-gradient(135deg, var(--light-accent-primary) 0%, var(--light-secondary-element) 100%);
+  background: linear-gradient(135deg, var(--light-accent-primary) 0%, var(--light-secondary) 100%);
   color: white;
   box-shadow: var(--light-shadow-default);
 }
 
 .light .btn-primary:hover {
-  background: linear-gradient(135deg, var(--light-secondary-element) 0%, var(--light-subtle-highlight) 100%);
+  background: linear-gradient(135deg, var(--light-secondary) 0%, var(--light-muted) 100%);
   box-shadow: var(--light-shadow-medium);
   transform: translateY(-1px);
-}
-
-.light .btn-primary:focus {
-  box-shadow: var(--light-focus-ring), var(--light-focus-ring-offset);
 }
 
 .light .btn-secondary {
@@ -144,21 +108,11 @@
 }
 
 .light .btn-secondary:hover {
-  background: var(--light-hover-bg);
+  background: var(--light-hover);
   border-color: var(--light-accent-primary);
 }
 
-.light .btn-ghost {
-  background: transparent;
-  color: var(--light-accent-primary);
-  border: none;
-}
-
-.light .btn-ghost:hover {
-  background: var(--light-hover-bg);
-}
-
-/* Navigation - Clean and Accessible */
+/* Navigation */
 .light .sidebar {
   background: rgba(255, 255, 255, 0.95);
   border-right: 1px solid var(--light-border-default);
@@ -166,78 +120,43 @@
   backdrop-filter: blur(8px);
 }
 
-.light .sidebar-header {
-  background: rgba(248, 249, 250, 0.8);
-  border-bottom: 1px solid var(--light-border-subtle);
-  padding: 1.5rem;
-}
-
 .light .sidebar-nav-item {
-  color: var(--light-secondary-element);
-  padding: 0.75rem 1rem;
-  margin: 0.25rem 0.5rem;
-  border-radius: 8px;
+  color: var(--light-secondary);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
 }
 
 .light .sidebar-nav-item:hover {
-  background: var(--light-hover-bg);
+  background: var(--light-hover);
   color: var(--light-text-primary);
 }
 
 .light .sidebar-nav-item-active {
-  background: var(--light-selected-bg);
+  background: var(--light-selected);
   color: var(--light-accent-primary);
   border-left: 3px solid var(--light-accent-primary);
-  font-weight: 600;
 }
 
-/* Header - Minimal and Clean */
-.light .header {
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid var(--light-border-subtle);
-  box-shadow: 0 1px 8px rgba(2, 16, 36, 0.06);
-  padding: 1rem 1.5rem;
-  backdrop-filter: blur(8px);
-}
-
-/* Form Elements - Accessible and Clean */
+/* Forms */
 .light .input {
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid var(--light-border-default);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
   color: var(--light-text-primary);
-  font-size: 0.875rem;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .light .input:focus {
   border-color: var(--light-accent-primary);
-  box-shadow: var(--light-focus-ring-offset);
-  outline: none;
-}
-
-.light .input::placeholder {
-  color: var(--light-subtle-highlight);
+  box-shadow: 0 0 0 3px rgba(5, 38, 89, 0.10);
 }
 
 .light .label {
-  color: var(--light-secondary-element);
-  font-weight: 500;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
-  display: block;
+  color: var(--light-secondary);
 }
 
-/* Table System - Clean Data Display */
+/* Tables */
 .light .table-container {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--light-border-subtle);
-  border-radius: 12px;
   box-shadow: var(--light-shadow-default);
-  overflow: hidden;
 }
 
 .light .table-header {
@@ -247,33 +166,17 @@
 .light .table-header-cell {
   color: var(--light-accent-primary);
   font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--light-border-subtle);
 }
 
 .light .table-body-cell {
   color: var(--light-text-primary);
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--light-border-subtle);
-  font-size: 0.875rem;
 }
 
 .light .table-row:hover {
   background: rgba(193, 232, 255, 0.08);
 }
 
-/* Badge System - Semantic Colors */
-.light .badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-}
-
+/* Badges */
 .light .badge-primary {
   background: rgba(5, 38, 89, 0.1);
   color: var(--light-accent-primary);
@@ -286,84 +189,10 @@
   border-color: rgba(34, 197, 94, 0.2);
 }
 
-.light .badge-warning {
-  background: rgba(245, 158, 11, 0.1);
-  color: #D97706;
-  border-color: rgba(245, 158, 11, 0.2);
-}
+/* -----------------------------------------------------------------------------
+   Responsive Design - Mobile optimizations
+   ----------------------------------------------------------------------------- */
 
-.light .badge-error {
-  background: rgba(239, 68, 68, 0.1);
-  color: #DC2626;
-  border-color: rgba(239, 68, 68, 0.2);
-}
-
-/* Chart Styles - Clean Data Visualization */
-.light .recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: var(--light-surface-primary) !important;
-  border: 1px solid var(--light-border-default) !important;
-  border-radius: 8px !important;
-  box-shadow: var(--light-shadow-medium) !important;
-  color: var(--light-text-primary) !important;
-}
-
-.light .recharts-cartesian-grid-horizontal line,
-.light .recharts-cartesian-grid-vertical line {
-  stroke: var(--light-border-subtle) !important;
-  stroke-opacity: 0.6 !important;
-}
-
-.light .recharts-text {
-  fill: var(--light-secondary-element) !important;
-  font-weight: 500 !important;
-}
-
-/* Gradient Text - Brand Colors */
-.light .gradient-text {
-  background: linear-gradient(135deg, var(--light-accent-primary) 0%, var(--light-secondary-element) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-/* Loading States */
-.light .loading-spinner {
-  border-color: var(--light-border-subtle);
-  border-top-color: var(--light-accent-primary);
-}
-
-.light .skeleton {
-  background: var(--light-surface-secondary);
-  border-radius: 4px;
-}
-
-/* Interactive States - Consistent Feedback */
-.light .hover-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--light-shadow-medium);
-}
-
-.light .floating-card:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--light-shadow-medium);
-}
-
-/* Focus Management - Accessibility First */
-.light *:focus-visible {
-  outline: 2px solid var(--light-accent-primary);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-.light button:focus-visible,
-.light input:focus-visible,
-.light select:focus-visible,
-.light textarea:focus-visible {
-  box-shadow: var(--light-focus-ring), var(--light-focus-ring-offset);
-}
-
-/* Responsive Design - Mobile First */
 @media (max-width: 768px) {
   .light .card {
     padding: 1rem;
@@ -374,18 +203,21 @@
     padding: 0.875rem 1.25rem;
     min-height: 44px; /* Touch target size */
   }
-  
-  .light .table-header-cell,
-  .light .table-body-cell {
-    padding: 0.75rem 1rem;
-  }
 }
 
-/* High Contrast Mode Support */
+/* -----------------------------------------------------------------------------
+   Accessibility Support - Enhanced for light mode
+   ----------------------------------------------------------------------------- */
+
+.light *:focus-visible {
+  outline: 2px solid var(--light-accent-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode */
 @media (prefers-contrast: high) {
   .light {
     --light-text-primary: #000000;
-    --light-secondary-element: #1a1a1a;
     --light-border-default: #333333;
     --light-accent-primary: #0000CC;
   }
@@ -393,13 +225,9 @@
   .light .card {
     border-width: 2px;
   }
-  
-  .light .btn {
-    border-width: 2px;
-  }
 }
 
-/* Reduced Motion Support */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .light * {
     transition-duration: 0.01ms !important;
@@ -412,11 +240,10 @@
   }
 }
 
-/* Print Styles */
+/* Print styles */
 @media print {
   .light {
-    --light-bg-dominant: white;
-    --light-surface-primary: white;
+    --light-bg-primary: white;
     --light-text-primary: black;
     --light-border-default: #cccccc;
   }
@@ -425,37 +252,4 @@
     border: 1px solid #cccccc;
     box-shadow: none;
   }
-  
-  .light .btn {
-    border: 1px solid #cccccc;
-  }
 }
-
-/* Color Blind Accessibility */
-.light .status-success::before {
-  content: "✓ ";
-  font-weight: bold;
-}
-
-.light .status-warning::before {
-  content: "⚠ ";
-  font-weight: bold;
-}
-
-.light .status-error::before {
-  content: "✗ ";
-  font-weight: bold;
-}
-
-/* Spacing System - Consistent Rhythm */
-.light .space-xs { margin: 0.25rem; }
-.light .space-sm { margin: 0.5rem; }
-.light .space-md { margin: 1rem; }
-.light .space-lg { margin: 1.5rem; }
-.light .space-xl { margin: 2rem; }
-
-.light .gap-xs { gap: 0.25rem; }
-.light .gap-sm { gap: 0.5rem; }
-.light .gap-md { gap: 1rem; }
-.light .gap-lg { gap: 1.5rem; }
-.light .gap-xl { gap: 2rem; }
