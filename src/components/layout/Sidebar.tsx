@@ -185,6 +185,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
         iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
         activeGradient: 'from-[#021024] via-[#052659] to-[#1B3B6F]',
         hoverBg: mode === 'dark' ? 'from-[#052659]/30 to-[#1B3B6F]/20' : 'from-[#052659]/40 to-[#1B3B6F]/30'
+      },
+      {
+        path: '/superadmin/privacy',
+        icon: Shield,
+        label: 'Privacidad',
+        iconColor: mode === 'dark' ? '#C1E8FF' : '#021024',
+        activeGradient: 'from-[#5483B3] via-[#7DA0CA] to-[#C1E8FF]',
+        hoverBg: mode === 'dark' ? 'from-[#7DA0CA]/30 to-[#C1E8FF]/20' : 'from-[#7DA0CA]/40 to-[#C1E8FF]/30'
       }
     ]
   };

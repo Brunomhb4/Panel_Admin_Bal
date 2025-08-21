@@ -13,6 +13,8 @@ import SnacksManagement from './pages/SnacksManagement';
 import StoreManagement from './pages/StoreManagement';
 import ProjectDashboardPage from './pages/ProjectDashboardPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import DataCollectionNotification from './components/privacy/DataCollectionNotification';
+import PrivacySettingsPage from './pages/PrivacySettingsPage';
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -101,6 +103,14 @@ function App() {
           </ProtectedRoute>
         } 
       />
+      <Route 
+        path="/superadmin/privacy" 
+        element={
+          <ProtectedRoute requiredRole="superadmin">
+            <PrivacySettingsPage />
+          </ProtectedRoute>
+        } 
+      />
 
       {/* Default routes */}
       <Route path="/" element={
@@ -112,6 +122,9 @@ function App() {
       {/* Catch all for non-existent routes */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
+    
+    {/* Sistema de notificaciones de recopilación de datos */}
+    <DataCollectionNotification />
   );
 }
 

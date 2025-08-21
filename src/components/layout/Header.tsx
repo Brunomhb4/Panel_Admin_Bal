@@ -91,11 +91,14 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
                            lg:p-3`}>
           
           {/* Fondo animado */}
-          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl
+          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-xl
                           ${mode === 'dark' 
-                            ? 'bg-gradient-to-r from-[#5483B3]/10 to-[#7DA0CA]/5' 
-                            : 'bg-gradient-to-r from-blue-50 to-indigo-50'
-                          }`}></div>
+                            ? 'bg-gradient-to-br from-[#5483B3]/15 via-[#7DA0CA]/10 to-[#C1E8FF]/5' 
+                            : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
+                          }`}>
+            {/* Efecto de brillo sutil */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+          </div>
           
           {/* Icono de campana con mejor contraste */}
           <Bell className={`relative z-10 transition-all duration-300 group-hover:rotate-12 drop-shadow-lg
@@ -110,16 +113,19 @@ const Header: React.FC<HeaderProps> = ({ title, toggleSidebar }) => {
                 }} />
           
           {/* Badge de notificación mejorado */}
-          <span className="absolute bg-gradient-to-r from-red-500 to-pink-500 rounded-full shadow-lg animate-pulse border-2 border-white
+          <span className="absolute bg-gradient-to-br from-red-500 via-red-600 to-pink-600 rounded-full shadow-xl border-2 border-white/90
                            -top-0.5 -right-0.5 h-2.5 w-2.5
                            xs:-top-1 xs:-right-1 xs:h-3 xs:w-3
                            sm:h-3.5 sm:w-3.5
-                           md:h-4 md:w-4"
+                           md:h-4 md:w-4
+                           animate-pulse"
                 style={{
-                  boxShadow: '0 0 8px rgba(239, 68, 68, 0.6), 0 2px 4px rgba(0,0,0,0.2)'
+                  boxShadow: '0 0 12px rgba(239, 68, 68, 0.8), 0 4px 8px rgba(0,0,0,0.3)'
                 }}>
-            {/* Efecto de brillo interno */}
-            <span className="absolute inset-0 bg-gradient-to-r from-red-400 to-pink-400 rounded-full animate-ping opacity-75"></span>
+            {/* Efecto de brillo interno mejorado */}
+            <span className="absolute inset-0.5 bg-gradient-to-br from-red-300 to-pink-300 rounded-full animate-ping opacity-60"></span>
+            {/* Punto central brillante */}
+            <span className="absolute inset-1 bg-white rounded-full opacity-80"></span>
           </span>
         </button>
         
