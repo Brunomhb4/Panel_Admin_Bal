@@ -23,7 +23,8 @@ function App() {
   useTheme();
 
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route path="/login" element={<LoginPage />} />
       
       {/* Protected routes for Admin */}
@@ -121,10 +122,11 @@ function App() {
       
       {/* Catch all for non-existent routes */}
       <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-    
-    {/* Sistema de notificaciones de recopilación de datos */}
-    <DataCollectionNotification />
+      </Routes>
+      
+      {/* Sistema de notificaciones de recopilación de datos */}
+      <DataCollectionNotification />
+    </>
   );
 }
 
